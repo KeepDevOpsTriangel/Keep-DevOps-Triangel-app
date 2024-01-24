@@ -9,7 +9,7 @@ app_dir = os.path.join(current_dir, 'app')
 sys.path.insert(0, app_dir)
 
 # Importa el módulo principal de tu aplicación
-from app.src.app import app
+from app.src.app import app  # Modifica esta línea
 
-# Indica a pdoc los módulos que debe documentar
+# Indica a pdoc los módulos que debe documentarbkjhboil
 modules = [app]
