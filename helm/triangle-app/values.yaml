@@ -1,0 +1,100 @@
+labels:
+  app:
+    app: triangle-app
+  mysql:
+    app: triangle-app-mysql
+
+secret:
+  type: Opaque
+  TOKEN:
+  MYSQL_ROOT_PASSWORD: dHJpYW5nbGVhcHA=
+  MYSQL_PASSWORD: dHJpYW5nbGVhcHA=
+
+configmap:
+  URL_WEBHOOK:
+  TITULO_APP: TRIANGLE_APP
+  TELEFONO_SOPORTE:
+  CHAT_ID_SOPORTE:
+  EMAIL_SOPORTE:
+  MYSQL_PORT: 3306
+  MYSQL_DATABASE: triangleapp
+  MYSQL_USER: triangleapp
+
+deployment:
+  replicaCount: 4
+  autoscaling:
+    enabled: true
+    minReplicas: 4
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 70
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 100m
+    limits:
+      memory: 100Mi
+      cpu: 120m
+  app:
+    ports:
+      name: app-port
+      containerPort: 5000
+  mysql:
+    ports:
+      name: mysql-port
+      containerPort: 3306
+    volumeClaimTemplates:
+      storageClassName: standard
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storageSize: 1Gi
+      volumeMode: Filesystem
+    sqlFilePath: "files/db.sql"
+
+image:
+  repository:
+    app: rafacv99/pytelegram
+    mysql: mysql
+  tag:
+    app: latest
+    mysql: latest
+
+service:
+  app:
+    type: ClusterIP
+    ports:
+      name: app-port
+      port: 5000
+      targetPort: app-port
+      protocol: TCP
+  mysql:
+    type: ClusterIP
+    ports:
+      name: mysql-port
+      port: 3306
+      targetPort: mysql-port
+      protocol: TCP
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+statefulset:
+  resources:
+    requests:
+      memory: 256Mi
+    limits:
+      memory: 512Mi

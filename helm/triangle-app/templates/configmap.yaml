@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "triangle-app.fullname" . }}-configmap
+data:
+  MYSQL_HOST: {{ include "triangle-app.fullname" . }}-mysql-service
+  MYSQL_PORT: {{ .Values.configmap.MYSQL_PORT | quote }}
+  MYSQL_USER: {{ .Values.configmap.MYSQL_USER | quote }}
+  MYSQL_DATABASE: {{ .Values.configmap.MYSQL_DATABASE | quote }}
+  URL_WEBHOOK: {{ .Values.configmap.URL_WEBHOOK | quote }}
+  TITULO_APP: {{ .Values.configmap.TITULO_APP | quote }}
+  TELEFONO_SOPORTE: {{ .Values.configmap.TELEFONO_SOPORTE | quote }}
+  CHAT_ID_SOPORTE: {{ .Values.configmap.CHAT_ID_SOPORTE | quote }}
+  EMAIL_SOPORTE: {{ .Values.configmap.EMAIL_SOPORTE | quote }}
