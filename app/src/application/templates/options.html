@@ -1,0 +1,38 @@
+{% extends "home.html" %}
+{% block content %}
+<h2>Options Bot Telegram</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>OPTION</th>
+      <th>OPTION TEXT</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if options %}
+    {% for option in options %}
+    <tr>
+      <form action="{{ url_for('EditOptionsWebApp_') }}" method="post">
+        <td>
+          <input type="hidden" name="id" value="{{ option[0] }}">
+          <input type="text" name="option" value="{{ option[1] }}" required>
+        </td>
+        <td>
+          <input type="text" name="text" value="{{ option[2] }}" placeholder="Write option text" required>
+        </td>
+        <td>
+          <button type="submit">Edit Option</button>
+        </td>
+      </form>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% if message %}
+  <div style="color: gold;">{{ message }}</div>
+  {% endif %}
+  {% else %}
+  <div></div>
+  {% endif %}
+</table>
+{% endblock %}
