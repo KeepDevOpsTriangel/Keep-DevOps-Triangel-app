@@ -36,7 +36,11 @@ jobs:
         run: |
           pylint --fail-under=1.0 app
       
+      - name: Install pdoc3
+        run: |
+          python -m pip install pdoc3
+
       - name: Generate Documentation
         run: |
           mkdir docs
-          pdoc --html -o docs app
+          pdoc3 --html -o docs app
