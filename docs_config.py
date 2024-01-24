@@ -2,13 +2,17 @@
 
 # Añade el directorio raíz de tu aplicación al PYTHONPATH
 import sys
-sys.path.insert(0, './app')
+import os
+
+current_dir = os.path.abspath(os.path.dirname(__file__))
+app_dir = os.path.join(current_dir, 'app')
+sys.path.insert(0, app_dir)
 
 # Importa el módulo principal de tu aplicación
-from app.src.app import app  # Asegúrate de reemplazar "YourMainModule" con el nombre correcto
+from app.src.app import app
 
-# Importa el módulo application
-import application  # Asegúrate de reemplazar con el nombre correcto
+# También puedes intentar importar el módulo application directamente si es un paquete
+# from app import application  # Asegúrate de reemplazar "application" con el nombre correcto
 
 # Indica a pdoc los módulos que debe documentar
-modules = [app, application]  # Asegúrate de reemplazar "YourMainModule" con el nombre correcto
+modules = [app]
