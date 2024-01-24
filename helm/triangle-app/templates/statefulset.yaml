@@ -55,8 +55,8 @@ spec:
                     name: {{ include "triangle-app.fullname" . }}-configmap
                     key: MYSQL_PORT
           volumeMounts:
-            # - name: {{ include "triangle-app.fullname" . }}-mysql-volume
-            #   mountPath: /var/lib/mysql
+            - name: {{ include "triangle-app.fullname" . }}-mysql-volume
+              mountPath: /var/lib/mysql
             - name: {{ include "triangle-app.fullname" . }}-mysql-init-configmap
               mountPath: /docker-entrypoint-initdb.d/
       volumes:
@@ -66,13 +66,13 @@ spec:
             items:
               - key: db.sql
                 path: db.sql
-  # volumeClaimTemplates:
-  #   - metadata:
-  #       name: {{ include "triangle-app.fullname" . }}-mysql-volume
-  #     spec:
-  #       accessModes: {{ .Values.deployment.mysql.volumeClaimTemplates.accessModes }}
-  #       storageClassName: {{ .Values.deployment.mysql.volumeClaimTemplates.storageClassName }}
-  #       resources:
-  #         requests:
-  #           storage: {{ .Values.deployment.mysql.volumeClaimTemplates.resources.requests.storageSize }}
-  #       volumeMode: {{ .Values.deployment.mysql.volumeClaimTemplates.volumeMode }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ include "triangle-app.fullname" . }}-mysql-volume
+      spec:
+        accessModes: {{ .Values.deployment.mysql.volumeClaimTemplates.accessModes }}
+        storageClassName: {{ .Values.deployment.mysql.volumeClaimTemplates.storageClassName }}
+        resources:
+          requests:
+            storage: {{ .Values.deployment.mysql.volumeClaimTemplates.resources.requests.storageSize }}
+        volumeMode: {{ .Values.deployment.mysql.volumeClaimTemplates.volumeMode }}
