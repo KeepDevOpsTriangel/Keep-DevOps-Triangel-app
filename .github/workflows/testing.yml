@@ -38,4 +38,5 @@ jobs:
       
       - name: Generate Documentation
         run: |
-          pdoc --html app -o docs
+          mkdir docs
+          pdoc --html -o docs app
