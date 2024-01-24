@@ -10,3 +10,4 @@ requests==2.31.0
 python-dotenv==1.0.0 #añadida para los tests
 pdoc==14.4.0 #añadido para la documentación
 pdoc3==0.10.0 #añadido para la documentación
+setuptools==69.0.3 #añadido para snyk
