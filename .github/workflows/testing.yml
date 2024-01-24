@@ -44,4 +44,3 @@ jobs:
         run: |
           mkdir docs
           pdoc3 --html -o docs src
-        working-directory: ./app
