@@ -89,11 +89,9 @@ jobs:
         run: npm install -g snyk
 
       - name: Authenticate Snyk
-        pwd
         run: snyk auth ${{ secrets.SNYK_AUTH_TOKEN }}
-        working-directory: ./app
+        working-directory: $GITHUB_WORKSPACE/app
 
       - name: Test with Snyk
-        pwd
-        run: snyk test
-        working-directory: ./app
+        run: snyk test --file=your/package-lock.json  # Ajusta el archivo según tu configuración
+        working-directory: $GITHUB_WORKSPACE/app
