@@ -22,4 +22,8 @@ spec:
             name: {{ include "triangle-app.fullname" . }}-service
             port:
               number: {{ .Values.ingress.ports.number }}
+  tls:
+  - hosts:
+    - {{ .Values.ingress.hosts.host }}
+    secretName: secret-tls
 {{- end }}
