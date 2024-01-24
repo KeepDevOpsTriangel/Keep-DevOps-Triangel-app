@@ -90,6 +90,7 @@ jobs:
 
       - name: Authenticate Snyk
         run: snyk auth ${{ secrets.SNYK_AUTH_TOKEN }}
+        working-directory: ./app
 
       - name: Test with Snyk
         run: snyk test
