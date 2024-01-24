@@ -3,12 +3,3 @@ TRIANGLE-APP - HELM CHARTS
 -------------------------------------------
 http://localhost:{{ .Values.service.app.ports.port }}
 -------------------------------------------
--------------------------------------------
-
-{{- if .Values.ingress.enabled }}
-{{- range $host := .Values.ingress.hosts }}
-  {{- range .paths }}
-Example App: http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
-  {{- end }}
-{{- end }}
-{{- end}}
