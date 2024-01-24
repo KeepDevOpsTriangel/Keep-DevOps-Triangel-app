@@ -24,8 +24,10 @@ jobs:
 
       - name: Generate Documentation
         run: |
+          pwd
           mkdir docs
           pdoc -o docs src/application
+        working-directory: ./app
 
       - name: Archive Documentation
         uses: actions/upload-artifact@v2
