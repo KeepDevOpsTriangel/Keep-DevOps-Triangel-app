@@ -43,6 +43,7 @@ jobs:
         run: |
           mkdir docs
           pdoc --html -o docs src
+        working-directory: ./app 
 
       - name: Archive Documentation
         uses: actions/upload-artifact@v2
