@@ -8,7 +8,7 @@ import sys
 sys.path.insert(0, './app')
 
 # Importa el módulo principal de tu aplicación
-from src.app import app  # Asegúrate de reemplazar "YourMainModule" con el nombre correcto
+from app.src.app import app  # Asegúrate de reemplazar "YourMainModule" con el nombre correcto
 
 # Indica a pdoc los módulos que debe documentar
 modules = [app]  # Asegúrate de reemplazar "YourMainModule" con el nombre correcto

@@ -21,11 +21,12 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Install and verify dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
-          pip list
+          pip install pdoc3
+        working-directory: ./app
 
       - name: Run tests and generate coverage report
         run: |
@@ -35,12 +36,14 @@ jobs:
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
-      
-      - name: Install pdoc3
-        run: |
-          python -m pip install pdoc3
+        working-directory: ./app
+
+      - name: Clean existing docs
+        run: rm -rf docs
+        continue-on-error: true  # Continuar si el directorio no existe
 
       - name: Generate Documentation
         run: |
           mkdir docs
           pdoc3 --html -o docs app/src
+        working-directory: ./app
