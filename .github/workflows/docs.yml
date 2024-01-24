@@ -31,8 +31,9 @@ jobs:
       - name: Generate Documentation
         run: |
           mkdir docs
-          pdoc3 --html -o docs src
+          pdoc3 --html -o docs app/src
         working-directory: ./app
+
 
       - name: Archive Documentation
         uses: actions/upload-artifact@v2
