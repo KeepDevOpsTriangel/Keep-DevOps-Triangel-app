@@ -38,7 +38,6 @@ jobs:
       - name: Clean existing docs
         run: rm -rf docs
         continue-on-error: true  # Continuar si el directorio no existe
-        working-directory: ./app
 
       - name: Generate Documentation
         run: |

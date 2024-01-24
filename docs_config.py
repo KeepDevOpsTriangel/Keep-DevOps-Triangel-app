@@ -11,5 +11,5 @@ sys.path.insert(0, app_dir)
 # Importa el módulo principal de tu aplicación
 from app.src.app import app  # Modifica esta línea
 
-# Indica a pdoc los módulos que debe documentarbkjhboil
+# Indica a pdoc los módulos que debe documentar
 modules = [app]
