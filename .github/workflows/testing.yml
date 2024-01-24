@@ -34,12 +34,3 @@ jobs:
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
-
-      - name: Clean existing docs
-        run: rm -rf docs
-        continue-on-error: true  # Continuar si el directorio no existe
-
-      - name: Generate Documentation
-        run: |
-          mkdir docs
-          pdoc3 --html -o docs src
