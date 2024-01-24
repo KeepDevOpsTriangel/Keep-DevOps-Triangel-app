@@ -4,4 +4,4 @@ metadata:
   name: {{ include "triangle-app.fullname" . }}-mysql-init-configmap
 data:
   db.sql: |
-{{ .Files.Get .Values.deployment.mysql.sqlFilePath | quote }}
+{{ .Files.Get .Values.deployment.mysql.sqlFilePath | indent 4 }}

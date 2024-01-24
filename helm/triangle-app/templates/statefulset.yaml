@@ -54,9 +54,6 @@ spec:
                 configMapKeyRef:
                     name: {{ include "triangle-app.fullname" . }}-configmap
                     key: MYSQL_PORT
-          envFrom:
-            - configMapRef:
-                name: {{ include "triangle-app.fullname" . }}-configmap
           volumeMounts:
             - name: {{ include "triangle-app.fullname" . }}-mysql-volume
               mountPath: /var/lib/mysql
