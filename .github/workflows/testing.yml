@@ -35,3 +35,7 @@ jobs:
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
+      
+      - name: Generate Documentation
+        run: |
+          pdoc --html app -o docs
