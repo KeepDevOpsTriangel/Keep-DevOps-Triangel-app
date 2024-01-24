@@ -71,3 +71,25 @@ jobs:
         with:
           name: documentation
           path: ./app/docs  # Ajusta la ruta según tu estructura
+
+  snyk:
+    needs: testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.8
+
+      - name: Install Snyk
+        run: npm install -g snyk
+
+      - name: Authenticate Snyk
+        run: snyk auth YOUR_SNYK_AUTH_TOKEN
+
+      - name: Test with Snyk
+        run: snyk test
