@@ -96,4 +96,5 @@ jobs:
       - name: Test with Snyk
         run: |
           pwd
+          cd app
           snyk test
