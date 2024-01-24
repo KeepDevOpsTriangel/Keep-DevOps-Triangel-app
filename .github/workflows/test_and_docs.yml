@@ -37,7 +37,7 @@ jobs:
           pylint --fail-under=1.0 app
 
   generate-docs:
-    needs: testing-and-docs
+    needs: testing
     runs-on: ubuntu-latest
 
     steps:
