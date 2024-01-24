@@ -89,8 +89,11 @@ jobs:
         run: npm install -g snyk
 
       - name: Authenticate Snyk
+        pwd
         run: snyk auth ${{ secrets.SNYK_AUTH_TOKEN }}
         working-directory: ./app
 
       - name: Test with Snyk
+        pwd
         run: snyk test
+        working-directory: ./app
