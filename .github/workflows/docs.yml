@@ -1,0 +1,39 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches:
+      - 'albert'
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install pdoc
+        run: |
+          python -m pip install pdoc
+
+      - name: Clean existing docs
+        run: rm -rf docs
+        continue-on-error: true
+        working-directory: ./app  # Ajusta la ruta según tu estructura
+
+      - name: Generate Documentation
+        run: |
+          mkdir docs
+          pdoc --html -o docs src
+        working-directory: ./app
+
+      - name: Archive Documentation
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation
+          path: ./app/docs

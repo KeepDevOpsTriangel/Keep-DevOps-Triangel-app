@@ -34,19 +34,3 @@ jobs:
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
-      
-      - name: Clean existing docs
-        run: rm -rf docs
-        continue-on-error: true
-
-      - name: Generate Documentation
-        run: |
-          mkdir docs
-          pdoc --html -o docs src
-        working-directory: ./app 
-
-      - name: Archive Documentation
-        uses: actions/upload-artifact@v2
-        with:
-          name: documentation
-          path: ./app/docs
