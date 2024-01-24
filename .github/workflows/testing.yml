@@ -29,11 +29,11 @@ jobs:
           pip list
       - name: Run tests and generate coverage report
         run: |
-          coverage run -m pytest app/src
+          coverage run -m pytest app
           coverage report -m
       - name: Run Pylint
         run: |
-          pylint --fail-under=1.0 app/src
+          pylint --fail-under=1.0 app
       
       - name: Clean existing docs
         run: rm -rf docs
