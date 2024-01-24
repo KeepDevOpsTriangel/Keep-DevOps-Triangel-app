@@ -49,11 +49,11 @@ spec:
               configMapKeyRef:
                 name: {{ include "triangle-app.fullname" . }}-configmap
                 key: TITULO_APP
-          - name: TELEFONO_APP
+          - name: TELEFONO_SOPORTE
             valueFrom:
               configMapKeyRef:
                 name: {{ include "triangle-app.fullname" . }}-configmap
-                key: TELEFONO_APP
+                key: TELEFONO_SOPORTE
           - name: CHAT_ID_SOPORTE
             valueFrom:
               configMapKeyRef:

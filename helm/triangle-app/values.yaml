@@ -6,12 +6,12 @@ labels:
 
 secret:
   type: Opaque
-  TOKEN:
+  TOKEN: dHJpYW5nbGVhcHA=
   MYSQL_ROOT_PASSWORD: dHJpYW5nbGVhcHA=
   MYSQL_PASSWORD: dHJpYW5nbGVhcHA=
 
 configmap:
-  URL_WEBHOOK:
+  URL_WEBHOOK: "https://example.com"
   TITULO_APP: TRIANGLE_APP
   TELEFONO_SOPORTE:
   CHAT_ID_SOPORTE:
@@ -21,9 +21,9 @@ configmap:
   MYSQL_USER: triangleapp
 
 deployment:
-  replicaCount: 4
+  replicaCount: 1
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 4
     maxReplicas: 10
     targetCPUUtilizationPercentage: 70
