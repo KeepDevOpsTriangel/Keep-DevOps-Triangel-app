@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
           pip install pdoc3
-        working-directory: ./app
+        working-directory: ./app  # Corregido el working-directory
 
       - name: Run tests and generate coverage report
         run: |
@@ -45,5 +45,5 @@ jobs:
       - name: Generate Documentation
         run: |
           mkdir docs
-          pdoc3 --html -o docs app/src
+          pdoc3 --html -o docs src
         working-directory: ./app
