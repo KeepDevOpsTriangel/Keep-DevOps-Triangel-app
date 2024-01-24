@@ -1,3 +1,4 @@
+
 name: Testing
 
 on:
@@ -26,7 +27,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
           pip install pdoc3
-        working-directory: ./app  # Corregido el working-directory
 
       - name: Run tests and generate coverage report
         run: |
@@ -36,14 +36,4 @@ jobs:
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
-        working-directory: ./app
-
-      - name: Clean existing docs
-        run: rm -rf docs
-        continue-on-error: true  # Continuar si el directorio no existe
-
-      - name: Generate Documentation
-        run: |
-          mkdir docs
-          pdoc3 --html -o docs src
         working-directory: ./app
