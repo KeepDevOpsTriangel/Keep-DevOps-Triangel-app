@@ -9,7 +9,7 @@ on:
       - 'albert'
 
 jobs:
-  testing-and-docs:
+  testing:
     runs-on: ubuntu-latest
 
     steps:
