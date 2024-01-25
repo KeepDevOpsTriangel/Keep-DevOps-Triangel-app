@@ -40,14 +40,14 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 - CI/CD (branch albert)
     - CircleCI
     - GitHub Actions
-        - [test_and_docs.yml](.github\workflows\test_and_docs.yml):
+        - [test_and_docs.yml](.github/workflows/test_and_docs.yml):
             - Por ahora solo se activará en la rama albert
             - Este flujo de trabajo consta de 3 jobs y realiza las siguientes acciones:
                 - JOB TESTING:
                     1. Clonar el código del repositorio: Descarga el código del repositorio para realizar las pruebas y el análisis estático.
                     2. Configurar el entorno de Python: Utiliza la acción setup-python para configurar la versión de Python que se utilizará en el entorno de ejecución.
                     3. Instalar y verificar dependencias: Actualiza pip, instala las dependencias del proyecto desde el archivo [requirements.txt](app/requirements.txt) y muestra la lista de dependencias instaladas.
-                    4. Ejecutar pruebas y generar informes de cobertura: Utiliza pytest para ejecutar las pruebas del proyecto ubicadas en [test_app_py](app\src\tests\test_app.py) y genera un informe de cobertura.
+                    4. Ejecutar pruebas y generar informes de cobertura: Utiliza pytest para ejecutar las pruebas del proyecto ubicadas en [test_app_py](app/src/tests/test_app.py) y genera un informe de cobertura.
                     5. Ejecutar Pylint para el análisis estático del código: Utiliza Pylint para realizar análisis estático del código en la carpeta app y establece un umbral mínimo de puntuación (--fail-under=1.0).
                 
                 - JOB GENERATE DOCS:
@@ -60,7 +60,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
                     1. Este trabajo "snyk" se ejecutará solo después de que testing haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
                     2. Se centra en verificar que las dependencias y bibliotecas que se usan en el proyecto no sufran vulnerabilidades de seguridad.
 
-        - [release.yml](.github\workflows\release.yml):
+        - [release.yml](.github/workflows/release.yml):
             - Por ahora solo se activa en la rama albert
             - IMPORTANTE: ESTE FLUJO DE TRABAJO SÓLO SE ACTIVA CUANDO LE DAMOS AL PUSH UNA ETIQUETA QUE EMPIECE POR "V". HAY MODOS DE SOBREESCRIBIR ETIQUETAS PARA NO TENER QUE PONER UNA NUEVA CADA VEZ QUE QUEREMOS EJECUTARLO PARA PRUEBAS, EJEMPLO CON "V0.1.BETA" (Ejecutar los comandos en el órden indicado):
             ```
