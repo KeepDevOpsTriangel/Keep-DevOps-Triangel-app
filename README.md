@@ -42,7 +42,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
     - GitHub Actions
         - [test_and_docs.yml](.github\workflows\test_and_docs.yml):
             - Por ahora solo se activará en la rama albert
-            - Este flujo de trabajo consta de 2 jobs y realiza las siguientes acciones:
+            - Este flujo de trabajo consta de 3 jobs y realiza las siguientes acciones:
                 - JOB TESTING:
                     1. Clonar el código del repositorio: Descarga el código del repositorio para realizar las pruebas y el análisis estático.
                     2. Configurar el entorno de Python: Utiliza la acción setup-python para configurar la versión de Python que se utilizará en el entorno de ejecución.
@@ -51,11 +51,14 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
                     5. Ejecutar Pylint para el análisis estático del código: Utiliza Pylint para realizar análisis estático del código en la carpeta app y establece un umbral mínimo de puntuación (--fail-under=1.0).
                 
                 - JOB GENERATE DOCS:
-                    1. Este trabajo "generate-docs" se ejecutará solo después de que testing-and-docs haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
+                    1. Este trabajo "generate-docs" se ejecutará solo después de que testing haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
                     2. Asume los mismos pasos que el job "testing" para clonar el repo, configurar el entorno python e instalar las dependencias necesarias.
                     3. Elimina la carpeta "docs", si la hubiera, para asegurar una generación limpia.
                     4. Crea una nueva carpeta "docs" y utiliza pdoc para generar la documentación en esa carpeta a partir del código fuente ubicado en src/application.
                     5. Utiliza la acción "actions/upload-artifact@v3" para empaquetar y cargar la carpeta docs como un artefacto llamado documentation. Este artefacto puede ser accesible después en GitHub.
+                - JOB SNYK:
+                    1. Este trabajo "snyk" se ejecutará solo después de que testing haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
+                    2. Se centra en verificar que las dependencias y bibliotecas que se usan en el proyecto no sufran vulnerabilidades de seguridad.
 
         - [release.yml](.github\workflows\release.yml):
             - Por ahora solo se activa en la rama albert
@@ -76,6 +79,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
                 6. Construir y enviar la imagen de Docker en [nuestro perfil](https://hub.docker.com/repository/docker/kctriangle/triangle-bot/general). Utiliza docker/build-push-action para construir la imagen de Docker desde el contexto ./app y subirla a GitHub Packages. Se aplican las etiquetas y labels extraídos en el paso anterior.
 
     HE TENIDO QUE REVISAR GITHUB MARKETPLACE PARA ACTUALIZAR A LAS ULTIMAS VERSIONES DE CHECKOUT, SETUPPYTHON Y UPLOAD ARTIFACT, EN PROCESO.........
+    MIRAR BANDIT Y SONAQUBE PARA EL ANALISIS DE CODIGO
 
 
 - Monitorización
