@@ -63,7 +63,8 @@ jobs:
       - name: Generate Documentation
         run: |
           mkdir docs
-          pdoc src/app.py -o ./docs
+          pdoc -o docs src/application
+      #pdoc src/app.py -o ./docs
         working-directory: ./app
 
       - name: Archive Documentation
