@@ -50,7 +50,6 @@ deployment:
         requests:
           storageSize: 1Gi
       volumeMode: Filesystem
-    sqlFilePath: "files/db.sql"
 
 image:
   repository:
@@ -87,7 +86,7 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
   hosts:
-    host: triangle-app.local
+    host: bot.rafaeltorices.com
     paths:
       path: /
   ports:
