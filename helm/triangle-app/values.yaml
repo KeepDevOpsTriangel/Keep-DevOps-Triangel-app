@@ -50,7 +50,6 @@ deployment:
         requests:
           storageSize: 1Gi
       volumeMode: Filesystem
-    sqlFilePath: "files/db.sql"
 
 image:
   repository:
