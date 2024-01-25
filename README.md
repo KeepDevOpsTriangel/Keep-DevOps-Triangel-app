@@ -14,10 +14,8 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 - [Desarrollo de una aplicación](app/Readme.md)
 - Despliegue de la aplicación en un entorno de desarrollo
 - Despliegue automatizado de un cluster de Kubernetes en un entorno de producción
-- Despliegue de la aplicación en un entorno de producción
 - CI/CD, integración continua y despliegue continuo
 - Monitorización de la aplicación
-- Automatización
 
 # Tecnologías utilizadas
 
@@ -31,14 +29,12 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
     - Docker Compose
 
 - Entorno de producción
-    - ECS (Elastic Container Service) de AWS
     - EKS (Elastic Kubernetes Service) de AWS
     - Terraform
     - Helm Charts
     - ArgoCD
 
-- CI/CD (branch albert)
-    - CircleCI
+- CI/CD
     - GitHub Actions
         - [test_and_docs.yml](.github/workflows/test_and_docs.yml):
             - Por ahora solo se activará en la rama albert
@@ -85,9 +81,6 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 - Monitorización
     - Prometheus
     - Grafana
-
-- Automatización
-    - Ansible
 
 # Fuentes de información
 
