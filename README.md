@@ -47,7 +47,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
                     1. Clonar el código del repositorio: Descarga el código del repositorio para realizar las pruebas y el análisis estático.
                     2. Configurar el entorno de Python: Utiliza la acción setup-python para configurar la versión de Python que se utilizará en el entorno de ejecución.
                     3. Instalar y verificar dependencias: Actualiza pip, instala las dependencias del proyecto desde el archivo [requirements.txt](app/requirements.txt) y muestra la lista de dependencias instaladas.
-                    4. Ejecutar pruebas y generar informes de cobertura: Utiliza pytest para ejecutar las pruebas del proyecto ubicadas en [test_app_py](app/src/tests\test_app.py) y genera un informe de cobertura.
+                    4. Ejecutar pruebas y generar informes de cobertura: Utiliza pytest para ejecutar las pruebas del proyecto ubicadas en [test_app_py](app/src/tests/test_app.py) y genera un informe de cobertura.
                     5. Ejecutar Pylint para el análisis estático del código: Utiliza Pylint para realizar análisis estático del código en la carpeta app y establece un umbral mínimo de puntuación (--fail-under=1.0).
                 
                 - JOB GENERATE DOCS:
