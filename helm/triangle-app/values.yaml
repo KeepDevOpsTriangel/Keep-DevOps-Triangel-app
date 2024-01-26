@@ -6,10 +6,10 @@ labels:
 
 secret:
   type: Opaque
-  TOKEN: NjQwNzgyNjQ1MTpBQUV1NlR4MkJWcGh0OEJ2QS15RHRZendpcDNhS1JQc1lQNAo=
+  TOKEN: NjQwNzgyNjQ1MTpBQUV1NlR4MkJWcGh0OEJ2QS15RHRZendpcDNhS1JQc1lQNA==
   MYSQL_ROOT_PASSWORD: dHJpYW5nbGVhcHA=
   MYSQL_PASSWORD: dHJpYW5nbGVhcHA=
-  CHAT_ID_SOPORTE: NTkwNTQxMTc5Cg==
+  CHAT_ID_SOPORTE: NTkwNTQxMTc5
 
 configmap:
   URL_WEBHOOK: "https://bot.rafaeltorices.com"
