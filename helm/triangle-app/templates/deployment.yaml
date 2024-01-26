@@ -56,8 +56,8 @@ spec:
                 key: TELEFONO_SOPORTE
           - name: CHAT_ID_SOPORTE
             valueFrom:
-              configMapKeyRef:
-                name: {{ include "triangle-app.fullname" . }}-configmap
+              secretKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-secret
                 key: CHAT_ID_SOPORTE
           - name: EMAIL_SOPORTE
             valueFrom:
@@ -84,6 +84,11 @@ spec:
               configMapKeyRef:
                 name: {{ include "triangle-app.fullname" . }}-configmap
                 key: MYSQL_USER
+          - name: API_TELEGRAM
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: API_TELEGRAM
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:

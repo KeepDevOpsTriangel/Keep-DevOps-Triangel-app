@@ -133,6 +133,7 @@ http://localhost:5000
 > File **.env** with the environment variables of the app is required to deploy the app with Docker-compose. Use the file **env_example** included in the repository as example.
 > ### Variables environment:
 >  - **URL_WEBHOOK**: Webhook URL of the Bot Telegram for requests. **(Required)**
+>   - **API_TELEGRAM**: API Telegram URL. **(Required)**
 >   - **TOKEN**: Token of the Bot Telegram. **(Required)**
 >   - **TITULO_APP**: Title of the app. **(Required)**
 >   - **TELEFONO_SOPORTE**: Phone number that is shown in the messages of the Bot. **(Optional)**

@@ -43,7 +43,7 @@ class ConfigApp():
         Port of database
     """
     URL_WEBHOOK = os.getenv('URL_WEBHOOK')
-    APIURL = 'https://api.telegram.org/bot'
+    APIURL = os.getenv('API_TELEGRAM')
     TOKEN = os.getenv('TOKEN')
     TITULO_APP = os.getenv('TITULO_APP')+'\n\n'
     TELEFONO_SOPORTE = os.getenv('TELEFONO_SOPORTE')
