@@ -65,6 +65,7 @@ jobs:
       - name: Install pdoc
         run: |
           pip install pdoc
+          pip install python-dotenv
         shell: bash
 
       - name: Show environment variables before pdoc
