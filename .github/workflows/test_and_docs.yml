@@ -71,9 +71,10 @@ jobs:
       - name: Wait for MySQL to start
         run: |
           pwd
-          chmod +x ./tools/check_mysql_ready.sh
-          ./tools/check_mysql_ready.sh
+          chmod +x ./Keep-DevOps-Triangel-app/tools/check_mysql_ready.sh
+          ./Keep-DevOps-Triangel-app/tools/check_mysql_ready.sh
         shell: bash
+
 
       - name: Clean existing docs
         run: rm -rf docs
