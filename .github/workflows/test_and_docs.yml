@@ -76,7 +76,21 @@ jobs:
           ./app/tools/check_mysql_ready.sh
         shell: bash
 
-
+      - name: Show environment variables
+        run: |
+          echo "MYSQL_VERSION: $MYSQL_VERSION"
+          echo "MYSQL_CONTAINER: $MYSQL_CONTAINER"
+          echo "MYSQL_HOST: $MYSQL_HOST"
+          echo "MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD"
+          echo "MYSQL_USER: $MYSQL_USER"
+          echo "MYSQL_PASSWORD: $MYSQL_PASSWORD"
+          echo "MYSQL_DATABASE: $MYSQL_DATABASE"
+          echo "pythonLocation: $pythonLocation"
+          echo "PKG_CONFIG_PATH: $PKG_CONFIG_PATH"
+          echo "Python_ROOT_DIR: $Python_ROOT_DIR"
+          echo "Python2_ROOT_DIR: $Python2_ROOT_DIR"
+          echo "Python3_ROOT_DIR: $Python3_ROOT_DIR"
+          echo "LD_LIBRARY_PATH: $LD_LIBRARY_PATH"
 
       - name: Clean existing docs
         run: rm -rf docs
@@ -87,7 +101,6 @@ jobs:
         run: |
           mkdir docs
           pdoc src/app.py -o docs
-      #pdoc -o docs src/application
         working-directory: ./app
 
       - name: Archive Documentation
