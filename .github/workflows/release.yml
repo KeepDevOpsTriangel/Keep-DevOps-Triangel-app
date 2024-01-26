@@ -2,8 +2,8 @@ name: Build-Publish-Docker-Image
 
 on:
   push:
-    branches:
-      - helm
+    tags:
+      - 'v*.*.*'
 
 env:
   REGISTRY: ghcr.io
