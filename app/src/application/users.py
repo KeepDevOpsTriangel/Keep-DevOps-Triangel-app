@@ -340,8 +340,8 @@ class User():
 
     #### AÑADIDAS PARA LOS TESTS:
 
-    def __init__(self, conn=None):
-        self.conn = conn if conn else pymysql.connect(host='localhost', user='user', password='password', database='dbname')
+    # def __init__(self, conn=None):
+    #     self.conn = conn if conn else pymysql.connect(host='localhost', user='user', password='password', database='dbname')
 
     def ListUsersWeb(self):
         # Función para listar usuarios desde la base de datos
