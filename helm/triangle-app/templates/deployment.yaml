@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "triangle-app.fullname" . }}-deployment
+  labels:
+    {{- include "triangle-app.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.deployment.autoscaling.enabled }}
+  replicas: {{ .Values.deployment.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "triangle-app.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.labels.app.app }}
+  template:
+    metadata:
+      labels:
+        {{- include "triangle-app.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.labels.app.app }}
+    spec:
+      initContainers:
+      - name: delay-init-container
+        image: alpine:latest
+        command: ["sleep", "20"]
+      containers:
+      - name: triangle-app-container
+        image: {{ .Values.image.repository.app }}
+        ports:
+          - name: {{ .Values.deployment.app.ports.name }}
+            containerPort: {{ .Values.deployment.app.ports.containerPort }}
+        # livenessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: app-port
+        # readinessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: app-port
+        resources:
+          {{- toYaml .Values.deployment.resources | nindent 12 }}
+        env:
+          - name: URL_WEBHOOK
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: URL_WEBHOOK
+          - name: TITULO_APP
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: TITULO_APP
+          - name: TELEFONO_SOPORTE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: TELEFONO_SOPORTE
+          - name: CHAT_ID_SOPORTE
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-secret
+                key: CHAT_ID_SOPORTE
+          - name: EMAIL_SOPORTE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: EMAIL_SOPORTE
+          - name: MYSQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: MYSQL_HOST
+          - name: MYSQL_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: MYSQL_PORT
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: MYSQL_DATABASE
+          - name: MYSQL_USER
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: MYSQL_USER
+          - name: API_TELEGRAM
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: API_TELEGRAM
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-secret
+                key: MYSQL_PASSWORD
+          - name: TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-secret
+                key: TOKEN
+          
+            
