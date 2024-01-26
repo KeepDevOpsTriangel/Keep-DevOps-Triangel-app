@@ -45,10 +45,10 @@ class ConfigApp():
     URL_WEBHOOK = os.getenv('URL_WEBHOOK')
     APIURL = 'https://api.telegram.org/bot'
     TOKEN = os.getenv('TOKEN')
-    TITULO_APP = os.getenv('TITULO_APP')+'\n\n'
-    TELEFONO_SOPORTE = os.getenv('TELEFONO_SOPORTE')
-    CHAT_ID_SOPORTE = os.getenv('CHAT_ID_SOPORTE')
-    EMAIL_SOPORTE = os.getenv('EMAIL_SOPORTE')
+    TITULO_APP = os.getenv('TITULO_APP', 'Valor_Predeterminado') + '\n\n' 
+    TELEFONO_SOPORTE = os.getenv('TELEFONO_SOPORTE', 'Valor_Predeterminado') + '\n\n'
+    CHAT_ID_SOPORTE = os.getenv('CHAT_ID_SOPORTE', 'Valor_Predeterminado') + '\n\n'
+    EMAIL_SOPORTE = os.getenv('EMAIL_SOPORTE', 'Valor_Predeterminado') + '\n\n'
     MYSQL_HOST = os.getenv('MYSQL_HOST')
     MYSQL_USER = os.getenv('MYSQL_USER')
     MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
