@@ -64,6 +64,7 @@ jobs:
           pip install -r app/requirements.txt
           pip install cryptography  # Nueva línea para instalar cryptography
           pip list
+          env
 
       - name: Show environment variables before pdoc
         run: |
@@ -126,7 +127,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
           pip list
-          env
 
       - name: Install Snyk
         run: npm install -g snyk
