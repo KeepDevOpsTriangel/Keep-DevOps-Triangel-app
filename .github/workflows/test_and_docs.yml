@@ -11,7 +11,7 @@ on:
 env:
   MYSQL_VERSION: '8.2.0'
   MYSQL_CONTAINER: 'docker_mysql'
-  MYSQL_HOST: 'localhost'
+  MYSQL_HOST: 'docker_mysql'
   MYSQL_ROOT_PASSWORD: 'devops'
   MYSQL_USER: 'devops'
   MYSQL_PASSWORD: 'devops'
@@ -62,7 +62,7 @@ jobs:
         env:
           MYSQL_VERSION: '8.2.0'
           MYSQL_CONTAINER: 'docker_mysql'
-          MYSQL_HOST: 'localhost'
+          MYSQL_HOST: 'docker_mysql'
           MYSQL_ROOT_PASSWORD: 'devops'
           MYSQL_USER: 'devops'
           MYSQL_PASSWORD: 'devops'
@@ -71,7 +71,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
           pip install python-dotenv
-          pip install cryptography  # Nueva línea para instalar cryptography
+          pip install cryptography
           pip list
           env
 
