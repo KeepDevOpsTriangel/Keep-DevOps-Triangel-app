@@ -92,10 +92,13 @@ jobs:
           echo "Python3_ROOT_DIR: $Python3_ROOT_DIR"
           echo "LD_LIBRARY_PATH: $LD_LIBRARY_PATH"
 
-      - name: Clean existing docs
-        run: rm -rf docs
-        continue-on-error: true
+      - name: Generate Documentation
+        run: |
+          mkdir docs
+          pip install cryptography
+          pdoc src/app.py -o docs
         working-directory: ./app
+
 
       - name: Generate Documentation
         run: |
