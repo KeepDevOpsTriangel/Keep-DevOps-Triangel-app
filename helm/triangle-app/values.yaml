@@ -91,6 +91,8 @@ ingress:
       path: /
   ports:
     number: 5000
+  tls:
+    enabled: false
 
 statefulset:
   resources:
