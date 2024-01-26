@@ -11,19 +11,11 @@ on:
 env:
   MYSQL_VERSION: '8.2.0'
   MYSQL_CONTAINER: 'docker_mysql'
-<<<<<<< HEAD
-  MYSQL_HOST: 'localhost'
-  MYSQL_ROOT_PASSWORD: 'password'
-  MYSQL_USER: 'studentsuser'
-  MYSQL_PASSWORD: 'studentspassword'
-  MYSQL_DATABASE: 'students'
-=======
   MYSQL_HOST: 'docker_mysql'
   MYSQL_ROOT_PASSWORD: 'devops'
   MYSQL_USER: 'devops'
   MYSQL_PASSWORD: 'devops'
   MYSQL_DATABASE: 'devops'
->>>>>>> 6529eba0418a8d8548c0fe3cd03f94eea3ec4a70
 
 jobs:
   testing:
@@ -68,12 +60,6 @@ jobs:
           python-version: 3.8
 
       - name: Install and verify dependencies
-<<<<<<< HEAD
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r app/requirements.txt
-          pip install cryptography  # Nueva línea para instalar cryptography
-=======
         env:
           MYSQL_VERSION: '8.2.0'
           MYSQL_CONTAINER: 'docker_mysql'
@@ -87,7 +73,6 @@ jobs:
           pip install -r app/requirements.txt
           pip install python-dotenv
           pip install cryptography
->>>>>>> 6529eba0418a8d8548c0fe3cd03f94eea3ec4a70
           pip list
           env
 
