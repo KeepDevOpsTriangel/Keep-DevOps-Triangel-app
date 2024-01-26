@@ -66,7 +66,7 @@ jobs:
         working-directory: ./app
 
       - name: Archive Documentation
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation
           path: ./app/docs  # Ajusta la ruta según tu estructura
