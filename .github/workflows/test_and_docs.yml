@@ -1,3 +1,4 @@
+
 name: Testing and Documentation
 
 on:
@@ -7,15 +8,6 @@ on:
   push:
     branches:
       - 'albert'
-
-env:
-  MYSQL_VERSION: '8.2.0'
-  MYSQL_CONTAINER: 'docker_mysql'
-  MYSQL_HOST: 'docker_mysql'
-  MYSQL_ROOT_PASSWORD: 'devops'
-  MYSQL_USER: 'devops'
-  MYSQL_PASSWORD: 'devops'
-  MYSQL_DATABASE: 'devops'
 
 jobs:
   testing:
@@ -34,18 +26,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
-          pip install cryptography
           pip list
-
       - name: Run tests and generate coverage report
         run: |
           coverage run -m pytest app
           coverage report -m
-
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
-
   generate-docs:
     needs: testing
     runs-on: ubuntu-latest
@@ -54,39 +42,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python for pdoc
-        uses: actions/setup-python@v2
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: 3.8
-          environment-variables: |
-            GENERATING_DOCS=true
-          path: ${{ env.PATH }}
 
-      - name: Install pdoc
+      - name: Install and verify dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
-          pip install python-dotenv
-        shell: bash
-
-      - name: Show environment variables before pdoc
-        run: |
-          echo "MYSQL_VERSION: $MYSQL_VERSION"
-          echo "MYSQL_CONTAINER: $MYSQL_CONTAINER"
-          echo "MYSQL_HOST: $MYSQL_HOST"
-          echo "MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD"
-          echo "MYSQL_USER: $MYSQL_USER"
-          echo "MYSQL_PASSWORD: $MYSQL_PASSWORD"
-          echo "MYSQL_DATABASE: $MYSQL_DATABASE"
-          echo "GENERATING_DOCS: $GENERATING_DOCS"
+          pip list
+      - name: Clean existing docs
+        run: rm -rf docs
+        continue-on-error: true
         working-directory: ./app
 
       - name: Generate Documentation
         run: |
           mkdir docs
-          pdoc src/app.py -o docs
+          pdoc -o docs src/application
         working-directory: ./app
 
+      - name: Archive Documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: documentation
+          path: ./app/docs  # Ajusta la ruta según tu estructura
 
   snyk:
     needs: testing
@@ -106,7 +87,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
           pip list
-
       - name: Install Snyk
         run: npm install -g snyk
 
