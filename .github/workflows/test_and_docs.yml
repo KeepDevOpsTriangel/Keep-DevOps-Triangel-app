@@ -5,9 +5,11 @@ on:
   pull_request:
     branches:
       - 'albert'
+      - 'completed'
   push:
     branches:
       - 'albert'
+      - 'completed'
 
 jobs:
   testing:
