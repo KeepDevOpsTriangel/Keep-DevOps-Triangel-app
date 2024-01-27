@@ -16,7 +16,7 @@ helm upgrade --install --wait --timeout 15m --atomic --namespace argocd --create
 
 ## Accessing ArgoCD
 
-For obtain the password of the ArgoCD UI, execute the following command:
+For obtain the password of the ArgoCD UI, execute the following command (user: admin):
 
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
@@ -32,5 +32,8 @@ Access to the ArgoCD UI:
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-> ### Login with the user **admin** and the password obtained.
->----
+Open the browser and access to the following URL:
+```bash
+http://localhost:8080/argocd
+```
+
