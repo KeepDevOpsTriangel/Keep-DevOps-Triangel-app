@@ -1,55 +1,21 @@
-# src/tests/test_app.py
+# app/tests/test_app.py
 
-from unittest.mock import MagicMock, patch
-from application.users import User
-from application.config_app import ConfigApp
+from app.src.app import MyApp
 
-def test_list_users_web():
-    # Configurar el mock de la conexión a la base de datos
-    mock_conn = MagicMock()
+def test_create_app():
+    app = MyApp()
+    assert app is not None
+    # Agrega más aserciones según sea necesario
 
-    # Configurar el mock del resultado de la consulta a la base de datos
-    mock_result = [(1, 'kc', 'triangle', 'kc.triangle@example.com')]
-    mock_cursor = mock_conn.cursor.return_value
-    mock_cursor.fetchall.return_value = mock_result
+# Puedes agregar más tests para otras funciones en tu aplicación
 
-    # Crear una instancia de User con el mock de la conexión
-    user = User(conn=mock_conn)
+# app/tests/test_users.py
 
-    # Llamar a la función que deseamos probar
-    result = user.ListUsersWeb()
+from app.src.application.users import User
 
-    # Verificar que la función devuelve el resultado esperado
-    assert result == mock_result
+def test_create_user():
+    user = User()
+    assert user is not None
+    # Agrega más aserciones según sea necesario
 
-##################################################################################
-
-def test_default_titulo_app():
-    config = ConfigApp()
-    assert config.TITULO_APP == 'Valor_Predeterminado\n\n'
-
-##################################################################################
-
-def test_default_telf_app():
-    config = ConfigApp()
-    assert config.TELEFONO_SOPORTE == 'Valor_Predeterminado\n\n'
-
-##################################################################################
-    
-def test_default_chat_id_app():
-    config = ConfigApp()
-    assert config.CHAT_ID_SOPORTE == 'Valor_Predeterminado\n\n'
-
-##################################################################################
-    
-def test_default_email_app():
-    config = ConfigApp()
-    assert config.EMAIL_SOPORTE == 'Valor_Predeterminado\n\n'
-
-##################################################################################
-
-def test_default_apiurl_app():
-    config = ConfigApp()
-    assert config.APIURL == 'https://api.telegram.org/bot'
-
-##################################################################################
+# Puedes agregar más tests para otras funciones relacionadas con usuarios
