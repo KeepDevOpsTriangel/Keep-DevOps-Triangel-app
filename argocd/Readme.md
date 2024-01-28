@@ -37,3 +37,13 @@ Open the browser and access to the following URL:
 http://localhost:8080/argocd
 ```
 
+## Deploying an application
+
+The application's manifests for deployment in ArgoCD are stored in the `argocd` folder.
+
+> ### The manifiest **app_cluster_default.yaml** is the definition of the application in ArgoCD for cluster default in local environment.
+
+Login in ArgoCD with the user admin and the password obtained in the previous step, and create a new application with the manifest **app_cluster_default.yaml**.
+
+
+
