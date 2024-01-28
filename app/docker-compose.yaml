@@ -3,14 +3,20 @@ services:
   app-mysql:
     image: mysql:latest
     container_name: app-bot-mysql
+    restart: always
     env_file:
       - ./.env
     volumes:
       - ./config/mysql:/docker-entrypoint-initdb.d
       - dbtelegram:/var/lib/mysql
+    healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
+        interval: 10s
+        retries: 5
   app-telegram:
     depends_on:
-      - app-mysql
+      app-mysql:
+        condition: service_healthy
     build:
       context: .
       dockerfile: Dockerfile
