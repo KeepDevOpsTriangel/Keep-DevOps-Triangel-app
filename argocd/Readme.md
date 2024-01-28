@@ -6,12 +6,21 @@
 - Kubectl
 - Cluster with Kubernetes 1.16 or later
 
+## Deployment ArgoCD on Kubernetes cluster local (minikube) using Helm
+
 ```bash
 helm upgrade --install --wait --timeout 15m --atomic --namespace argocd --create-namespace \
     --repo https://argoproj.github.io/argo-helm argocd argo-cd --values values.yaml
 ```
 > This command will install a ArgoCD project in the namespace argocd and will use the values.yaml file to configure the project.
 
+## Deployment ArgoCD on cluster GKE
+
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+> This command will install a ArgoCD project in the namespace argocd.
 
 ## Accessing ArgoCD
 
@@ -36,3 +45,9 @@ Open the browser and access to the following URL:
 http://localhost:8080/argocd
 ```
 
+## Deploying an application using ArgoCD
+
+Create a new application using the ArgoCD UI and use the manifest file located in the folder:
+```bash
+triangle-app.yaml
+```
