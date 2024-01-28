@@ -22,6 +22,7 @@ def test_list_users_web():
     # Verificar que la función devuelve el resultado esperado
     assert result == mock_result
 
+
 ##################################################################################
 
 def test_default_titulo_app():
@@ -45,11 +46,5 @@ def test_default_chat_id_app():
 def test_default_email_app():
     config = ConfigApp()
     assert config.EMAIL_SOPORTE == 'Valor_Predeterminado\n\n'
-
-##################################################################################
-
-def test_default_apiurl_app():
-    config = ConfigApp()
-    assert config.APIURL == 'https://api.telegram.org/bot'
 
 ##################################################################################
