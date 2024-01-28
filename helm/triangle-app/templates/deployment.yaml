@@ -18,10 +18,6 @@ spec:
         {{- include "triangle-app.selectorLabels" . | nindent 8 }}
         app: {{ .Values.labels.app.app }}
     spec:
-      initContainers:
-      - name: delay-init-container
-        image: alpine:latest
-        command: ["sleep", "20"]
       containers:
       - name: triangle-app-container
         image: {{ .Values.image.repository.app }}
