@@ -6,13 +6,12 @@
 - Kubectl
 - Cluster with Kubernetes 1.16 or later
 
-## Deployment ArgoCD
-
 ```bash
 helm upgrade --install --wait --timeout 15m --atomic --namespace argocd --create-namespace \
     --repo https://argoproj.github.io/argo-helm argocd argo-cd --values values.yaml
 ```
 > This command will install a ArgoCD project in the namespace argocd and will use the values.yaml file to configure the project.
+
 
 ## Accessing ArgoCD
 
