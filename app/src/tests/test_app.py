@@ -1,21 +1,30 @@
-# app/tests/test_app.py
+# src/tests/test_app.py
 
-from app.src.app import MyApp
+from application.users import User
+from application.config_app import ConfigApp
 
-def test_create_app():
-    app = MyApp()
-    assert app is not None
-    # Agrega más aserciones según sea necesario
+##################################################################################
 
-# Puedes agregar más tests para otras funciones en tu aplicación
+def test_default_titulo_app():
+    config = ConfigApp()
+    assert config.TITULO_APP == 'Valor_Predeterminado\n\n'
 
-# app/tests/test_users.py
+##################################################################################
 
-from app.src.application.users import User
+def test_default_telf_app():
+    config = ConfigApp()
+    assert config.TELEFONO_SOPORTE == 'Valor_Predeterminado\n\n'
 
-def test_create_user():
-    user = User()
-    assert user is not None
-    # Agrega más aserciones según sea necesario
+##################################################################################
+    
+def test_default_chat_id_app():
+    config = ConfigApp()
+    assert config.CHAT_ID_SOPORTE == 'Valor_Predeterminado\n\n'
 
-# Puedes agregar más tests para otras funciones relacionadas con usuarios
+##################################################################################
+    
+def test_default_email_app():
+    config = ConfigApp()
+    assert config.EMAIL_SOPORTE == 'Valor_Predeterminado\n\n'
+
+##################################################################################
