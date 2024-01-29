@@ -338,14 +338,14 @@ class User():
         self.result = self.cursor.fetchall()
         return self.result
 
-    #### AÑADIDAS PARA LOS TESTS:
+    # AÑADIDAS PARA LOS TESTS:
 
-    def __init__(self, conn=None):
-        self.conn = conn if conn else pymysql.connect(host='localhost', user='user', password='password', database='dbname')
+    # def __init__(self, conn=None):
+    #     self.conn = conn if conn else pymysql.connect(host='localhost', user='user', password='password', database='dbname')
 
-    def ListUsersWeb(self):
-        # Función para listar usuarios desde la base de datos
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT * FROM users")
-        result = cursor.fetchall()
-        return result
+    # def ListUsersWeb(self):
+    #     # Función para listar usuarios desde la base de datos
+    #     cursor = self.conn.cursor()
+    #     cursor.execute("SELECT * FROM users")
+    #     result = cursor.fetchall()
+    #     return result
