@@ -1,4 +1,4 @@
-""" Module for config app Telegram and database MySQL. """
+""" Module for config app Telegram and database MySQL and Redis """
 
 import os  # Import os for use variables of environment
 # Import load_dotenv for load variables of environment
@@ -9,7 +9,7 @@ load_dotenv()  # Load variables of environment
 
 class ConfigApp():
     """
-    Config class for app Telegram and database MySQL.
+    Config class for app Telegram and database MySQL and Redis.
 
     Parameters with os.getenv() are variables of environment
     in file .env in root of project.
@@ -31,6 +31,10 @@ class ConfigApp():
         Chat id of support
     EMAIL_SOPORTE : str
         Email of support
+    WEB_USERNAME : str
+        Username of web flask app
+    WEB_PASSWORD : str
+        Password of web flask app
     MYSQL_HOST : str
         Host of database
     MYSQL_USER : str
@@ -41,16 +45,23 @@ class ConfigApp():
         Name of database
     MYSQL_PORT : str
         Port of database
+    REDIS_HOST : str
+        Host of Redis database
     """
     URL_WEBHOOK = os.getenv('URL_WEBHOOK')
     APIURL = os.getenv('API_TELEGRAM')
     TOKEN = os.getenv('TOKEN')
-    TITULO_APP = os.getenv('TITULO_APP', 'Valor_Predeterminado') + '\n\n' 
-    TELEFONO_SOPORTE = os.getenv('TELEFONO_SOPORTE', 'Valor_Predeterminado') + '\n\n'
-    CHAT_ID_SOPORTE = os.getenv('CHAT_ID_SOPORTE', 'Valor_Predeterminado') + '\n\n'
+    TITULO_APP = os.getenv('TITULO_APP', 'Valor_Predeterminado') + '\n\n'
+    TELEFONO_SOPORTE = os.getenv(
+        'TELEFONO_SOPORTE', 'Valor_Predeterminado') + '\n\n'
+    CHAT_ID_SOPORTE = os.getenv(
+        'CHAT_ID_SOPORTE', 'Valor_Predeterminado') + '\n\n'
     EMAIL_SOPORTE = os.getenv('EMAIL_SOPORTE', 'Valor_Predeterminado') + '\n\n'
     MYSQL_HOST = os.getenv('MYSQL_HOST')
     MYSQL_USER = os.getenv('MYSQL_USER')
     MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
     MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
     MYSQL_PORT = os.getenv('MYSQL_PORT')
+    WEB_USERNAME = os.getenv('WEB_USERNAME')
+    WEB_PASSWORD = os.getenv('WEB_PASSWORD')
+    REDIS_HOST = os.getenv('REDIS_HOST')

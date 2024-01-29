@@ -13,6 +13,12 @@ services:
         test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
         interval: 10s
         retries: 5
+  app-redis:
+    image: redis:latest
+    container_name: app-bot-redis
+    restart: always
+    ports:
+      - "6379:6379"
   app-telegram:
     depends_on:
       app-mysql:

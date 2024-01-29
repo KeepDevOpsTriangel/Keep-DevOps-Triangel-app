@@ -1,0 +1,27 @@
+{% extends "home.html" %}
+{% block content %}
+<h2>Login</h2>
+<form action="{{ url_for('Login_') }}" method="post">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>USERNAME</th>
+        <th>PASSWORD</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input type="text" name="username" placeholder="Username">
+        </td>
+        <td>
+          <input type="password" name="password" placeholder="Password">
+        </td>
+        <td>
+          <button type="submit">Login</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  {% endblock %}
