@@ -54,7 +54,7 @@ deployment:
 
 image:
   repository:
-    app: rafacv99/pytelegram
+    app: kctriangle/triangle-bot
     mysql: mysql
   tag:
     app: latest
