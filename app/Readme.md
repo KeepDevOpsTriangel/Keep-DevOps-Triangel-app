@@ -6,7 +6,7 @@ App to create a Telegram Bot using official Telegram API ([python-telegram-bot](
 
 ## Description
 
-The app create a Telegram Bot that can be used to exchange information and messages between Bot and users through official Telegram app, responding to the options that the user selects in the Bot menu. This options are created by the admin user through the web interface. Also, the app has a web interface to manage the Bot and the users that can use it, and to see the messages that the users send to the Bot. Through the web interface, the admin user can activate or deactivate the Bot, authorize or block users, and see the messages that the users send to the Bot. All the information is stored in a MySQL database.
+The app create a Telegram Bot that can be used to exchange information and messages between Bot and users through official Telegram app, responding to the options that the user selects in the Bot menu. This options are created by the admin user through the web interface. Also, the app has a web interface to manage the Bot and the users that can use it, and to see the messages that the users send to the Bot. Through the web interface, the admin user can activate or deactivate the Bot, authorize or block users, and see the messages that the users send to the Bot. All the information is stored in a MySQL database. Also, the app use Redis database to login in the web interface.
 
 ## Prerequisites
 
@@ -49,6 +49,7 @@ The app create a Telegram Bot that can be used to exchange information and messa
       - **css**: CSS files of the application web.
     - **templates**: templates of the application web.
     - **api.py**: file with the methods for use the API Telegram.
+    - **auth.py**: file with the methods for use the authentication of the web interface.
     - **config_app.py**: variables of configuration of the Bot.
     - **options.py**: functions of the options of the Bot.
     - **resp.py**: functions of the responses of the Bot.
@@ -115,13 +116,18 @@ docker run -d --name mysql -p 3306:3306 --env-file=.env mysql:8.0
 docker exec -i mysql mysql -uroot -p$MYSQL_ROOT_PASSWORD < config/mysql/db.sql
 ```
 
-7. Run the app.
+7. Docker run Redis database.
+```bash	
+docker run -d --name redis -p 6379:6379 redis
+```
+
+8. Run the app.
 
 ```bash
 python src/app.py
 ```
 
-8. Open the app in the browser.
+9. Open the app in the browser.
 
 ```bash
 http://localhost:5000
@@ -216,6 +222,7 @@ The admin user (defined in the environment variable **CHAT_ID_SOPORTE** and defi
 ### Web interface
 
 - Access to the web interface in the browser with the URL defined in the environment variable **URL_WEBHOOK**.
+- Login in the web interface with the username and password defined in the environment variables **WEB_USERNAME** and **WEB_PASSWORD**.
 - The admin user can see the messages that the users send to the Bot Telegram.
 - The admin user can see the users that use the Bot Telegram.
 - The admin user can authorize or block the users that use the Bot Telegram.

@@ -24,14 +24,6 @@ spec:
         ports:
           - name: {{ .Values.deployment.app.ports.name }}
             containerPort: {{ .Values.deployment.app.ports.containerPort }}
-        # livenessProbe:
-        #   httpGet:
-        #     path: /health
-        #     port: app-port
-        # readinessProbe:
-        #   httpGet:
-        #     path: /health
-        #     port: app-port
         resources:
           {{- toYaml .Values.deployment.resources | nindent 12 }}
         env:
@@ -95,5 +87,20 @@ spec:
               secretKeyRef:
                 name: {{ include "triangle-app.fullname" . }}-secret
                 key: TOKEN
+          - name: WEB_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: WEB_USERNAME
+          - name: WEB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-secret
+                key: WEB_PASSWORD
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: REDIS_HOST
           
             

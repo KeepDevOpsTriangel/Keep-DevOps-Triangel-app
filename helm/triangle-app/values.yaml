@@ -3,6 +3,8 @@ labels:
     app: triangle-app
   mysql:
     app: triangle-app-mysql
+  redis:
+    app: triangle-app-redis
 
 secret:
   type: Opaque
@@ -10,6 +12,7 @@ secret:
   MYSQL_ROOT_PASSWORD: dHJpYW5nbGVhcHA=
   MYSQL_PASSWORD: dHJpYW5nbGVhcHA=
   CHAT_ID_SOPORTE: NTkwNTQxMTc5
+  WEB_PASSWORD: dHJpYW5nbGVhcHA=
 
 configmap:
   URL_WEBHOOK: "https://bot.rafaeltorices.com"
@@ -20,6 +23,7 @@ configmap:
   MYSQL_DATABASE: triangleapp
   MYSQL_USER: triangleapp
   API_TELEGRAM: "https://api.telegram.org/bot"
+  WEB_USERNAME: triangleapp
 
 deployment:
   replicaCount: 2
@@ -40,6 +44,10 @@ deployment:
     ports:
       name: app-port
       containerPort: 5000
+  redis:
+    ports:
+      name: redis-port
+      containerPort: 6379
   mysql:
     ports:
       name: mysql-port
@@ -56,9 +64,11 @@ image:
   repository:
     app: kctriangle/triangle-bot
     mysql: mysql
+    redis: redis
   tag:
     app: latest
     mysql: latest
+    redis: latest
 
 service:
   app:
@@ -74,6 +84,13 @@ service:
       name: mysql-port
       port: 3306
       targetPort: mysql-port
+      protocol: TCP
+  redis:
+    type: ClusterIP
+    ports:
+      name: redis-port
+      port: 6379
+      targetPort: redis-port
       protocol: TCP
 
 serviceAccount:
