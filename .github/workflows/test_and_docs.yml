@@ -100,7 +100,10 @@ jobs:
           snyk test
 
   generate-docs:
-    needs: testing
+    needs: 
+      - testing
+      - sonarcloud
+      - snyk
     runs-on: ubuntu-latest
 
     steps:
