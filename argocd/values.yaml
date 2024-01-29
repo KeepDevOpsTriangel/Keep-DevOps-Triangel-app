@@ -1,0 +1,22 @@
+# Values file for ArgoCD configuration in the cluster by Helm chart
+configs:
+  params:
+    server.insecure: true
+  cm:
+    resource.compareoptions: |
+      ignoreAggregatedRoles: true
+      ignoreResourceStatusField: all
+    url: http://localhost/argocd
+    application.instanceLabelKey: argocd.argoproj.io/instance
+server:
+  insecure: true
+  extraArgs:
+    - --rootpath
+    - /argocd
+  ingress:
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+    enabled: true
+    paths:
+      - /argocd

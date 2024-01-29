@@ -140,6 +140,8 @@ http://localhost:5000
 >   - **CHAT_ID_SOPORTE**: Chat ID of the admin user of the Bot Telegram. **(Required)**
 >     - To obtain it, we can use the Telegram Bot [@userinfobot](https://t.me/userinfobot). When we start it, it will show us our CHAT_ID.
 >   - **EMAIL_SOPORTE**: Contact email that is shown in the messages of the Bot. **(Optional)**
+>   - **WEB_USERNAME**: Username of the admin user of the web interface. **(Required)**
+>   - **WEB_PASSWORD**: Password of the admin user of the web interface. **(Required)**
 > --------
 
 > ### - Variables environment of the database MySQL:
@@ -149,6 +151,10 @@ http://localhost:5000
 >   - **MYSQL_HOST** - **(REQUIRED)**
 >   - **MYSQL_PORT** - **(REQUIRED)**
 >   - **MYSQL_ROOT_PASSWORD** - **(REQUIRED)**
+> ------
+
+> ### - Variables environment of the Redis database:
+>   - **REDIS_HOST** - **(REQUIRED)**
 > ------
 
 ### Once configured the environment variables, follow the next steps to deploy the app in local with Docker-compose:

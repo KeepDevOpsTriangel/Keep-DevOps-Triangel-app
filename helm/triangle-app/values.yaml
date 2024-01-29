@@ -15,7 +15,7 @@ configmap:
   URL_WEBHOOK: "https://bot.rafaeltorices.com"
   TITULO_APP: TRIANGLE_APP
   TELEFONO_SOPORTE: 123456789
-  EMAIL_SOPORTE:
+  EMAIL_SOPORTE: "soporte@triangle-app.example"
   MYSQL_PORT: 3306
   MYSQL_DATABASE: triangleapp
   MYSQL_USER: triangleapp

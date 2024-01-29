@@ -29,8 +29,12 @@
         <li><a href="{{ url_for('ServiceStateWebApp_') }}">Service</a></li>
         <li><a href="{{ url_for('SendMessagesWebApp_') }}">Send Messages</a></li>
         <li><a href="{{ url_for('GetMessagesWebApp_') }}">List Messages</a></li>
+        <li><a href="{{ url_for('LogOut_') }}">LogOut</a></li>
       </ul>
     </nav>
+    {% if myuser %}
+    <div style="color: gray"><b>USER:</b> {{ myuser }}</div>
+    {% endif %}
     <p>
       {% block content %}
     <h2>Home Page</h2>
