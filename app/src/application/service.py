@@ -8,6 +8,7 @@ import json  # Import json for use json format
 from application.users import User
 from application.state_app import StateApp
 from application.options import Options
+from application.mongodb import MongoDB
 
 
 class Service():
@@ -41,10 +42,11 @@ class Service():
         self.state = StateApp()
         self.resp = RespText()
         self.options = Options()
+        self.mongodb = MongoDB()
 
         json_file = 'data.json'  # File json for save data of message
-
         self.data = data
+
         # create file empty json if not exist
         with open(json_file, 'w') as file:
             file.write('')
@@ -60,6 +62,8 @@ class Service():
         # open file json and save in variable data
         with open(json_file) as file:
             self.data = json.load(file)
+        # insert data in database MongoDB
+        self.mongodb.InsertMessage(data)
         # if data is not empty
         if self.data != []:
             # for each data in file json
@@ -72,8 +76,8 @@ class Service():
                     # date = fact['message']['date']
                     text = str(fact['message']['text'])
                     # save message in database MySQL
-                    self.user.SavedMessageUser(
-                        chatId, first_name, text, username)
+                    # self.user.SavedMessageUser(
+                    #     chatId, first_name, text, username)
                 except Exception:
                     print("Error: "+Exception)
                 # send response to user
