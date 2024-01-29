@@ -30,38 +30,6 @@ class AppWeb():
 
     def Index(self):
         """
-        Method for render template page home.html
-
-        args:
-        ----------
-        self : object
-            Object of class
-
-        return:
-        ----------
-        render_template : object
-            Object of class render_template
-            render template home.html
-        """
-        if request.method == 'POST':
-            username = request.form['username']
-            password = request.form['password']
-            if self.authenticator.Login(username, password) is True:
-                session['username'] = username
-                return render_template('home.html', title=self.title_web,
-                                       resp='Hello, '+username)
-            else:
-                return render_template('login.html', title=self.title_web,
-                                       resp='Login failed.')
-        if request.method == 'GET':
-            if 'username' in session:
-                return render_template('home.html', title=self.title_web,
-                                       myuser=session['username'])
-            else:
-                return render_template('login.html', title=self.title_web)
-
-    def WebHook(self):
-        """
         webhook for Bot Telegram where
         receive the messages of the users
         and are processed by the Bot Telegram API
@@ -81,7 +49,11 @@ class AppWeb():
             Service(request.json)
             return render_template('home.html')
         if request.method == 'GET':
-            return render_template('home.html')
+            if 'username' in session:
+                return render_template('home.html', title=self.title_web,
+                                       myuser=session['username'])
+            else:
+                return render_template('login.html', title=self.title_web)
 
     def GetWebHookInfo(self):
         """
@@ -406,6 +378,48 @@ class AppWeb():
         else:
             return render_template('login.html', title=self.title_web)
 
+    def Login(self):
+        """
+        login in web app
+
+        args:
+        ----------
+        self : object
+            Object of class
+
+        return:
+        ----------
+        render_template : object
+            Object of class render_template
+            render template login.html
+        """
+        if request.method == 'POST':
+            username = request.form['username']
+            password = request.form['password']
+            if self.authenticator.Login(username, password):
+                session['username'] = username
+                return render_template('home.html', title=self.title_web,
+                                       myuser=session['username'])
+            else:
+                return render_template('login.html', title=self.title_web,
+                                       resp="Login failed.")
+        else:
+            return render_template('home.html', title=self.title_web)
+
     def LogOut(self):
+        """
+        logout in web app
+
+        args:
+        ----------
+        self : object
+            Object of class
+
+        return:
+        ----------
+        render_template : object
+            Object of class render_template
+            render template login.html
+        """
         session.pop('username', None)
         return render_template('login.html', title=self.title_web)

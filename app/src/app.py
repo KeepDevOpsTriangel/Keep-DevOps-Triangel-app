@@ -57,19 +57,6 @@ class MyApp():
             """
             return render_template('404.html', title=self.title_web)
 
-        @self.app.route('/webhook', methods=['GET', 'POST'])
-        def WebHook_():
-            """
-            Method for manage the webhook of Telegram Bot
-
-            return:
-            ----------
-            AppWeb.WebHook : object
-                Object of class AppWeb
-                manage the webhook of Telegram Bot
-            """
-            return AppWeb.WebHook(self)
-
         @self.app.route('/get_webhook', methods=['GET'])
         def GetWebHookInfo_():
             """
@@ -217,6 +204,19 @@ class MyApp():
                 list the messages of Telegram Bot
             """
             return AppWeb.GetMessagesWebApp(self)
+
+        @self.app.route('/login', methods=['GET', 'POST'])
+        def Login_():
+            """
+            Method for login of the app
+
+            return:
+            ----------
+            AppWeb.Login : object
+                Object of class AppWeb
+                login of the app
+            """
+            return AppWeb.Login(self)
 
         @self.app.route('/logout', methods=['GET'])
         def LogOut_():
