@@ -12,3 +12,5 @@ data:
   TITULO_APP: {{ .Values.configmap.TITULO_APP | quote }}
   TELEFONO_SOPORTE: {{ .Values.configmap.TELEFONO_SOPORTE | quote }}
   EMAIL_SOPORTE: {{ .Values.configmap.EMAIL_SOPORTE | quote }}
+  WEB_USERNAME: {{ .Values.configmap.WEB_USERNAME | quote }}
+  REDIS_HOST: {{ include "triangle-app.fullname" . }}-service-redis
