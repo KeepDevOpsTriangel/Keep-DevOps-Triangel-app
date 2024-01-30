@@ -65,3 +65,7 @@ class ConfigApp():
     WEB_USERNAME = os.getenv('WEB_USERNAME')
     WEB_PASSWORD = os.getenv('WEB_PASSWORD')
     REDIS_HOST = os.getenv('REDIS_HOST')
+    MONGO_HOST = os.getenv('MONGO_HOST')
+    MONGO_PORT = os.getenv('MONGO_PORT')
+    MONGO_DATABASE = os.getenv('MONGO_DATABASE')
+    MONGO_COLLECTION = os.getenv('MONGO_COLLECTION')
