@@ -12,7 +12,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 # Descripción del proyecto
 
 - [Desarrollo de una aplicación](app/Readme.md)
-- Despliegue de la aplicación en un entorno de desarrollo
+- [Despliegue de la aplicación en un entorno de desarrollo](app/Readme.md)
 - Despliegue automatizado de un cluster de Kubernetes en un entorno de producción
 - CI/CD, integración continua y despliegue continuo
 - Monitorización de la aplicación
@@ -23,6 +23,8 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
     - Python
     - Flask
     - MySQL
+    - Redis
+    - MongoDB
 
 - Entorno de desarrollo
     - Docker
@@ -31,8 +33,8 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 - Entorno de producción
     - EKS (Elastic Kubernetes Service) de AWS
     - Terraform
-    - Helm Charts
-    - ArgoCD
+    - [Helm Charts](/helm/Readme.md)
+    - [ArgoCD](/argocd/Readme.md)
 
 - CI/CD
     - GitHub Actions
