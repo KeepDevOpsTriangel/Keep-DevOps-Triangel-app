@@ -31,6 +31,8 @@ services:
     restart: always
     ports:
       - "27017:27017"
+    volumes:
+      - app-mongo-volume:/bitnami/mongodb/data/
     healthcheck:
       test: mongo --eval "db.adminCommand('ping')" --quiet | grep 1
       interval: 10s
@@ -56,3 +58,4 @@ services:
     restart: always
 volumes:
   app-mysql-volume:
+  app-mongo-volume:
