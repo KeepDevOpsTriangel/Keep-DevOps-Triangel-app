@@ -11,6 +11,7 @@ from application.options import Options
 from application.state_app import StateApp
 from application.api import Api
 from application.auth import Authenticator
+from application.mongodb import MongoDB
 import os
 
 load_dotenv()  # Load variables of .env
@@ -28,6 +29,7 @@ class MyApp():
         self.authenticator = Authenticator(
             self.config.WEB_USERNAME, self.config.WEB_PASSWORD)
         self.title_web = self.config.TITULO_APP
+        self.mongodb = MongoDB()
         self.routes()
 
     def routes(self):
