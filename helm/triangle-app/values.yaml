@@ -57,24 +57,20 @@ deployment:
     ports:
       name: mongo-port
       containerPort: 27017
-    volumeClaimTemplates:
-      storageClassName: standard
+    persistence:
+      enabled: false
       accessModes: ["ReadWriteOnce"]
-      resources:
-        requests:
-          storageSize: 1Gi
-      volumeMode: Filesystem
+      size: 1Gi
+      mountPath: /bitnami/mongodb/data/
   mysql:
     ports:
       name: mysql-port
       containerPort: 3306
-    volumeClaimTemplates:
-      storageClassName: standard
+    persistence:
+      enabled: true
       accessModes: ["ReadWriteOnce"]
-      resources:
-        requests:
-          storageSize: 1Gi
-      volumeMode: Filesystem
+      size: 1Gi
+      mountPath: /var/lib/mysql
 
 image:
   repository:

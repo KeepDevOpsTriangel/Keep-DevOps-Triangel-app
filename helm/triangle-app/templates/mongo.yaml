@@ -50,16 +50,18 @@ spec:
                 - sh
                 - -c
                 - mongo --eval "db.adminCommand('ping')" --quiet | grep 1
+          {{- if .Values.deployment.mongo.persistence.enabled }}
           volumeMounts:
-            # - name: {{ include "triangle-app.fullname" . }}-mongo-volume
-            #   mountPath: /var/lib/mongodb
-  # volumeClaimTemplates:
-  #   - metadata:
-  #       name: {{ include "triangle-app.fullname" . }}-mongo-volume
-  #     spec:
-  #       accessModes: {{ .Values.deployment.mongo.volumeClaimTemplates.accessModes }}
-  #       storageClassName: {{ .Values.deployment.mongo.volumeClaimTemplates.storageClassName }}
-  #       resources:
-  #         requests:
-  #           storage: {{ .Values.deployment.mongo.volumeClaimTemplates.resources.requests.storageSize }}
-  #       volumeMode: {{ .Values.deployment.mongo.volumeClaimTemplates.volumeMode }}
+            - name: {{ include "triangle-app.fullname" . }}-mongo-volume
+              mountPath: {{ .Values.deployment.mongo.persistence.mountPath }}
+          {{- end }}
+  {{- if .Values.deployment.mongo.persistence.enabled }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ include "triangle-app.fullname" . }}-mongo-volume
+      spec:
+        accessModes: {{ .Values.deployment.mongo.persistence.accessModes }}
+        resources:
+          requests:
+            storage: {{ .Values.deployment.mongo.persistence.size }}
+  {{- end }}
