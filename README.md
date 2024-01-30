@@ -18,7 +18,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 - [Despliegue de la aplicación en un entorno de desarrollo](app/Readme.md)
 - Despliegue automatizado de un cluster de Kubernetes en un entorno de producción
 - CI/CD, integración continua y despliegue continuo
-- Monitorización de la aplicación
+- Monitorización de la aplicación.
 
 # Tecnologías utilizadas
 
