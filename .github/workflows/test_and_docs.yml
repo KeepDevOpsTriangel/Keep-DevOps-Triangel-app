@@ -69,6 +69,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+              - Dsonar.organization=keepdevopstriangel
+              - Dsonar.projectKey=KeepDevOpsTriangel_Keep-DevOps-Triangel-app
+              - Dsonar.python.coverage.reportPaths=coverage.xml
 
   snyk:
     needs: testing
