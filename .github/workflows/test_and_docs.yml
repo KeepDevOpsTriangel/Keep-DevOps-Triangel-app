@@ -16,10 +16,10 @@ jobs:
       MYSQL_VERSION: '8.0'
       MYSQL_CONTAINER: 'docker_mysql'
       MYSQL_HOST: 'docker_mysql'
-      MYSQL_ROOT_PASSWORD: 'devops'
-      MYSQL_USER: 'devops'
-      MYSQL_PASSWORD: 'devops'
-      MYSQL_DATABASE: 'devops'
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
 
     steps:
       - name: Checkout code
