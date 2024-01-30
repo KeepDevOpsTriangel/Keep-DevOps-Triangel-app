@@ -80,7 +80,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 
 - Monitorización
     - Prometheus
-    - Grafana
+    - Grafana.
 
 # Fuentes de información
 
