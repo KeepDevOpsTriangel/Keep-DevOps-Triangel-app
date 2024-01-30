@@ -9,6 +9,7 @@ from application.options import Options
 from application.api import Api
 from application.service import Service
 from application.auth import Authenticator
+from application.mongodb import MongoDB
 
 
 class AppWeb():
@@ -27,6 +28,7 @@ class AppWeb():
         self.user = User()
         self.authenticator = Authenticator()
         self.title_web = self.config.TITULO_APP  # Define title of web app
+        self.mongodb = MongoDB()
 
     def Index(self):
         """
@@ -371,7 +373,8 @@ class AppWeb():
             render template messages.html
         """
         if 'username' in session:
-            messages = self.user.ListMessagesWeb()
+            # messages = self.user.ListMessagesWeb()
+            messages = self.mongodb.GetMessages()
             return render_template('messages.html',
                                    messages=messages, title=self.title_web,
                                    myuser=session['username'])

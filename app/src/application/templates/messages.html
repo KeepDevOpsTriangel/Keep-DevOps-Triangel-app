@@ -6,6 +6,7 @@
     <tr>
       <th>DATE/TIME</th>
       <th>FIRST_NAME</th>
+      <th>USERNAME</th>
       <th>MESSAGE</th>
     </tr>
   </thead>
@@ -13,15 +14,10 @@
     {% if messages %}
     {% for message in messages %}
     <tr>
-      <td>
-        <p>{{ message[0] }}</p>
-      </td>
-      <td>
-        <p>{{ message[1] }}</p>
-      </td>
-      <td>
-        <p>{{ message[3] }}</p>
-      </td>
+      <td>{{ message.message.date }}</td>
+      <td>{{ message.message.chat.first_name }}</td>
+      <td>{{ message.message.chat.username }}</td>
+      <td>{{ message.message.text }}</td>
     </tr>
     {% endfor %}
   </tbody>

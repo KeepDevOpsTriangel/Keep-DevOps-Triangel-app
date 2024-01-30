@@ -27,3 +27,16 @@ class MongoDB():
             Dictionary with the data of the message of the user
         """
         self.collection.insert_one(message)
+
+    def GetMessages(self):
+        """
+        Get all messages in MongoDB
+
+        return:
+        messages : list
+            List with all messages in MongoDB
+        """
+        messages = []
+        for message in self.collection.find():
+            messages.append(message)
+        return messages
