@@ -2,11 +2,11 @@
 
 ## Introduction
 
-App to create a Telegram Bot using official Telegram API ([python-telegram-bot](https://core.telegram.org/bots/api)). The app is developed using Python for the Bot service and communication with API Telegram, and Python Flask framework for the interface web. The database used is MySQL.
+App to create a Telegram Bot using official Telegram API ([python-telegram-bot](https://core.telegram.org/bots/api)). The app is developed using Python for the Bot service and communication with API Telegram, and Python Flask framework for the interface web. The database used for options and users is MySQL. The app use Redis database to login in the web interface and to save the messages use MongoDB.
 
 ## Description
 
-The app create a Telegram Bot that can be used to exchange information and messages between Bot and users through official Telegram app, responding to the options that the user selects in the Bot menu. This options are created by the admin user through the web interface. Also, the app has a web interface to manage the Bot and the users that can use it, and to see the messages that the users send to the Bot. Through the web interface, the admin user can activate or deactivate the Bot, authorize or block users, and see the messages that the users send to the Bot. All the information is stored in a MySQL database. Also, the app use Redis database to login in the web interface.
+The app create a Telegram Bot that can be used to exchange information and messages between Bot and users through official Telegram app, responding to the options that the user selects in the Bot menu. This options are created by the admin user through the web interface. Also, the app has a web interface to manage the Bot and the users that can use it, and to see the messages that the users send to the Bot. Through the web interface, the admin user can activate or deactivate the Bot, authorize or block users, and see the messages that the users send to the Bot. All the information is stored in a MySQL database. Also, the app use Redis database to login in the web interface and to save the messages use MongoDB.
 
 ## Prerequisites
 
@@ -32,6 +32,10 @@ The app create a Telegram Bot that can be used to exchange information and messa
     - (https://pypi.org/project/Flask/)
 - MySQL 8.0 for the database.
     - (https://dev.mysql.com/downloads/mysql/)
+- Redis database.
+    - (https://redis.io/download)
+- MongoDB database.
+    - (https://www.mongodb.com/try/download/community)
 - Python mysql-connector-python for the connection with the database MySQL.
     - (https://pypi.org/project/mysql-connector-python/)
 - > File **requirements.txt** with all the libraries, dependencies and versions used in the app.
@@ -51,6 +55,7 @@ The app create a Telegram Bot that can be used to exchange information and messa
     - **api.py**: file with the methods for use the API Telegram.
     - **auth.py**: file with the methods for use the authentication of the web interface.
     - **config_app.py**: variables of configuration of the Bot.
+    - **mongodb.py**: file with the methods and connection to the MongoDB database.
     - **options.py**: functions of the options of the Bot.
     - **resp.py**: functions of the responses of the Bot.
     - **service.py**: service to manage the Bot.
@@ -121,13 +126,18 @@ docker exec -i mysql mysql -uroot -p$MYSQL_ROOT_PASSWORD < config/mysql/db.sql
 docker run -d --name redis -p 6379:6379 redis
 ```
 
-8. Run the app.
+8. Docker run MongoDB database.
+```bash
+docker run -d --name mongo -p 27017:27017 mongo
+```
+
+9. Run the app.
 
 ```bash
 python src/app.py
 ```
 
-9. Open the app in the browser.
+10. Open the app in the browser.
 
 ```bash
 http://localhost:5000
@@ -162,6 +172,13 @@ http://localhost:5000
 > ### - Variables environment of the Redis database:
 >   - **REDIS_HOST** - **(REQUIRED)**
 > ------
+
+> ### - Variables environment of the MongoDB database:
+>   - **MONGO_HOST** - **(REQUIRED)**
+>   - **MONGO_PORT** - **(REQUIRED)**
+>   - **MONGO_DATABASE** - **(REQUIRED)**
+>   - **MONGO_COLLECTION** - **(REQUIRED)**
+
 
 ### Once configured the environment variables, follow the next steps to deploy the app in local with Docker-compose:
 
