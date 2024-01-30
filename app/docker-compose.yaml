@@ -10,7 +10,7 @@ services:
       - ./config/mysql:/docker-entrypoint-initdb.d
       - app-mysql-volume:/var/lib/mysql
     healthcheck:
-        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
+        test: mysqladmin ping -hlocalhost -u${MYSQL_USER} -p${MYSQL_PASSWORD}
         interval: 10s
         retries: 5
   app-redis:
@@ -19,15 +19,31 @@ services:
     restart: always
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
   app-mongo:
-    image: mongo:latest
+    image: bitnami/mongodb:4.4.13-debian-10-r30
     container_name: app-bot-mongo
     restart: always
     ports:
       - "27017:27017"
+    healthcheck:
+      test: mongo --eval "db.adminCommand('ping')" --quiet | grep 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
   app-telegram:
     depends_on:
       app-mysql:
+        condition: service_healthy
+      app-redis:
+        condition: service_healthy
+      app-mongo:
         condition: service_healthy
     build:
       context: .
@@ -37,6 +53,6 @@ services:
       - ./.env
     ports:
       - "5000:5000"
-
+    restart: always
 volumes:
   app-mysql-volume:

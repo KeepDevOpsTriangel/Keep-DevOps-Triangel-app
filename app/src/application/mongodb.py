@@ -19,11 +19,10 @@ class MongoDB():
         self.collection = self.database[self.collection]
 
     def InsertMessage(self, message):
-        """ 
+        """
         Insert message in MongoDB
 
         args:
-
         message : dict
             Dictionary with the data of the message of the user
         """
