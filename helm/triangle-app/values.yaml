@@ -5,6 +5,8 @@ labels:
     app: triangle-app-mysql
   redis:
     app: triangle-app-redis
+  mongo:
+    app: triangle-app-mongo
 
 secret:
   type: Opaque
@@ -24,6 +26,9 @@ configmap:
   MYSQL_USER: triangleapp
   API_TELEGRAM: "https://api.telegram.org/bot"
   WEB_USERNAME: triangleapp
+  MONGO_PORT: 27017
+  MONGO_DATABASE: triangleapp
+  MONGO_COLLECTION: triangleapp
 
 deployment:
   replicaCount: 2
@@ -48,6 +53,17 @@ deployment:
     ports:
       name: redis-port
       containerPort: 6379
+  mongo:
+    ports:
+      name: mongo-port
+      containerPort: 27017
+    volumeClaimTemplates:
+      storageClassName: standard
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storageSize: 1Gi
+      volumeMode: Filesystem
   mysql:
     ports:
       name: mysql-port
@@ -65,10 +81,12 @@ image:
     app: kctriangle/triangle-bot
     mysql: mysql
     redis: redis
+    mongo: bitnami/mongodb
   tag:
     app: latest
     mysql: latest
     redis: latest
+    mongo: 4.4.13-debian-10-r30
 
 service:
   app:
@@ -84,6 +102,13 @@ service:
       name: mysql-port
       port: 3306
       targetPort: mysql-port
+      protocol: TCP
+  mongo:
+    type: ClusterIP
+    ports:
+      name: mongo-port
+      port: 27017
+      targetPort: mongo-port
       protocol: TCP
   redis:
     type: ClusterIP
