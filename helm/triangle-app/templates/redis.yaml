@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "triangle-app.fullname" . }}-service-redis
+  name: {{ include "triangle-app.fullname" . }}-redis-service
   labels:
     {{- include "triangle-app.labels" . | nindent 4 }}
     app: {{ .Values.labels.redis.app }}
