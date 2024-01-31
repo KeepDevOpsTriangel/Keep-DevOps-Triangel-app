@@ -1,20 +1,6 @@
-resource "helm_release" "argocd" {
-  name       = "${var.resource_name}-argocd"
-  repository = var.chart_repository
-  chart      = var.chart_name
-  values = [
-    file("../modules/argocd/values.yaml")
-  ]
+data "http" "argo_cd_install_yaml" {
+  url = "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
 }
-
-# resource "google_compute_firewall" "argo_cd_fw" {
-#   name    = "allow-argo-cd-ingress"
-#   network = "default"
-
-#   allow {
-#     protocol = "tcp"
-#     ports    = ["80", "443"]
-#   }
-
-#   source_ranges = ["0.0.0.0/0"]
-# }
+resource "kubernetes_manifest" "argocd_install" {
+  manifest = data.http.argo_cd_install_yaml.body
+}

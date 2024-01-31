@@ -10,7 +10,3 @@ variable "chart_name" {
   description = "Chart name"
   type        = string
 }
-variable "chart_version" {
-  description = "Chart version"
-  type        = string
-}

@@ -8,3 +8,6 @@ module "gke" {
   cluster_disk_type    = "pd-standard"
   cluster_disk_size_gb = 25
 }
+module "argocd" {
+  source = "../modules/argocd"
+}
