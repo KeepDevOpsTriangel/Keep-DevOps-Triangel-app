@@ -8,7 +8,6 @@ module "gke" {
   cluster_disk_type    = "pd-standard"
   cluster_disk_size_gb = 25
 }
-
 module "argocd" {
   depends_on    = [module.gke]
   source        = "../modules/argocd"
@@ -19,5 +18,19 @@ module "argocd" {
   chart_version = "5.27.3"
   file          = "../modules/argocd/values.yaml"
 }
+module "bucket" {
+  depends_on    = [module.gke]
+  source        = "../modules/bucket"
+  bucket_name   = "${var.resource_name}-terraform-state"
+  region        = var.region
+  force_destroy = false
+  versioning    = true
+}
+# module "bucket_local" {
+#   depends_on  = [module.gke]
+#   source      = "../modules/bucket"
+#   bucket_name = var.resource_name
+#   region      = var.region
+# }
 
 
