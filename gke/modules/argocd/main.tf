@@ -1,6 +1,15 @@
-data "http" "argo_cd_install_yaml" {
-  url = "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
+resource "kubernetes_namespace" "argocd" {
+  metadata {
+    name = var.namespace
+  }
 }
-resource "kubernetes_manifest" "argocd_install" {
-  manifest = data.http.argo_cd_install_yaml.body
+resource "helm_release" "argocd" {
+  depends_on = [kubernetes_namespace.argocd]
+  name       = "${var.resource_name}-argocd"
+  chart      = var.chart
+  repository = var.repository
+  namespace  = var.namespace
+  version    = var.chart_version
+  timeout    = "1200"
+  values     = [templatefile("${var.file}", {})]
 }

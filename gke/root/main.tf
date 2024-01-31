@@ -8,6 +8,16 @@ module "gke" {
   cluster_disk_type    = "pd-standard"
   cluster_disk_size_gb = 25
 }
+
 module "argocd" {
-  source = "../modules/argocd"
+  depends_on    = [module.gke]
+  source        = "../modules/argocd"
+  resource_name = var.resource_name
+  namespace     = "argocd"
+  chart         = "argo-cd"
+  repository    = "https://argoproj.github.io/argo-helm"
+  chart_version = "5.27.3"
+  file          = "../modules/argocd/values.yaml"
 }
+
+
