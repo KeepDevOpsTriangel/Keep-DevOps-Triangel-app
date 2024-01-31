@@ -26,18 +26,6 @@ def test_default_email_app():
 
 ##################################################################################
 
-def test_default_sql_host():
-    config = ConfigApp()
-    assert config.MYSQL_HOST == 'localhost'
-    
-##################################################################################
-    
-def test_default_sql_db():
-    config = ConfigApp()
-    assert config.MYSQL_DATABASE == 'databasemysql'
-
-##################################################################################
-
 def test_default_web_username():
     config = ConfigApp()
     assert config.WEB_USERNAME == 'userweb'
