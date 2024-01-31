@@ -26,11 +26,15 @@ module "bucket" {
   force_destroy = false
   versioning    = true
 }
-# module "bucket_local" {
-#   depends_on  = [module.gke]
-#   source      = "../modules/bucket"
-#   bucket_name = var.resource_name
-#   region      = var.region
-# }
-
-
+module "bucket_local" {
+  depends_on  = [module.gke]
+  source      = "../modules/bucket"
+  bucket_name = var.resource_name
+  region      = var.region
+}
+resource "google_compute_address" "ingress_ip_address" {
+  name = "nginx-controller"
+}
+module "nginx-controller" {
+  source = "terraform-iaac/nginx-controller/helm"
+}
