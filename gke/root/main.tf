@@ -19,10 +19,12 @@ module "argocd" {
   file          = "../modules/argocd/values.yaml"
 }
 resource "google_compute_address" "ingress_ip_address" {
-  name = "nginx-controller"
+  depends_on = [module.argocd]
+  name       = "nginx-controller"
 }
 module "nginx-controller" {
-  source = "terraform-iaac/nginx-controller/helm"
+  depends_on = [module.argocd]
+  source     = "terraform-iaac/nginx-controller/helm"
 }
 
 resource "null_resource" "execute_kubectl" {
