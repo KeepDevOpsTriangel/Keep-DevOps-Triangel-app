@@ -3,6 +3,10 @@ labels:
     app: triangle-app
   mysql:
     app: triangle-app-mysql
+  redis:
+    app: triangle-app-redis
+  mongo:
+    app: triangle-app-mongo
 
 secret:
   type: Opaque
@@ -10,16 +14,21 @@ secret:
   MYSQL_ROOT_PASSWORD: dHJpYW5nbGVhcHA=
   MYSQL_PASSWORD: dHJpYW5nbGVhcHA=
   CHAT_ID_SOPORTE: NTkwNTQxMTc5
+  WEB_PASSWORD: dHJpYW5nbGVhcHA=
 
 configmap:
   URL_WEBHOOK: "https://bot.rafaeltorices.com"
   TITULO_APP: TRIANGLE_APP
   TELEFONO_SOPORTE: 123456789
-  EMAIL_SOPORTE:
+  EMAIL_SOPORTE: "soporte@triangle-app.example"
   MYSQL_PORT: 3306
   MYSQL_DATABASE: triangleapp
   MYSQL_USER: triangleapp
   API_TELEGRAM: "https://api.telegram.org/bot"
+  WEB_USERNAME: triangleapp
+  MONGO_PORT: 27017
+  MONGO_DATABASE: triangleapp
+  MONGO_COLLECTION: triangleapp
 
 deployment:
   replicaCount: 2
@@ -40,25 +49,40 @@ deployment:
     ports:
       name: app-port
       containerPort: 5000
+  redis:
+    ports:
+      name: redis-port
+      containerPort: 6379
+  mongo:
+    ports:
+      name: mongo-port
+      containerPort: 27017
+    persistence:
+      enabled: false
+      accessModes: ["ReadWriteOnce"]
+      size: 1Gi
+      mountPath: /bitnami/mongodb/data/
   mysql:
     ports:
       name: mysql-port
       containerPort: 3306
-    volumeClaimTemplates:
-      storageClassName: standard
+    persistence:
+      enabled: true
       accessModes: ["ReadWriteOnce"]
-      resources:
-        requests:
-          storageSize: 1Gi
-      volumeMode: Filesystem
+      size: 1Gi
+      mountPath: /var/lib/mysql
 
 image:
   repository:
-    app: rafacv99/pytelegram
+    app: kctriangle/triangle-bot
     mysql: mysql
+    redis: redis
+    mongo: bitnami/mongodb
   tag:
     app: latest
     mysql: latest
+    redis: latest
+    mongo: 4.4.13-debian-10-r30
 
 service:
   app:
@@ -74,6 +98,20 @@ service:
       name: mysql-port
       port: 3306
       targetPort: mysql-port
+      protocol: TCP
+  mongo:
+    type: ClusterIP
+    ports:
+      name: mongo-port
+      port: 27017
+      targetPort: mongo-port
+      protocol: TCP
+  redis:
+    type: ClusterIP
+    ports:
+      name: redis-port
+      port: 6379
+      targetPort: redis-port
       protocol: TCP
 
 serviceAccount:

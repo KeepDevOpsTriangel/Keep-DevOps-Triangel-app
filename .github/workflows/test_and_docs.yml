@@ -1,19 +1,25 @@
-
 name: Testing and Documentation
 
 on:
   pull_request:
     branches:
-      - 'albert'
       - 'completed'
   push:
     branches:
-      - 'albert'
       - 'completed'
 
 jobs:
   testing:
     runs-on: ubuntu-latest
+
+    env:
+      MYSQL_VERSION: '8.0'
+      MYSQL_CONTAINER: 'docker_mysql'
+      MYSQL_HOST: 'docker_mysql'
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
 
     steps:
       - name: Checkout code
@@ -28,7 +34,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
+          pip install cryptography
           pip list
+      - name: Run MySQL container
+        run: |
+          docker run -d --name $MYSQL_CONTAINER -p 3306:3306 -e MYSQL_ROOT_PASSWORD=${{env.MYSQL_ROOT_PASSWORD}} -e MYSQL_USER=${{env.MYSQL_USER}} -e MYSQL_PASSWORD=${{env.MYSQL_PASSWORD}} -e MYSQL_DATABASE=${{env.MYSQL_DATABASE}} mysql:${{env.MYSQL_VERSION}}
+          
+          # Wait for MySQL to start
+          chmod +x ./app/tools/check_mysql_ready.sh
+          ./app/tools/check_mysql_ready.sh
       - name: Run tests and generate coverage report
         run: |
           coverage run -m pytest app
@@ -36,40 +50,21 @@ jobs:
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
-  generate-docs:
+      
+      - name: Destroy MySQL container
+        run: docker rm -f $MYSQL_CONTAINER
+
+  sonarcloud:
     needs: testing
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
         with:
-          python-version: 3.8
-
-      - name: Install and verify dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r app/requirements.txt
-          pip list
-      - name: Clean existing docs
-        run: rm -rf docs
-        continue-on-error: true
-        working-directory: ./app
-
-      - name: Generate Documentation
-        run: |
-          mkdir docs
-          pdoc -o docs src/application
-        working-directory: ./app
-
-      - name: Archive Documentation
-        uses: actions/upload-artifact@v4
-        with:
-          name: documentation
-          path: ./app/docs  # Ajusta la ruta según tu estructura
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   snyk:
     needs: testing
@@ -99,3 +94,41 @@ jobs:
         run: |
           cd app
           snyk test
+  generate-docs:
+    needs: 
+      - testing
+      - sonarcloud
+      - snyk
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.8
+
+      - name: Install and verify dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r app/requirements.txt
+          pip list
+          
+      - name: Clean existing docs
+        run: rm -rf docs
+        continue-on-error: true
+        working-directory: ./app
+
+      - name: Generate Documentation
+        run: |
+          mkdir docs
+          pdoc -o docs src/application
+        working-directory: ./app
+
+      - name: Archive Documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: ./app/docs

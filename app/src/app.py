@@ -10,6 +10,9 @@ from application.users import User
 from application.options import Options
 from application.state_app import StateApp
 from application.api import Api
+from application.auth import Authenticator
+from application.mongodb import MongoDB
+import os
 
 load_dotenv()  # Load variables of .env
 
@@ -23,11 +26,14 @@ class MyApp():
         self.options = Options()
         self.state = StateApp()
         self.api = Api()
+        self.authenticator = Authenticator(
+            self.config.WEB_USERNAME, self.config.WEB_PASSWORD)
         self.title_web = self.config.TITULO_APP
+        self.mongodb = MongoDB()
         self.routes()
 
     def routes(self):
-        @self.app.route('/', methods=['GET'])
+        @self.app.route('/', methods=['GET', 'POST'])
         def Index_():
             """
             Method for render template page home.html
@@ -38,7 +44,7 @@ class MyApp():
                 Object of class render_template
                 render template home.html
             """
-            return render_template('home.html', title=self.title_web)
+            return AppWeb.Index(self)
 
         @self.app.errorhandler(404)
         def GetError404_(error):
@@ -52,19 +58,6 @@ class MyApp():
                 render template 404.html
             """
             return render_template('404.html', title=self.title_web)
-
-        @self.app.route('/webhook', methods=['GET', 'POST'])
-        def WebHook_():
-            """
-            Method for manage the webhook of Telegram Bot
-
-            return:
-            ----------
-            AppWeb.WebHook : object
-                Object of class AppWeb
-                manage the webhook of Telegram Bot
-            """
-            return AppWeb.WebHook(self)
 
         @self.app.route('/get_webhook', methods=['GET'])
         def GetWebHookInfo_():
@@ -214,6 +207,32 @@ class MyApp():
             """
             return AppWeb.GetMessagesWebApp(self)
 
+        @self.app.route('/login', methods=['GET', 'POST'])
+        def Login_():
+            """
+            Method for login of the app
+
+            return:
+            ----------
+            AppWeb.Login : object
+                Object of class AppWeb
+                login of the app
+            """
+            return AppWeb.Login(self)
+
+        @self.app.route('/logout', methods=['GET'])
+        def LogOut_():
+            """
+            Method for logout of the app
+
+            return:
+            ----------
+            AppWeb.Logout : object
+                Object of class AppWeb
+                logout of the app
+            """
+            return AppWeb.LogOut(self)
+
     def RunApp(self):
         """
         Method for run the app
@@ -223,5 +242,6 @@ class MyApp():
 
 WebApp = MyApp()
 app = WebApp.app
+app.secret_key = os.urandom(24)
 if __name__ == "__main__":
     WebApp.RunApp()  # Run the app

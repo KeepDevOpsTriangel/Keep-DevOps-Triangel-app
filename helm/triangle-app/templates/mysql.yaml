@@ -54,9 +54,17 @@ spec:
                 configMapKeyRef:
                     name: {{ include "triangle-app.fullname" . }}-configmap
                     key: MYSQL_PORT
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - mysqladmin ping -h localhost -u${MYSQL_USER} -p${MYSQL_PASSWORD}
           volumeMounts:
-            # - name: {{ include "triangle-app.fullname" . }}-mysql-volume
-            #   mountPath: /var/lib/mysql
+            {{- if .Values.deployment.mysql.persistence.enabled }}
+            - name: {{ include "triangle-app.fullname" . }}-mysql-volume
+              mountPath: {{ .Values.deployment.mysql.persistence.mountPath }}
+            {{- end }}
             - name: {{ include "triangle-app.fullname" . }}-mysql-init-configmap
               mountPath: /docker-entrypoint-initdb.d/
       volumes:
@@ -66,13 +74,13 @@ spec:
             items:
               - key: db.sql
                 path: db.sql
-  # volumeClaimTemplates:
-  #   - metadata:
-  #       name: {{ include "triangle-app.fullname" . }}-mysql-volume
-  #     spec:
-  #       accessModes: {{ .Values.deployment.mysql.volumeClaimTemplates.accessModes }}
-  #       storageClassName: {{ .Values.deployment.mysql.volumeClaimTemplates.storageClassName }}
-  #       resources:
-  #         requests:
-  #           storage: {{ .Values.deployment.mysql.volumeClaimTemplates.resources.requests.storageSize }}
-  #       volumeMode: {{ .Values.deployment.mysql.volumeClaimTemplates.volumeMode }}
+  {{- if .Values.deployment.mysql.persistence.enabled }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ include "triangle-app.fullname" . }}-mysql-volume
+      spec:
+        accessModes: {{ .Values.deployment.mysql.persistence.accessModes }}
+        resources:
+          requests:
+            storage: {{ .Values.deployment.mysql.persistence.size }}
+  {{- end }}

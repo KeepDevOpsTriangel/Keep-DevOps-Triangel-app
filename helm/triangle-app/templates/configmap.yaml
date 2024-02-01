@@ -12,3 +12,9 @@ data:
   TITULO_APP: {{ .Values.configmap.TITULO_APP | quote }}
   TELEFONO_SOPORTE: {{ .Values.configmap.TELEFONO_SOPORTE | quote }}
   EMAIL_SOPORTE: {{ .Values.configmap.EMAIL_SOPORTE | quote }}
+  WEB_USERNAME: {{ .Values.configmap.WEB_USERNAME | quote }}
+  REDIS_HOST: {{ include "triangle-app.fullname" . }}-redis-service
+  MONGO_HOST: {{ include "triangle-app.fullname" . }}-mongo-service
+  MONGO_PORT: {{ .Values.configmap.MONGO_PORT | quote }}
+  MONGO_DATABASE: {{ .Values.configmap.MONGO_DATABASE | quote }}
+  MONGO_COLLECTION: {{ .Values.configmap.MONGO_COLLECTION | quote }}
