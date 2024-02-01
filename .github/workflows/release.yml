@@ -4,14 +4,22 @@ name: Build-Publish-Docker-Image
 #   push:
 #     tags:
 #       - 'v*'
+# on:
+#   workflow_run:
+#     workflows:
+#       - "Testing&Documentation"
+#     branches:
+#       - 'semantic-release'
+#     types:
+#       - completed
+
 on:
-  workflow_run:
-    workflows:
-      - "Testing&Documentation"
+  pull_request:
     branches:
       - 'semantic-release'
-    types:
-      - completed
+  push:
+    branches:
+      - 'semantic-release'
 
 permissions:
   contents: write
