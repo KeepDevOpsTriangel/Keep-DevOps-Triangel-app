@@ -18,6 +18,8 @@ Deploying a Kubernetes cluster on Google Cloud Platform (GCP) using Terraform, a
 
 ## Deployment of Kubernetes cluster on GCP using Terraform
 
+> NOTE: work directory **root**.
+
 ### Create a service account on GCP
 
 Create a service account on GCP and download the credentials file in JSON format.
