@@ -33,3 +33,5 @@ kubectl apply -f issuer_letsencrypt_staging.yml
 ```bash
 kubectl apply -f issuer_letsencrypt_production.yml
 ```
+
+> **NOTE** The issuer must be installed in the same namespace as the app.
