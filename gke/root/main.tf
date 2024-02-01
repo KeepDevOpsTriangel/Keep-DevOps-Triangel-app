@@ -29,12 +29,7 @@ resource "null_resource" "execute_kubectl" {
   depends_on = [module.argocd]
   provisioner "local-exec" {
     command = <<-EOT
-      kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode > argocd_password.txt
+      kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
     EOT
   }
-}
-resource "local_file" "argocd_password" {
-  depends_on = [null_resource.execute_kubectl]
-  filename   = "${path.module}/argocd_password.txt"
-  content    = file("${path.module}/argocd_password.txt")
 }
