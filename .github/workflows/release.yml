@@ -14,19 +14,17 @@ on:
       - completed
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME_DOCKERHUB: 'Triangle-bot'
 
 jobs:
-  Build-Publish-Docker-Image:
+  semantic-release:
     if: "${{ github.event.workflow_run.conclusion == 'success' && !contains(github.event.commits[0].message, 'chore(release):') }}"
+    name: Semantic Release
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -76,14 +74,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME_DOCKERHUB }}
 
       - name: Build and Push on DockerHub
         if: ${{ env.VERSION != '' }}
