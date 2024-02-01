@@ -18,5 +18,14 @@ server:
     annotations:
       cert-manager.io/cluster-issuer: ca-issuer
     enabled: true
-    paths:
-      - /argocd
+    rules:
+      - host: argocd.rafaeltorices.com
+        http:
+          paths:
+            - path: /argocd
+              pathType: Prefix
+              backend:
+                service:
+                  name: argocd-server
+                  port:
+                    number: 80
