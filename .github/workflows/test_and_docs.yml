@@ -3,10 +3,10 @@ name: Testing and Documentation
 on:
   pull_request:
     branches:
-      - 'completed'
+      - 'semantic-release'
   push:
     branches:
-      - 'completed'
+      - 'semantic-release'
 
 jobs:
   testing:
