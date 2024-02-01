@@ -18,20 +18,6 @@ module "argocd" {
   chart_version = "5.27.3"
   file          = "../modules/argocd/values.yaml"
 }
-module "bucket" {
-  depends_on    = [module.gke]
-  source        = "../modules/bucket"
-  bucket_name   = "${var.resource_name}-terraform-state"
-  region        = var.region
-  force_destroy = false
-  versioning    = true
-}
-module "bucket_local" {
-  depends_on  = [module.gke]
-  source      = "../modules/bucket"
-  bucket_name = var.resource_name
-  region      = var.region
-}
 resource "google_compute_address" "ingress_ip_address" {
   name = "nginx-controller"
 }
