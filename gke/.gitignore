@@ -11,3 +11,4 @@ credentials.json
 .tfvars.*
 .tfvars.backup
 .tfvars.backup.*
+argocd_password.txt

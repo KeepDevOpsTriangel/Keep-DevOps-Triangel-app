@@ -6,7 +6,7 @@ configs:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
       ignoreResourceStatusField: all
-    url: http://localhost/argocd
+      url: http://localhost/argocd
     application.instanceLabelKey: argocd.argoproj.io/instance
 server:
   insecure: true
