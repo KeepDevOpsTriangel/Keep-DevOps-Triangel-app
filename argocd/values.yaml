@@ -16,7 +16,21 @@ server:
   ingress:
     ingressClassName: nginx
     annotations:
-      cert-manager.io/cluster-issuer: ca-issuer
+      # cert-manager.io/cluster-issuer: ca-issuer
+      cert-manager.io/issuer: "letsencrypt-prod"
     enabled: true
-    paths:
-      - /argocd
+    rules:
+      - host: argocd.rafaeltorices.com
+        http:
+          paths:
+            - path: /argocd
+              pathType: Prefix
+              backend:
+                service:
+                  name: argocd-server
+                  port:
+                    number: 80
+    tls:
+      - hosts:
+          - argocd.rafaeltorices.com
+        secretName: argocd-secret-tls
