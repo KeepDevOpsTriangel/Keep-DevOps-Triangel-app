@@ -8,7 +8,8 @@ on:
   workflow_run:
     workflows:
       - "Testing&Documentation"
-    branches: [ semantic-release ]
+    branches:
+      - 'semantic-release'
     types:
       - completed
 
