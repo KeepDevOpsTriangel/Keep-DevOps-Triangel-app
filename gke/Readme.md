@@ -51,6 +51,7 @@ terraform plan
 ```bash
 terraform apply
 ```
+>NOTE: At the end of the deployment of resources, show the password for user **admin** of ArgoCD in screen.
 
 ### Destroy the infrastructure
 
