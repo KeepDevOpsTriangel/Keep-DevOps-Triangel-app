@@ -34,6 +34,8 @@ terraform apply
 
 - `kubeconfig_command`: The command to update the kubeconfig file for the dev-cluster.
 
+- `comaand pass` : kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
 
 
 

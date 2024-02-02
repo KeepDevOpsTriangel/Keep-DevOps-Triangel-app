@@ -163,7 +163,7 @@ variable "argocd_server_insecure" {
 variable "s3_bucket_name" {
   type    = string
   default = "bucket-triangle-app"
-  
+
 }
 
 variable "force_destroy" {
