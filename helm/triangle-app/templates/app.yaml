@@ -102,5 +102,25 @@ spec:
               configMapKeyRef:
                 name: {{ include "triangle-app.fullname" . }}-configmap
                 key: REDIS_HOST
+          - name: MONGO_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: MONGO_HOST
+          - name: MONGO_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: MONGO_PORT
+          - name: MONGO_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: MONGO_DATABASE
+          - name: MONGO_COLLECTION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "triangle-app.fullname" . }}-configmap
+                key: MONGO_COLLECTION
           
             
