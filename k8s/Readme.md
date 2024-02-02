@@ -35,3 +35,16 @@ kubectl apply -f issuer_letsencrypt_production.yml
 ```
 
 > **NOTE** The issuer must be installed in the same namespace as the app.
+
+## Sealed Secrets
+
+```bash
+helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
+helm repo update
+helm install sealed-secrets-controller sealed-secrets/sealed-secrets -n kube-system
+
+kubeseal --controller-name=sealed-secrets-controller --controller-namespace=kube-system --format yaml < token.yaml > secret-token.yaml
+
+kubectl apply -f secret-token.yaml
+```
+

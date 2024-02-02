@@ -8,7 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io # Finalizer for ArgoCD
 spec:
   destination:
-    namespace: triangle-app # Namespace where the application will be deployed
+    namespace: default # Namespace where the application will be deployed
     server: https://kubernetes.default.svc # Kubernetes API server URL
   project: default # Project where the application will be deployed
   source:
@@ -19,5 +19,3 @@ spec:
     automated:
       prune: false
       selfHeal: false
-    syncOptions:
-      - CreateNamespace=true
