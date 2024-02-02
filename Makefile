@@ -13,7 +13,10 @@ IMAGE_GHRC_LATEST	= $(IMAGE_REGISTRY_GHCR)/$(IMAGE_REPO)/$(IMAGE_NAME):latest
 
 .PHONY: docker-build
 docker-build: ## Build image
-	docker build -t $(IMAGE) -t $(IMAGE_LATEST) -t $(IMAGE_GHCR) -t $(IMAGE_GHRC_LATEST) ./app/
+
+.PHONY: docker-build
+docker-build: ## Build image
+	docker buildx build --push --platform=linux/amd64,linux/arm64 ./app/ -t $(IMAGE) -t $(IMAGE_LATEST) -t $(IMAGE_GHCR) -t $(IMAGE_GHRC_LATEST)
 
 .PHONY: publish
 publish: docker-build ## Publish image
