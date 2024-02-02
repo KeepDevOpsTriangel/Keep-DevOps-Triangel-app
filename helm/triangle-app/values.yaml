@@ -57,7 +57,7 @@ deployment:
       name: mongo-port
       containerPort: 27017
     persistence:
-      enabled: true
+      enabled: false
       accessModes: ["ReadWriteOnce"]
       size: 1Gi
       mountPath: /bitnami/mongodb/data/

@@ -1,4 +1,5 @@
 # Resources for Kubernetes (k8s) for the project
+# Necessary resources for our project to work in a k8s cluster
 
 Resources kubernetes to install in the cluster for the app of project to work.
 
