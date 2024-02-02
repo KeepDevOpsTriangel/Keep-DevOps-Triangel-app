@@ -85,7 +85,7 @@ spec:
           - name: TOKEN
             valueFrom:
               secretKeyRef:
-                name: {{ include "triangle-app.fullname" . }}-secret
+                name: secret-token
                 key: TOKEN
           - name: WEB_USERNAME
             valueFrom:
