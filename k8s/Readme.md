@@ -44,6 +44,17 @@ helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 helm repo update
 helm install sealed-secrets-controller sealed-secrets/sealed-secrets -n kube-system
 
+# Create secret **token.yaml** with data token to be sealed
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret-token
+  namespace: default
+type: Opaque
+stringData:
+    TOKEN: xxxxxxxxxxx
+
 kubeseal --controller-name=sealed-secrets-controller --controller-namespace=kube-system --format yaml < token.yaml > secret-token.yaml
 
 kubectl apply -f secret-token.yaml
