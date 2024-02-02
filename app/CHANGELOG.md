@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app/compare/v1.2.0...v1.3.0) (2024-02-02)
+
+
+### Features
+
+* Docker build 1.0 ([bf81d8b](https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app/commit/bf81d8b22aea2f9b59811c959f30381361be1d83))
+* Docker build 1.1 ([1329bbe](https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app/commit/1329bbe0f3a18cb69afc3c3b93d611af923ebafb))
+
 # [1.2.0](https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app/compare/v1.1.0...v1.2.0) (2024-02-02)
 
 
