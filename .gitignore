@@ -162,3 +162,4 @@ cython_debug/
 prueba*
 .vscode/
 token.yaml
+secret-token.yaml
