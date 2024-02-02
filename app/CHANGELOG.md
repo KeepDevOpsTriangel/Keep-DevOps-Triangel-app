@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app/compare/v1.1.0...v1.2.0) (2024-02-02)
+
+
+### Features
+
+* Docker buildx ([68a6cf9](https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app/commit/68a6cf9472ac45ffe770884f19ba257f79bdb12d))
+
 # [1.1.0](https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app/compare/v1.0.0...v1.1.0) (2024-02-02)
 
 
