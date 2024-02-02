@@ -1,0 +1,31 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name:  {{ include "triangle-app.fullname" . }}-ingress
+  labels:
+    {{- include "triangle-app.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingress.class }}
+  rules:
+  - host: {{ .Values.ingress.hosts.host }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: {{ .Values.ingress.hosts.paths.path }}
+        backend:
+          service:
+            name: {{ include "triangle-app.fullname" . }}-service
+            port:
+              number: {{ .Values.ingress.ports.number }}
+  {{- if .Values.ingress.tls }}
+  tls:
+  - hosts:
+    - {{ .Values.ingress.hosts.host }}
+    secretName: {{ include "triangle-app.fullname" . }}-secret-tls
+  {{- end}}
+{{- end }}

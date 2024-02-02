@@ -1,0 +1,9 @@
+-------------------------------------------
+TRIANGLE-APP - HELM Charts
+https://github.com/KeepDevOpsTriangel
+-------------------------------------------
+{{- if .Values.ingress.enabled }}
+--- To run application: ---
+http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.hosts.host }}
+{{- end }}
+-------------------------------------------

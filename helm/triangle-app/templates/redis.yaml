@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "triangle-app.fullname" . }}-deployment-redis
+  labels:
+    {{- include "triangle-app.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "triangle-app.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.labels.redis.app }}
+  template:
+    metadata:
+      labels:
+        {{- include "triangle-app.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.labels.redis.app }}
+    spec:
+      containers:
+      - name: triangle-app-container-redis
+        image: {{ .Values.image.repository.redis }}:{{ .Values.image.tag.redis }}
+        ports:
+          - name: {{ .Values.deployment.redis.ports.name }}
+            containerPort: {{ .Values.deployment.redis.ports.containerPort }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "triangle-app.fullname" . }}-redis-service
+  labels:
+    {{- include "triangle-app.labels" . | nindent 4 }}
+    app: {{ .Values.labels.redis.app }}
+spec:
+  type: {{ .Values.service.redis.type }}
+  ports:
+    - port: {{ .Values.service.redis.ports.port }}
+      targetPort: {{ .Values.service.redis.ports.targetPort }}
+      protocol: {{ .Values.service.redis.ports.protocol }}
+      name: {{ .Values.service.redis.ports.name }}
+  selector:
+    {{- include "triangle-app.selectorLabels" . | nindent 4 }}
+    app: {{ .Values.labels.redis.app }}

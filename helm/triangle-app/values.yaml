@@ -1,0 +1,141 @@
+labels:
+  app:
+    app: triangle-app
+  mysql:
+    app: triangle-app-mysql
+  redis:
+    app: triangle-app-redis
+  mongo:
+    app: triangle-app-mongo
+
+secret:
+  type: Opaque
+  MYSQL_ROOT_PASSWORD: dHJpYW5nbGVhcHA=
+  MYSQL_PASSWORD: dHJpYW5nbGVhcHA=
+  CHAT_ID_SOPORTE: NTkwNTQxMTc5
+  WEB_PASSWORD: dHJpYW5nbGVhcHA=
+
+configmap:
+  URL_WEBHOOK: "https://bot.rafaeltorices.com"
+  TITULO_APP: TRIANGLE_APP
+  TELEFONO_SOPORTE: 123456789
+  EMAIL_SOPORTE: "soporte@triangle-app.example"
+  MYSQL_PORT: 3306
+  MYSQL_DATABASE: triangleapp
+  MYSQL_USER: triangleapp
+  API_TELEGRAM: "https://api.telegram.org/bot"
+  WEB_USERNAME: triangleapp
+  MONGO_PORT: 27017
+  MONGO_DATABASE: triangleapp
+  MONGO_COLLECTION: triangleapp
+
+deployment:
+  replicaCount: 2
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 70
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 100m
+    limits:
+      memory: 100Mi
+      cpu: 120m
+  app:
+    ports:
+      name: app-port
+      containerPort: 5000
+  redis:
+    ports:
+      name: redis-port
+      containerPort: 6379
+  mongo:
+    ports:
+      name: mongo-port
+      containerPort: 27017
+    persistence:
+      enabled: false
+      accessModes: ["ReadWriteOnce"]
+      size: 1Gi
+      mountPath: /bitnami/mongodb/data/
+  mysql:
+    ports:
+      name: mysql-port
+      containerPort: 3306
+    persistence:
+      enabled: true
+      accessModes: ["ReadWriteOnce"]
+      size: 1Gi
+      mountPath: /var/lib/mysql
+
+image:
+  repository:
+    app: kctriangle/triangle-bot
+    mysql: mysql
+    redis: redis
+    mongo: bitnami/mongodb
+  tag:
+    app: latest
+    mysql: latest
+    redis: latest
+    mongo: 4.4.13-debian-10-r30
+
+service:
+  app:
+    type: ClusterIP
+    ports:
+      name: app-port
+      port: 5000
+      targetPort: app-port
+      protocol: TCP
+  mysql:
+    type: ClusterIP
+    ports:
+      name: mysql-port
+      port: 3306
+      targetPort: mysql-port
+      protocol: TCP
+  mongo:
+    type: ClusterIP
+    ports:
+      name: mongo-port
+      port: 27017
+      targetPort: mongo-port
+      protocol: TCP
+  redis:
+    type: ClusterIP
+    ports:
+      name: redis-port
+      port: 6379
+      targetPort: redis-port
+      protocol: TCP
+
+serviceAccount:
+  create: false
+  annotations: {}
+  name: ""
+
+ingress:
+  enabled: true
+  class: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: "letsencrypt-prod"
+  hosts:
+    host: bot.rafaeltorices.com
+    paths:
+      path: /
+  ports:
+    number: 5000
+  tls:
+    enabled: true
+
+statefulset:
+  resources:
+    requests:
+      memory: 256Mi
+    limits:
+      memory: 512Mi
