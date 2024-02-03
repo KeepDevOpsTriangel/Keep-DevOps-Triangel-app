@@ -8,7 +8,7 @@ on:
   workflow_run:
     workflows: [Test]
     types: [completed]
-    branches: [yul]
+    branches: [semantic-release]
 
 # on:
 #   pull_request:
