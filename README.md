@@ -66,7 +66,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
                     ((IMAGEN DE DND ESTÁ EL ARTEFACTO, DEBAJO DEL PIPELINE))
         
 
-        - [release.yml](.github/workflows/release.yml):
+        - [release.yml](.github/workflows/release.yml): ((SE CAMBIARÁ POR SEMANTIC RELEASE))
             - IMPORTANTE: ESTE FLUJO DE TRABAJO SÓLO SE ACTIVA CUANDO LE DAMOS AL PUSH UNA ETIQUETA QUE EMPIECE POR "V". HAY MODOS DE SOBREESCRIBIR ETIQUETAS PARA NO TENER QUE PONER UNA NUEVA CADA VEZ QUE QUEREMOS EJECUTARLO PARA PRUEBAS, EJEMPLO CON "V0.1.BETA" (Ejecutar los comandos en el órden indicado):
             ```
               git tag -d v0.1.beta  # Eliminar etiqueta localmente
