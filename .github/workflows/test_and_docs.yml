@@ -1,4 +1,4 @@
-name: Testing&Documentation
+name: Testing
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ on:
 jobs:
   testing:
     runs-on: ubuntu-latest
-
+    
     env:
       MYSQL_VERSION: '8.0'
       MYSQL_CONTAINER: 'docker_mysql'

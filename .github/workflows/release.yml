@@ -4,22 +4,22 @@ name: Build-Publish-Docker-Image
 #   push:
 #     tags:
 #       - 'v*'
+on:
+  workflow_run:
+    workflows:
+      - "Testing"
+    branches:
+      - 'semantic-release'
+    types:
+      - completed
+
 # on:
-#   workflow_run:
-#     workflows:
-#       - "Testing&Documentation"
+#   pull_request:
 #     branches:
 #       - 'semantic-release'
-#     types:
-#       - completed
-
-on:
-  pull_request:
-    branches:
-      - 'semantic-release'
-  push:
-    branches:
-      - 'semantic-release'
+#   push:
+#     branches:
+#       - 'semantic-release'
 
 permissions:
   contents: write
@@ -85,7 +85,7 @@ jobs:
 
       - name: Build and Push on DockerHub
         if: ${{ env.VERSION != '' }}
-        run: make publish
+        run: make docker-buildx
         env:
           VERSION: ${{ env.VERSION }}
 
