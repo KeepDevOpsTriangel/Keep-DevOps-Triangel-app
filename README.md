@@ -74,9 +74,6 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
                 5. Guardar estado y establecer salidas: Guarda en el entorno de GitHub (GITHUB_ENV) las rutas de las imágenes de GitHub Packages y Docker Hub.
                 6. Construir y enviar la imagen de Docker en [nuestro perfil](https://hub.docker.com/repository/docker/kctriangle/triangle-bot/general). Utiliza docker/build-push-action para construir la imagen de Docker desde el contexto ./app y subirla a GitHub Packages. Se aplican las etiquetas y labels extraídos en el paso anterior.
 
-    HE TENIDO QUE REVISAR GITHUB MARKETPLACE PARA ACTUALIZAR A LAS ULTIMAS VERSIONES DE CHECKOUT, SETUPPYTHON Y UPLOAD ARTIFACT, EN PROCESO.........
-    MIRAR BANDIT Y SONAQUBE PARA EL ANALISIS DE CODIGO
-
 
 - Monitorización
     - Prometheus
