@@ -39,22 +39,28 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
         - [test_and_docs.yml](.github/workflows/test_and_docs.yml):
             - Por ahora solo se activará en la rama albert
             - Este flujo de trabajo consta de 3 jobs y realiza las siguientes acciones:
-                - JOB TESTING:
-                    1. Clonar el código del repositorio: Descarga el código del repositorio para realizar las pruebas y el análisis estático.
-                    2. Configurar el entorno de Python: Utiliza la acción setup-python para configurar la versión de Python que se utilizará en el entorno de ejecución.
-                    3. Instalar y verificar dependencias: Actualiza pip, instala las dependencias del proyecto desde el archivo [requirements.txt](app/requirements.txt) y muestra la lista de dependencias instaladas.
-                    4. Ejecutar pruebas y generar informes de cobertura: Utiliza pytest para ejecutar las pruebas del proyecto ubicadas en [test_app_py](app/src/tests/test_app.py) y genera un informe de cobertura.
-                    5. Ejecutar Pylint para el análisis estático del código: Utiliza Pylint para realizar análisis estático del código en la carpeta app y establece un umbral mínimo de puntuación (--fail-under=1.0).
+                - JOB TESTING-AND-SONARCLOUD:
+                    1. Configuramos unas variables para, por si hiciera falta en los tests, generar una base de datos MYSQL con docker.
+                    2. Clonar el código del repositorio: Descarga el código del repositorio para realizar las pruebas y el análisis estático.
+                    3. Configurar el entorno de Python: Utiliza la acción setup-python para configurar la versión de Python que se utilizará en el entorno de ejecución.
+                    4. Instalar y verificar dependencias: Actualiza pip, instala las dependencias del proyecto desde el archivo [requirements.txt](app/requirements.txt) y muestra la lista de dependencias instaladas.
+                    5. Arranca un contenedor MYSQL por si se hicieran nuevos tests que requirieran una db para ser ejecutados. 
+                    6. Ejecutar pruebas y generar informes de cobertura XML: Utiliza pytest para ejecutar las pruebas del proyecto ubicadas en [test_app_py](app/src/tests/test_app.py) y genera un informe de cobertura, el cual será necesario para que SonarCloud pueda acceder a él.
+                    7. Ejecutar Pylint para el análisis estático del código: Utiliza Pylint para realizar análisis estático del código en la carpeta app y establece un umbral mínimo de puntuación (--fail-under=1.0).
+                    8. Finalizamos el pipeline ejecutando un scan del código con SonarCloud, al terminar, se muestra la [URL de nuestro proyecto](https://sonarcloud.io/project/overview?id=KeepDevOpsTriangel_Keep-DevOps-Triangel-app), donde se pueden ver los resultados de todo el proceso.
                 
+                - JOB SNYK:
+                    1. Este trabajo "snyk" se ejecutará solo después de que el job "testing-and-sonarcloud" haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
+                    2. Su función principal es analizar las dependencias del proyecto, incluyendo bibliotecas y paquetes de terceros, en busca de vulnerabilidades de seguridad conocidas. Podemos acceder a la interfaz de Snyk en nuestro proyecto --> [AQUI](https://app.snyk.io/org/keepdevopstriangel)
+
                 - JOB GENERATE DOCS:
                     1. Este trabajo "generate-docs" se ejecutará solo después de que testing haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
                     2. Asume los mismos pasos que el job "testing" para clonar el repo, configurar el entorno python e instalar las dependencias necesarias.
                     3. Elimina la carpeta "docs", si la hubiera, para asegurar una generación limpia.
                     4. Crea una nueva carpeta "docs" y utiliza pdoc para generar la documentación en esa carpeta a partir del código fuente ubicado en src/application.
                     5. Utiliza la acción "actions/upload-artifact@v3" para empaquetar y cargar la carpeta docs como un artefacto llamado documentation. Este artefacto puede ser accesible después en GitHub.
-                - JOB SNYK:
-                    1. Este trabajo "snyk" se ejecutará solo después de que testing haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
-                    2. Se centra en verificar que las dependencias y bibliotecas que se usan en el proyecto no sufran vulnerabilidades de seguridad.
+                    6. IMAGEN CON UBICACION DEL ARTEFACTO
+
 
         - [release.yml](.github/workflows/release.yml):
             - Por ahora solo se activa en la rama albert
