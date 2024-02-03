@@ -48,7 +48,7 @@ jobs:
       - name: Run tests and generate coverage report
         run: |
           coverage run -m pytest app
-          coverage xml -o app/coverage-report.xml
+          coverage xml -o app/src/coverage-report.xml
   
       - name: Run Pylint
         run: |
