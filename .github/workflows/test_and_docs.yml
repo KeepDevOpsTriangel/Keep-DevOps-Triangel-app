@@ -49,10 +49,7 @@ jobs:
         run: |
           coverage run -m pytest app
           coverage xml -o app/src/coverage-report.xml
-          
-      - name: Show coverage report directory
-        run: ls -R app/src
-
+  
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
