@@ -1,4 +1,4 @@
-name: Testing and Documentation
+name: Testing, SonarCloud, Snyk, and Documentation
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
       - 'albert'
 
 jobs:
-  testing:
+  testing-and-sonarcloud:
     runs-on: ubuntu-latest
 
     env:
@@ -60,16 +60,6 @@ jobs:
       - name: Destroy MySQL container
         run: docker rm -f $MYSQL_CONTAINER
 
-  sonarcloud:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-
-      - name: Show coverage report directory
-        run: ls -R app/src
-
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:
@@ -79,7 +69,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   snyk:
-    needs: testing
+    needs: testing-and-sonarcloud
     runs-on: ubuntu-latest
 
     steps:
@@ -110,8 +100,7 @@ jobs:
 
   generate-docs:
     needs: 
-      - testing
-      - sonarcloud
+      - testing-and-sonarcloud
       - snyk
     runs-on: ubuntu-latest
 
