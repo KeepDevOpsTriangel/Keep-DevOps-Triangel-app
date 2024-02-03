@@ -47,16 +47,32 @@ class AppWeb():
             Object of class render_template
             render template home.html
         """
+        if 'username' in session:
+            return render_template('home.html', title=self.title_web,
+                                       myuser=session['username'])
+        else:
+            return render_template('login.html', title=self.title_web)
+    
+    def WebHook(self):
+        """
+        webhook for Bot Telegram where
+        receive the messages of the users
+        and are processed by the Bot Telegram API
+
+        args:
+        ----------
+        self : object
+            Object of class
+
+        return:
+        ----------
+        render_template : object
+            Object of class render_template
+            render template home.html
+        """
         if request.method == 'POST':
             Service(request.json)
-            return render_template('home.html')
-        if request.method == 'GET':
-            if 'username' in session:
-                return render_template('home.html', title=self.title_web,
-                                       myuser=session['username'])
-            else:
-                return render_template('login.html', title=self.title_web)
-
+        
     def GetWebHookInfo(self):
         """
         get webhook info of Bot Telegram API
@@ -130,7 +146,7 @@ class AppWeb():
         """
         if 'username' in session:
             api_url = self.config.APIURL+self.config.TOKEN + \
-                "/setWebhook?url="+self.config.URL_WEBHOOK
+                "/setWebhook?url="+self.config.URL_WEBHOOK+"/webhook"
             response = requests.post(api_url)
             if response.status_code == 200:
                 resp = response.json()

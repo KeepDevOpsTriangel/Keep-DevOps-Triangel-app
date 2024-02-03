@@ -46,6 +46,19 @@ class MyApp():
             """
             return AppWeb.Index(self)
 
+        @self.app.route('/webhook', methods=['POST'])
+        def WebHook_():
+            """
+            Method for receive the messages of Telegram Bot
+
+            return:
+            ----------
+            AppWeb.WebHook : object
+                Object of class AppWeb
+                receive the messages of Telegram Bot
+            """
+            return AppWeb.WebHook(self)
+
         @self.app.errorhandler(404)
         def GetError404_(error):
             """
