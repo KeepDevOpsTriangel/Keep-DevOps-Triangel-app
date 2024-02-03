@@ -111,8 +111,7 @@ class RespText():
             result = self.config.TITULO_APP + \
                 "Sorry "+first_name + \
                 ", I don't understand your message: ("+text+") \
-                \n\nTry with /OPTIONS" + \
-                self.config.EMAIL_SOPORTE
+                \n\nTry with /OPTIONS" + "\n\n" + self.config.EMAIL_SOPORTE
             self.api.SendMessage(chatId, result)
             keyboard = self.options.SendOptions()
             return self.api.SendKeyboard(chatId, keyboard)
