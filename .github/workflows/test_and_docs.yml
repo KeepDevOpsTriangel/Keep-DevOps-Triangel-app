@@ -1,4 +1,4 @@
-name: Testing and Documentation
+name: Testing, SonarCloud, Snyk, and Documentation
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
       - 'completed'
 
 jobs:
-  testing:
+  testing-and-sonarcloud:
     runs-on: ubuntu-latest
 
     env:
@@ -36,6 +36,7 @@ jobs:
           pip install -r app/requirements.txt
           pip install cryptography
           pip list
+
       - name: Run MySQL container
         run: |
           docker run -d --name $MYSQL_CONTAINER -p 3306:3306 -e MYSQL_ROOT_PASSWORD=${{env.MYSQL_ROOT_PASSWORD}} -e MYSQL_USER=${{env.MYSQL_USER}} -e MYSQL_PASSWORD=${{env.MYSQL_PASSWORD}} -e MYSQL_DATABASE=${{env.MYSQL_DATABASE}} mysql:${{env.MYSQL_VERSION}}
@@ -43,10 +44,12 @@ jobs:
           # Wait for MySQL to start
           chmod +x ./app/tools/check_mysql_ready.sh
           ./app/tools/check_mysql_ready.sh
+
       - name: Run tests and generate coverage report
         run: |
           coverage run -m pytest app
-          coverage report -m
+          coverage xml -o app/src/coverage-report.xml
+  
       - name: Run Pylint
         run: |
           pylint --fail-under=1.0 app
@@ -54,20 +57,14 @@ jobs:
       - name: Destroy MySQL container
         run: docker rm -f $MYSQL_CONTAINER
 
-  sonarcloud:
-    needs: testing
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   snyk:
-    needs: testing
+    needs: testing-and-sonarcloud
     runs-on: ubuntu-latest
 
     steps:
@@ -84,6 +81,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
           pip list
+
       - name: Install Snyk
         run: npm install -g snyk
 
@@ -94,10 +92,10 @@ jobs:
         run: |
           cd app
           snyk test
+
   generate-docs:
     needs: 
-      - testing
-      - sonarcloud
+      - testing-and-sonarcloud
       - snyk
     runs-on: ubuntu-latest
 
