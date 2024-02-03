@@ -72,7 +72,7 @@ class AppWeb():
         """
         if request.method == 'POST':
             Service(request.json)
-            return request.json
+            return None
         
     def GetWebHookInfo(self):
         """
