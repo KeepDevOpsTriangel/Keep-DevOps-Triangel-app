@@ -54,11 +54,11 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
                     2. Su función principal es analizar las dependencias del proyecto, incluyendo bibliotecas y paquetes de terceros, en busca de vulnerabilidades de seguridad conocidas. Podemos acceder a la interfaz de Snyk en nuestro proyecto --> [AQUI](https://app.snyk.io/org/keepdevopstriangel)
 
                 - JOB GENERATE DOCS:
-                    1. Este trabajo "generate-docs" se ejecutará solo después de que testing haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
-                    2. Asume los mismos pasos que el job "testing" para clonar el repo, configurar el entorno python e instalar las dependencias necesarias.
-                    3. Elimina la carpeta "docs", si la hubiera, para asegurar una generación limpia.
+                    1. Este trabajo "generate-docs" se ejecutará solo después de que testing-and-sonarcloud se haya completado con éxito. Las dependencias entre trabajos permiten establecer un orden específico de ejecución.
+                    2. Asume los mismos pasos que los jobs anteriores para clonar el repositorio, configurar el entorno python e instalar las dependencias necesarias.
+                    3. Elimina la carpeta "docs", si la hubiera, para asegurar una generación de documentación limpia.
                     4. Crea una nueva carpeta "docs" y utiliza pdoc para generar la documentación en esa carpeta a partir del código fuente ubicado en src/application.
-                    5. Utiliza la acción "actions/upload-artifact@v3" para empaquetar y cargar la carpeta docs como un artefacto llamado documentation. Este artefacto puede ser accesible después en GitHub.
+                    5. Utiliza la acción "actions/upload-artifact@" para empaquetar y cargar la carpeta docs como un artefacto llamado documentation. Este artefacto puede ser accesible después en GitHub.
                     6. IMAGEN CON UBICACION DEL ARTEFACTO
 
 
