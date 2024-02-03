@@ -6,12 +6,9 @@ name: Build-Publish-Docker-Image
 #       - 'v*'
 on:
   workflow_run:
-    workflows:
-      - "Testing"
-    branches:
-      - 'semantic-release'
-    types:
-      - completed
+    workflows: [Test]
+    types: [completed]
+    branches: [semantic-release]
 
 # on:
 #   pull_request:
