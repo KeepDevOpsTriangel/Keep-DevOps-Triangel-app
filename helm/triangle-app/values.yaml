@@ -73,7 +73,7 @@ deployment:
 
 image:
   repository:
-    app: kctriangle/triangle-bot
+    app: kctriangle/triangle-bot-demo
     mysql: mysql
     redis: redis
     mongo: bitnami/mongodb
