@@ -16,7 +16,7 @@ secret:
   WEB_PASSWORD: dHJpYW5nbGVhcHA=
 
 configmap:
-  URL_WEBHOOK: "https://bot.rafaeltorices.com"
+  URL_WEBHOOK: "https://botdemo.rafaeltorices.com"
   TITULO_APP: TRIANGLE_APP
   TELEFONO_SOPORTE: 123456789
   EMAIL_SOPORTE: "soporte@triangle-app.example"
