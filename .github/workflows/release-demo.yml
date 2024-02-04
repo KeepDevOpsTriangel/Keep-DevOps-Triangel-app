@@ -8,7 +8,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME_DOCKERHUB: 'Triangle-bot'
+  IMAGE_NAME_DOCKERHUB: 'Triangle-bot-demo'
 
 jobs:
   Build-Publish-Docker-Image:
