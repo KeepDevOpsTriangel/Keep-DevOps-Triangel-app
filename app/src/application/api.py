@@ -76,5 +76,5 @@ class Api():
             send keyboard to user
         """
         return requests.post(self.ApiUrl+self.token+'/sendMessage',
-                             data={'chat_id': chatId, 'text': '/OPCIONES',
+                             data={'chat_id': chatId, 'text': '/OPTIONS',
                                    'reply_markup': json.dumps(keyboard)})
