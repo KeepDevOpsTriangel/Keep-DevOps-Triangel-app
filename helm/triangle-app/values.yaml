@@ -73,12 +73,12 @@ deployment:
 
 image:
   repository:
-    app: kctriangle/triangle-bot-demo
+    app: kctriangle/triangle-bot
     mysql: mysql
     redis: redis
     mongo: bitnami/mongodb
   tag:
-    app: latest
+    app: dev
     mysql: latest
     redis: latest
     mongo: 4.4.13-debian-10-r30
