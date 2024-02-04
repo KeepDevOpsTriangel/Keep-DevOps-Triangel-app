@@ -52,43 +52,40 @@ class RespText():
         options = self.options.GetOptions()
         if text == '/OPTIONS' or text == '/options':
             result = self.config.TITULO_APP + \
-                "Your response is "+text+self.config.EMAIL_SOPORTE
+                "Your response is "+text
             self.api.SendMessage(chatId, result)
             return self.api.SendKeyboard(chatId, self.options.GetOptions())
         elif text == 'ACTIVATE_SERVICE' or text == 'activate_service':
             if chatId == self.config.CHAT_ID_SOPORTE:
                 self.state.ActivateState()
                 result = self.config.TITULO_APP + \
-                    "OK, SERVICE ACTIVATE"+self.config.EMAIL_SOPORTE
+                    "OK, SERVICE ACTIVATE"
                 self.api.SendMessage(chatId, result)
         elif text == 'DEACTIVATE_SERVICE' or text == 'deactivate_service':
             if chatId == self.config.CHAT_ID_SOPORTE:
                 self.state.DeactivateState()
                 result = self.config.TITULO_APP + \
-                    "OK, SERVICE DEACTIVATE"+self.config.EMAIL_SOPORTE
+                    "OK, SERVICE DEACTIVATE"
                 self.api.SendMessage(chatId, result)
         elif text == 'LIST_USERS':
             if chatId == self.config.CHAT_ID_SOPORTE:
                 result = self.config.TITULO_APP + \
                     "LIST USERS: \n\n" \
-                    + self.user.ListUsers() \
-                    + self.config.EMAIL_SOPORTE
+                    + self.user.ListUsers()
                 self.api.SendMessage(
                     self.config.CHAT_ID_SOPORTE, result)
         elif text == 'LIST_USERS_PENDING':
             if chatId == self.config.CHAT_ID_SOPORTE:
                 result = self.config.TITULO_APP + \
                     "LIST USERS PENDING: \n\n" + \
-                    self.user.ListUsersPending() \
-                    + self.config.EMAIL_SOPORTE
+                    self.user.ListUsersPending()
                 self.api.SendMessage(
                     self.config.CHAT_ID_SOPORTE, result)
         elif text == 'LIST_USERS_AUTHORIZED':
             if chatId == self.config.CHAT_ID_SOPORTE:
                 result = self.config.TITULO_APP + \
                     "LIST USERS AUTHORIZED: \n\n" + \
-                    self.user.ListAuthorizedUsers() \
-                    + self.config.EMAIL_SOPORTE
+                    self.user.ListAuthorizedUsers()
                 self.api.SendMessage(
                     self.config.CHAT_ID_SOPORTE, result)
         elif text == options[0][0]:
@@ -111,7 +108,7 @@ class RespText():
             result = self.config.TITULO_APP + \
                 "Sorry "+first_name + \
                 ", I don't understand your message: ("+text+") \
-                \n\nTry with /OPTIONS" + "\n\n" + self.config.EMAIL_SOPORTE
+                \n\nTry with /OPTIONS"
             self.api.SendMessage(chatId, result)
             keyboard = self.options.SendOptions()
             return self.api.SendKeyboard(chatId, keyboard)
