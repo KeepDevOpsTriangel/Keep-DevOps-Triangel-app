@@ -106,7 +106,7 @@ class RespText():
             result = self.config.TITULO_APP + options[3][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
-        elif text == "Hi" or text == "hi" or text == "Hello" or text == "hello":
+        elif text == "hi" or text == "Hello" or text == "hello":
             result = self.config.TITULO_APP + \
                 "Hi "+first_name + \
                 ", I am a bot, I can help you with the following options: \n\n"

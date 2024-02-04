@@ -21,6 +21,7 @@ spec:
       containers:
       - name: triangle-app-container
         image: {{ .Values.image.repository.app }}:{{ .Values.image.tag.app }}
+        imagePullPolicy: Always
         ports:
           - name: {{ .Values.deployment.app.ports.name }}
             containerPort: {{ .Values.deployment.app.ports.containerPort }}
