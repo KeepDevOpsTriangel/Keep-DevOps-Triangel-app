@@ -5,6 +5,7 @@ from application.state_app import StateApp  # Import class StateApp
 from application.api import Api  # Import class Api
 from application.config_app import ConfigApp  # Import class configApp
 from application.options import Options  # Import class Options
+from application.chatai import ChatAI  # Import class ChatAI
 
 
 class RespText():
@@ -22,6 +23,7 @@ class RespText():
         self.options = Options()
         self.state = StateApp()
         self.user = User()
+        self.chatai = ChatAI()
 
     def SendResponse(self, chatId, text, first_name):
         """
@@ -104,6 +106,20 @@ class RespText():
             result = self.config.TITULO_APP + options[3][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
+        elif text == "Hi" or text == "hi" or text == "Hello" or text == "hello":
+            result = self.config.TITULO_APP + \
+                "Hi "+first_name + \
+                ", I am a bot, I can help you with the following options: \n\n"
+            self.api.SendMessage(chatId, result)
+            keyboard = self.options.SendOptions()
+            return self.api.SendKeyboard(chatId, keyboard)
+        elif text == "chatgpt":
+            result = self.config.TITULO_APP + \
+                self.chatai.AnswerChatAI(text) + \
+                self.config.EMAIL_SOPORTE
+            self.api.SendMessage(chatId, result)
+            keyboard = self.options.SendOptions()
+            return self.api.SendKeyboard(chatId, keyboard)
         else:
             result = self.config.TITULO_APP + \
                 "Sorry "+first_name + \
