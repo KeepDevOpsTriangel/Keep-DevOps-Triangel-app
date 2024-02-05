@@ -54,7 +54,7 @@ class RespText():
         options = self.options.GetOptions()
         if text == '/OPTIONS' or text == '/options':
             result = self.config.TITULO_APP + \
-                "Your response is "+text
+                "Tu respuesta es: "+text
             self.api.SendMessage(chatId, result)
             return self.api.SendKeyboard(chatId, self.options.GetOptions())
         elif text == 'ACTIVATE_SERVICE' or text == 'activate_service':
@@ -106,25 +106,27 @@ class RespText():
             result = self.config.TITULO_APP + options[3][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
-        elif text == "hi" or text == "Hello" or text == "hello":
+        elif text == "hi" or text == "Hello" or text == "hello" \
+                or text == "Hola" or text == "hola" \
+                or text == "HOLA" or text == "HI" \
+                or text == "HELLO":
             result = self.config.TITULO_APP + \
-                "Hi "+first_name + \
-                ", I am a bot, I can help you with the following options: \n\n"
+                "Hola!! "+first_name + \
+                ", soy tu asistente virtual, en que puedo ayudarte?\n\n Selecciona una de mis opciones"
             self.api.SendMessage(chatId, result)
             keyboard = self.options.SendOptions()
             return self.api.SendKeyboard(chatId, keyboard)
-        elif text == "chatgpt":
-            result = self.config.TITULO_APP + \
-                self.chatai.AnswerChatAI(text) + \
-                self.config.EMAIL_SOPORTE
-            self.api.SendMessage(chatId, result)
-            keyboard = self.options.SendOptions()
-            return self.api.SendKeyboard(chatId, keyboard)
+        # elif text == "chatgpt":
+        #     result = self.config.TITULO_APP + \
+        #         self.chatai.AnswerChatAI(text) + \
+        #         self.config.EMAIL_SOPORTE
+        #     self.api.SendMessage(chatId, result)
+        #     keyboard = self.options.SendOptions()
+        #     return self.api.SendKeyboard(chatId, keyboard)
         else:
             result = self.config.TITULO_APP + \
-                "Sorry "+first_name + \
-                ", I don't understand your message: ("+text+") \
-                \n\nTry with /OPTIONS"
+                "Lo siento "+first_name + \
+                ", no has seleccionado una opción ("+text+")\n"
             self.api.SendMessage(chatId, result)
             keyboard = self.options.SendOptions()
             return self.api.SendKeyboard(chatId, keyboard)

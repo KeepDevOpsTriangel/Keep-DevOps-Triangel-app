@@ -86,12 +86,19 @@ class Service():
                 actual_user = self.user.CheckUser(chatId)
                 # if the user is not in the database, save it
                 # and give him a welcome to the system as a new user
+                # and send a message to admin to inform new user
                 # if the user is in the database, check the service
                 if actual_user == 0:
                     self.user.SavedUser(chatId, first_name, username)
-                    text = self.title_app+"Hello "+first_name + \
-                        " !!,\nWelcome to the system automated.\n\nHere you have our /OPTIONS"
+                    text = self.title_app+"Hola "+first_name + \
+                        " !!,\nBienvenido!! Soy tu asistente virtual de \n\nDime en qué puedo ayudarte?\nTambién puedes usar una de mis opciones\n"
                     self.meth.SendMessage(chatId, text)
+                    self.meth.SendMessage(chatId, "/OPCIONES")
+                    self.options.SendOptions(chatId)
+                    text = self.title_app +\
+                        "New user: \n\n" + \
+                        first_name + " - " + username + " ("+chatId+")"
+                    self.meth.SendMessage(self.chat_id_support, text)
                 else:
                     # if the service is out of service and
                     # the user is not admin

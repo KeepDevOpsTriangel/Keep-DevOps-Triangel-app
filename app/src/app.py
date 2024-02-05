@@ -12,6 +12,7 @@ from application.state_app import StateApp
 from application.api import Api
 from application.auth import Authenticator
 from application.mongodb import MongoDB
+from application.context import Context
 import os
 
 load_dotenv()  # Load variables of .env
@@ -30,6 +31,7 @@ class MyApp():
             self.config.WEB_USERNAME, self.config.WEB_PASSWORD)
         self.title_web = self.config.TITULO_APP
         self.mongodb = MongoDB()
+        self.context = Context()
         self.routes()
 
     def routes(self):
@@ -232,6 +234,32 @@ class MyApp():
                 logout of the app
             """
             return AppWeb.LogOut(self)
+
+        @self.app.route('/chatbot', methods=['GET'])
+        def ChatBot_():
+            """
+            Method for render template page chatbot.html
+
+            return:
+            ----------
+            render_template : object
+                Object of class render_template
+                render template chatbot.html
+            """
+            return AppWeb.ChatBot(self)
+
+        @self.app.route('/setchatbot', methods=['POST'])
+        def SetChatBot_():
+            """
+            Method for set the context of the chatbot
+
+            return:
+            ----------
+            AppWeb.SetChatBot : object
+                Object of class AppWeb
+                set the context of the chatbot
+            """
+            return AppWeb.SetChatBot(self)
 
     def RunApp(self):
         """
