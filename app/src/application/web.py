@@ -10,6 +10,7 @@ from application.api import Api
 from application.service import Service
 from application.auth import Authenticator
 from application.mongodb import MongoDB
+from application.context import Context
 
 
 class AppWeb():
@@ -29,6 +30,7 @@ class AppWeb():
         self.authenticator = Authenticator()
         self.title_web = self.config.TITULO_APP  # Define title of web app
         self.mongodb = MongoDB()
+        self.context = Context()
 
     def Index(self):
         """
@@ -426,3 +428,55 @@ class AppWeb():
         """
         session.pop('username', None)
         return render_template('login.html', title=self.title_web)
+
+    def ChatBot(self):
+        """
+        config chatbot in web app
+
+        args:
+        ----------
+        self : object
+            Object of class
+
+        return:
+        ----------
+        render_template : object
+            Object of class render_template
+            render template context.html
+        """
+        if 'username' in session:
+            if request.method == 'GET':
+                mycontext = self.context.GetContext()
+                return render_template('context.html', mycontext=mycontext,
+                                       title=self.title_web,
+                                       myuser=session['username'])
+        else:
+            return render_template('login.html', title=self.title_web)
+
+    def SetChatBot(self):
+        """
+        set context of chatbot in web app
+
+        args:
+        ----------
+        self : object
+            Object of class
+
+        return:
+        ----------
+        render_template : object
+            Object of class render_template
+            render template context.html
+        """
+        if 'username' in session:
+            if request.method == 'POST':
+                title_context = request.form['title_context']
+                context = request.form['context']
+                self.context.SetContext(title_context, context)
+                mycontext = self.context.GetContext()
+                return render_template('context.html', mycontext=mycontext,
+                                       message="Context set correctly.",
+                                       title=self.title_web,
+                                       myuser=session['username'])
+        else:
+            return render_template('login.html', title=self.title_web)

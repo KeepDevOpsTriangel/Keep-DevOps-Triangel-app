@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` varchar(150) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `chatid` varchar(20) COLLATE utf8mb3_spanish_ci NOT NULL,
   `username` varchar(150) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `authorized` int DEFAULT '0',
+  `authorized` int DEFAULT '1',
   `pending` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb3 COLLATE = utf8mb3_spanish_ci;
@@ -139,6 +139,22 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `message` text COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb3 COLLATE = utf8mb3_spanish_ci;
+-- Volcando estructura para la tabla contexto
+CREATE TABLE IF NOT EXISTS `context` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `updated` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+  `context` text COLLATE utf8mb3_spanish_ci,
+  `title_context` varchar(100) COLLATE utf8mb3_spanish_ci,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb3 COLLATE = utf8mb3_spanish_ci;
+-- Volcando datos para la tabla context: ~0 rows (aproximadamente)
+INSERT INTO `context` (`id`, `updated`, `context`, `title_context`)
+VALUES (
+    1,
+    '2024-01-18 12:23:23',
+    'Soy un experto en mecanica de coches capaz de resolver averias, ayudar con el mantenimiento y dar consejos sobre el cuidado del vehículo. Tambien puedo recomendar talleres y tiendas de repuestos.',
+    'Soy un experto en mecanica de coches'
+  );
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */
 ;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */
