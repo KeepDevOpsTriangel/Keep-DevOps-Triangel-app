@@ -9,6 +9,7 @@ from application.users import User
 from application.state_app import StateApp
 from application.options import Options
 from application.mongodb import MongoDB
+from application.context import Context
 
 
 class Service():
@@ -43,6 +44,8 @@ class Service():
         self.resp = RespText()
         self.options = Options()
         self.mongodb = MongoDB()
+        self.context = Context()
+        self.config.TITULO_APP = self.context.GetTitleContext() + "\n\n"
 
         json_file = 'data.json'  # File json for save data of message
         self.data = data
@@ -91,9 +94,10 @@ class Service():
                 if actual_user == 0:
                     self.user.SavedUser(chatId, first_name, username)
                     text = self.title_app+"Hola "+first_name + \
-                        " !!,\nBienvenido!! Soy tu asistente virtual de \n\nDime en qué puedo ayudarte?\nTambién puedes usar una de mis opciones\n"
+                        " !!,\nBienvenido!! Soy un "+self.config.TITULO_APP + \
+                        "Dime en qué puedo ayudarte?\nTambién puedes usar una de mis opciones\n\n"
                     self.meth.SendMessage(chatId, text)
-                    self.meth.SendMessage(chatId, "/OPCIONES")
+                    self.meth.SendMessage(chatId, "/OPTIONS")
                     self.options.SendOptions(chatId)
                     text = self.title_app +\
                         "New user: \n\n" + \
