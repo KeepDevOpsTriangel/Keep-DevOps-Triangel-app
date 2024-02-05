@@ -16,7 +16,7 @@ def test_default_telf_app():
     
 def test_default_chat_id_app():
     config = ConfigApp()
-    assert config.CHAT_ID_SOPORTE == '000000' + '\n\n'
+    assert config.CHAT_ID_SOPORTE == '000000'
 
 ##################################################################################
     
