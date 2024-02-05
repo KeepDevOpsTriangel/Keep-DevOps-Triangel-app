@@ -6,6 +6,7 @@ from application.api import Api  # Import class Api
 from application.config_app import ConfigApp  # Import class configApp
 from application.options import Options  # Import class Options
 from application.chatai import ChatAI  # Import class ChatAI
+from application.context import Context  # Import class Context
 
 
 class RespText():
@@ -24,6 +25,9 @@ class RespText():
         self.state = StateApp()
         self.user = User()
         self.chatai = ChatAI()
+        self.context = Context()
+        self.config.TITULO_APP = self.config.TITULO_APP + \
+            self.context.GetTitleContext() + "\n\n"
 
     def SendResponse(self, chatId, text, first_name):
         """
@@ -53,8 +57,7 @@ class RespText():
         """
         options = self.options.GetOptions()
         if text == '/OPTIONS' or text == '/options':
-            result = self.config.TITULO_APP + \
-                "Tu respuesta es: "+text
+            result = self.config.TITULO_APP
             self.api.SendMessage(chatId, result)
             return self.api.SendKeyboard(chatId, self.options.GetOptions())
         elif text == 'ACTIVATE_SERVICE' or text == 'activate_service':
@@ -106,16 +109,6 @@ class RespText():
             result = self.config.TITULO_APP + options[3][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
-        elif text == "hi" or text == "Hello" or text == "hello" \
-                or text == "Hola" or text == "hola" \
-                or text == "HOLA" or text == "HI" \
-                or text == "HELLO":
-            result = self.config.TITULO_APP + \
-                "Hola!! "+first_name + \
-                ", soy tu asistente virtual, en que puedo ayudarte?\n\n Selecciona una de mis opciones"
-            self.api.SendMessage(chatId, result)
-            keyboard = self.options.SendOptions()
-            return self.api.SendKeyboard(chatId, keyboard)
         # elif text == "chatgpt":
         #     result = self.config.TITULO_APP + \
         #         self.chatai.AnswerChatAI(text) + \
@@ -126,7 +119,8 @@ class RespText():
         else:
             result = self.config.TITULO_APP + \
                 "Lo siento "+first_name + \
-                ", no has seleccionado una opción ("+text+")\n"
+                ", no entiendo lo que me dices (" + \
+                text+"), selecciona una opción para poder ayudarte\n"
             self.api.SendMessage(chatId, result)
             keyboard = self.options.SendOptions()
             return self.api.SendKeyboard(chatId, keyboard)
