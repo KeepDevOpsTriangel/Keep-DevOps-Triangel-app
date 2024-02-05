@@ -51,3 +51,18 @@ class Context():
             context = "{context}" WHERE id = 1'
         self.cursor.execute(self.sql)
         self.db.commit()
+
+    def GetTitleContext(self):
+        """
+        Method for get the title of the context.
+
+        Returns:
+            str: title of the context
+        """
+        self.cursor = self.db.cursor()
+        self.sql = 'SELECT title_context FROM context where id = 1'
+        self.cursor.execute(self.sql)
+        self.result = self.cursor.fetchall()
+        for row in self.result:
+            title_context = row[0]
+            return title_context
