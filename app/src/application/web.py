@@ -261,13 +261,13 @@ class AppWeb():
                     message = "User " + first_name + \
                         " deactivated correctly and informed by Telegram."
                     self.api.SendMessage(
-                        chatId, "Hello "+first_name+", your user has been deactivated.\nYou can't use the Bot.")
+                        chatId, self.config.TITULO_APP + "Hello "+first_name+", your user has been deactivated.\nYou can't use the Bot.")
                 else:
                     self.user.ActivateUserWeb(id)
                     message = "User " + first_name + \
                         " activated correctly and informed by Telegram."
                     self.api.SendMessage(
-                        chatId, "Hello "+first_name+", your user has been activated.\nYou can use the Bot.")
+                        chatId, self.config.TITULO_APP + "Hello "+first_name+", your user has been activated.\nYou can use the Bot.")
                 users = self.user.ListUsersWeb()
                 return render_template('users.html', users=users,
                                        message=message, title=self.title_web,
@@ -303,10 +303,10 @@ class AppWeb():
                 if result == 0:
                     self.state.ActivateState()
                     result = self.state.CheckStateWeb()
-                    for row in self.user.ChatIdUsers():
-                        chatId = row[0]
-                        self.api.SendMessage(
-                            chatId, "The service has been activated. \n\nYou can use the Bot.")
+                    # for row in self.user.ChatIdUsers():
+                    #     chatId = row[0]
+                    #     self.api.SendMessage(
+                    #         chatId, "The service has been activated. \n\nYou can use the Bot.")
                     return render_template('service.html', result=result)
                 else:
                     new_note = request.form['note']
@@ -314,11 +314,11 @@ class AppWeb():
                     note = self.state.GetNoteState()
                     self.state.DeactivateState()
                     result = self.state.CheckStateWeb()
-                    for row in self.user.ChatIdUsers():
-                        chatId = row[0]
-                        self.api.SendMessage(
-                            chatId, "Service temporarily unavailable: \n\n" + note +
-                                    "\n\nSorry for the inconvenience.")
+                    # for row in self.user.ChatIdUsers():
+                    #     chatId = row[0]
+                    #     self.api.SendMessage(
+                    #         chatId, "Service temporarily unavailable: \n\n" + note +
+                    #                 "\n\nSorry for the inconvenience.")
                     return render_template('service.html',
                                            result=result, note=note)
         else:
