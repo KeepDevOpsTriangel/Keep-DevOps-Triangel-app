@@ -92,5 +92,3 @@ class RespText():
                 "Un momento, estoy pensando...")
             result = self.chatbot.ChatBotResponse(text)
             self.api.SendMessage(chatId, result)
-            keyboard = self.options.SendOptions()
-            return self.api.SendKeyboard(chatId, keyboard)

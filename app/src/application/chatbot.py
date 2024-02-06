@@ -21,7 +21,7 @@ class ChatBot():
         self.mycontext = self.context.GetContextContext()
         self.model = "gpt-3.5-turbo-instruct"
         self.temperature = 0.9
-        self.max_tokens = 200
+        self.max_tokens = 100
 
     def ChatBotResponse(self, text):
         """
