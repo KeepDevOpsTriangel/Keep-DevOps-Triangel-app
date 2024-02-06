@@ -19,8 +19,8 @@ class ChatBot():
         self.client = OpenAI(api_key=self.config.OPENAI_API_KEY)
         self.context = Context()
         self.model = "gpt-3.5-turbo-instruct"
-        self.temperature = 0.5
-        self.max_tokens = 150
+        self.temperature = 0.9
+        self.max_tokens = 200
 
     def ChatBotResponse(self, text):
         mycontext = self.context.GetContextContext()
@@ -32,7 +32,9 @@ class ChatBot():
             temperature=self.temperature,
             max_tokens=self.max_tokens
         )
-        myanswer = response.choices[0].text.strip()
+        myanswer = response.choices[0].text.strip() + "..."
+        if response.choices[0].finish_reason == 'length':
+            myanswer += "\n\n" + "Solicitáme más información..."
         mycontext = myanswer
         result = self.config.TITULO_APP + myanswer
         return result

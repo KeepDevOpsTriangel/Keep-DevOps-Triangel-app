@@ -59,8 +59,12 @@ class RespText():
                 ", puedes seleccionar una de mis opciones\n"
             self.api.SendMessage(chatId, result)
             self.api.SendKeyboard(chatId, self.options.GetOptions())
-        elif text == 'hola':
-            result = self.config.TITULO_APP + "Hola " + first_name + "\n"
+        elif text == 'nuevo':
+            result = self.config.TITULO_APP + "Hola " + first_name + \
+                ", Bienvenido al asistente virtual de "
+            + self.config.TITULO_APP + \
+                ". ¿En qué puedo ayudarte hoy? \
+                    También puedes seleccionar una de mis opciones\n"
             self.api.SendMessage(chatId, result)
         elif text == options[0][0]:
             result = self.config.TITULO_APP + options[0][1] + "\n"
@@ -79,6 +83,9 @@ class RespText():
             self.api.SendMessage(
                 chatId, result)
         else:
+            self.api.SendMessage(
+                chatId, self.config.TITULO_APP + first_name +
+                ", dame un momento, estoy pensando...")
             result = self.chatbot.ChatBotResponse(text)
             self.api.SendMessage(chatId, result)
             keyboard = self.options.SendOptions()
