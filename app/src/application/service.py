@@ -46,6 +46,7 @@ class Service():
         self.mongodb = MongoDB()
         self.context = Context()
         self.config.TITULO_APP = self.context.GetTitleContext() + "\n\n"
+        self.api = Api()
 
         json_file = 'data.json'  # File json for save data of message
         self.data = data
@@ -92,15 +93,14 @@ class Service():
                 # and send a message to admin to inform new user
                 # if the user is in the database, check the service
                 if actual_user == 0:
+                    # saved the user in bd
                     self.user.SavedUser(chatId, first_name, username)
-                    text = self.title_app+"Hola "+first_name + \
-                        " !!,\nBienvenido!! Soy un "+self.config.TITULO_APP + \
-                        "Dime en qué puedo ayudarte?\nTambién puedes usar una de mis opciones\n\n"
-                    self.meth.SendMessage(chatId, text)
-                    self.meth.SendMessage(chatId, "/OPTIONS")
-                    self.options.SendOptions(chatId)
+                    # send welcome message to user
+                    self.resp.SendResponse(
+                        chatId, "hola", first_name)
+                    # send message to admin to inform new user
                     text = self.title_app +\
-                        "New user: \n\n" + \
+                        "New user in Bot: \n\n" + \
                         first_name + " - " + username + " ("+chatId+")"
                     self.meth.SendMessage(self.chat_id_support, text)
                 else:
@@ -129,7 +129,7 @@ class Service():
                                 if self.user.CheckRequestUser(chatId) == 0:
                                     text = self.title_app +\
                                         "Request access from user: \n\n" + \
-                                        first_name + \
+                                        first_name + " - " + username +\
                                         " - ("+chatId+")"
                                     # update user's status to pending
                                     self.user.RequestUser(chatId)
@@ -143,8 +143,9 @@ class Service():
                                         "Your request is pending, wait for a response.\n\n"
                                     self.meth.SendMessage(chatId, text)
                                     text = self.title_app\
-                                        + "Remember that you can only have one pending request.\n\n" +\
-                                        first_name+" - ("+chatId+")"
+                                        + "Remember that you have pending request.\n\n" +\
+                                        first_name+" - " + username + \
+                                        " - ("+chatId+")"
                                     self.meth.SendMessage(
                                         self.chat_id_support, text)
                             else:
