@@ -470,9 +470,8 @@ class AppWeb():
         """
         if 'username' in session:
             if request.method == 'POST':
-                title_context = request.form['title_context']
                 context = request.form['context']
-                self.context.SetContext(title_context, context)
+                self.context.SetContext(context)
                 mycontext = self.context.GetContext()
                 return render_template('context.html', mycontext=mycontext,
                                        message="Context set correctly.",

@@ -4,13 +4,11 @@
 {% if mycontext %}
 <table>
   <tr>
-    <th>Title</th>
     <th>Description</th>
   </tr>
   {% for element in mycontext %}
   <tr>
     <td>{{ element[0] }}</td>
-    <td>{{ element[1] }}</td>
   </tr>
   {% endfor %}
   {% if message %}
@@ -21,10 +19,8 @@
 {% endif %}
 <form action="{{ url_for('SetChatBot_') }}" method="post">
   <div class="inputs">
-    <label for="title_context">Title of ChatBot</label>
-    <input type="text" name="title_context" placeholder="Title of ChatBot" required />
     <label for="context">ChatBot Description</label>
-    <input type="text" name="context" placeholder="ChatBot Description" required />
+    <input type="text" name="context" required />
   </div>
   <button type="submit">Save</button>
 </form>
