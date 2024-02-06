@@ -32,40 +32,23 @@ class Context():
             str: context of the chatbot
         """
         self.cursor = self.db.cursor()
-        self.sql = 'SELECT title_context, context FROM context where id = 1'
+        self.sql = 'SELECT context FROM context where id = 1'
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
         return self.result
 
-    def SetContext(self, title_context, context):
+    def SetContext(self, context):
         """
         Method for set the context of the chatbot.
 
         Args:
-            title_context (str): title of the context
             context (str): context of the chatbot
         """
         self.cursor = self.db.cursor()
         self.sql = f'UPDATE context SET \
-            title_context = "{title_context}",\
             context = "{context}" WHERE id = 1'
         self.cursor.execute(self.sql)
         self.db.commit()
-
-    def GetTitleContext(self):
-        """
-        Method for get the title of the context.
-
-        Returns:
-            str: title of the context
-        """
-        self.cursor = self.db.cursor()
-        self.sql = 'SELECT title_context FROM context where id = 1'
-        self.cursor.execute(self.sql)
-        self.result = self.cursor.fetchall()
-        for row in self.result:
-            title_context = row[0]
-            return title_context
 
     def GetContextContext(self):
         """
