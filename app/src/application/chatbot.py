@@ -18,14 +18,15 @@ class ChatBot():
         self.config = ConfigApp()
         self.client = OpenAI(api_key=self.config.OPENAI_API_KEY)
         self.context = Context()
+        self.mycontext = None
         self.model = "gpt-3.5-turbo-instruct"
         self.temperature = 0.9
         self.max_tokens = 200
 
     def ChatBotResponse(self, text):
-        mycontext = self.context.GetContextContext()
-        prompt = mycontext + "\n" + text
-        prompt = f"{mycontext}\n{text}" if mycontext else prompt
+        self.mycontext = self.context.GetContextContext()
+        prompt = self.mycontext + "\n" + text
+        prompt = f"{self.mycontext}\n{text}" if self.mycontext else prompt
         response = self.client.completions.create(
             model=self.model,
             prompt=prompt,
@@ -35,6 +36,10 @@ class ChatBot():
         myanswer = response.choices[0].text.strip() + "..."
         if response.choices[0].finish_reason == 'length':
             myanswer += "\n\n" + "Solicitáme más información..."
-        mycontext = myanswer
+        self.mycontext = myanswer
         result = self.config.TITULO_APP + myanswer
         return result
+
+    def ClearContext(self):
+        self.mycontext = None
+        return
