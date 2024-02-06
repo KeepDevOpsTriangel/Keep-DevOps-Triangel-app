@@ -144,16 +144,14 @@ CREATE TABLE IF NOT EXISTS `context` (
   `id` int NOT NULL AUTO_INCREMENT,
   `updated` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
   `context` text COLLATE utf8mb3_spanish_ci,
-  `title_context` varchar(100) COLLATE utf8mb3_spanish_ci,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb3 COLLATE = utf8mb3_spanish_ci;
 -- Volcando datos para la tabla context: ~0 rows (aproximadamente)
-INSERT INTO `context` (`id`, `updated`, `context`, `title_context`)
+INSERT INTO `context` (`id`, `updated`, `context`)
 VALUES (
     1,
     '2024-01-18 12:23:23',
-    'Soy un experto en mecanica de coches capaz de resolver averias, ayudar con el mantenimiento y dar consejos sobre el cuidado del vehículo. Tambien puedo recomendar talleres y tiendas de repuestos.',
-    'Soy un experto en mecanica de coches'
+    'Soy un experto en mecanica de coches capaz de resolver averias, ayudar con el mantenimiento y dar consejos sobre el cuidado del vehículo. Tambien puedo recomendar talleres y tiendas de repuestos.'
   );
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */
 ;
