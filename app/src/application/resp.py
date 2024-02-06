@@ -1,5 +1,6 @@
 """ Module for manage the response of the bot to the user """
 
+from openai import OpenAI  # Import OpenAI for use the API
 from application.users import User  # Import class User
 from application.state_app import StateApp  # Import class StateApp
 from application.api import Api  # Import class Api
@@ -24,10 +25,13 @@ class RespText():
         self.options = Options()
         self.state = StateApp()
         self.user = User()
-        self.chatai = ChatAI()
+        self.client = OpenAI(api_key=self.config.OPENAI_API_KEY)
         self.context = Context()
         self.config.TITULO_APP = self.config.TITULO_APP + \
             self.context.GetTitleContext() + "\n\n"
+        self.model = "gpt-3.5-turbo-instruct"
+        self.temperature = 0.5
+        self.max_tokens = 150
 
     def SendResponse(self, chatId, text, first_name):
         """
@@ -117,10 +121,18 @@ class RespText():
         #     keyboard = self.options.SendOptions()
         #     return self.api.SendKeyboard(chatId, keyboard)
         else:
-            result = self.config.TITULO_APP + \
-                "Lo siento "+first_name + \
-                ", no entiendo lo que me dices (" + \
-                text+"), selecciona una opción para poder ayudarte\n"
+            mycontext = self.context.GetContextContext()
+            prompt = mycontext + "\n" + text
+            prompt = f"{mycontext}\n{text}" if mycontext else prompt
+            response = self.client.completions.create(
+                model=self.model,
+                prompt=prompt,
+                temperature=self.temperature,
+                max_tokens=self.max_tokens
+            )
+            myanswer = response.choices[0].text.strip()
+            mycontext = myanswer
+            result = self.config.TITULO_APP + myanswer
             self.api.SendMessage(chatId, result)
             keyboard = self.options.SendOptions()
             return self.api.SendKeyboard(chatId, keyboard)

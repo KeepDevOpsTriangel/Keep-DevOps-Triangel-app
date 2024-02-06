@@ -3,6 +3,7 @@
 from openai import OpenAI  # Import OpenAI for use the API
 # Import ConfigApp for use the config file
 from application.config_app import ConfigApp
+from application.context import Context  # Import class Context
 
 
 class ChatAI():
@@ -18,7 +19,8 @@ class ChatAI():
         """
         self.config = ConfigApp()  # Create an instance of ConfigApp
         self.client = OpenAI(api_key=self.config.OPENAI_API_KEY)
-        self.mycontext = None
+        self.context = Context()
+        self.mycontext = self.context.GetContextContext()  # Get the context of the chatbot
         self.model = "gpt-3.5-turbo-instruct"
         self.temperature = 0.5
         self.max_tokens = 150
