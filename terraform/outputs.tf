@@ -15,7 +15,7 @@ output "cluster_id" {
 }
 
 output "kubeconfig_command" {
-  value = "rm $HOME/.kube/config ; aws eks update-kubeconfig --name dev-cluster"
+  value = "rm $HOME/.kube/config ; aws eks update-kubeconfig --name eks-triangle-env-cluster"
 }
 
 output "argocd_ingress_service_name" {

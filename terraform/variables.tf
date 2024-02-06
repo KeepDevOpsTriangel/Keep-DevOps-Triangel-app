@@ -22,7 +22,7 @@ variable "aws_cred_profile" {
 
 variable "env_name" {
   type    = string
-  default = "dev"
+  default = "eks-triangle-env"
 }
 
 variable "provisioner" {
@@ -170,4 +170,12 @@ variable "force_destroy" {
   description = "Force destroy the bucket containing state files?"
   default     = true
   type        = bool
+}
+
+######################################################################
+## cert manager
+
+variable "email" {
+  type    = string
+  default = " jeffnacato@gmail.com"
 }
