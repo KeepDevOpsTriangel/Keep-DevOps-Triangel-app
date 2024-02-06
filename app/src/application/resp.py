@@ -55,7 +55,10 @@ class RespText():
         """
         options = self.options.GetOptions()
         if text == '/OPTIONS' or text == '/options':
-            return self.api.SendKeyboard(chatId, self.options.GetOptions())
+            result = self.config.TITULO_APP + first_name + \
+                ", puedes seleccionar una de mis opciones\n"
+            self.api.SendMessage(chatId, result)
+            self.api.SendKeyboard(chatId, self.options.GetOptions())
         elif text == 'hola':
             result = self.config.TITULO_APP + "Hola " + first_name + "\n"
             self.api.SendMessage(chatId, result)
