@@ -59,11 +59,10 @@ class RespText():
                 ", puedes seleccionar una de mis opciones\n"
             self.api.SendMessage(chatId, result)
             self.api.SendKeyboard(chatId, self.options.GetOptions())
-        elif text == 'nuevo':
-            result = self.config.TITULO_APP + "Hola " + first_name + ", Bienvenido al asistente virtual de " + \
-                self.config.TITULO_APP + \
-                "¿En qué puedo ayudarte hoy? \n\nTambién puedes seleccionar una de mis opciones\n"
+        elif text == 'newuser':
+            result = self.config.TITULO_APP + "Hola " + first_name + ", Bienvenido al asistente virtual, ¿En qué puedo ayudarte? \n\nTambién puedes seleccionar una de mis opciones\n"
             self.api.SendMessage(chatId, result)
+            self.api.SendMessage(chatId, '/OPTIONS')
             self.api.SendKeyboard(chatId, self.options.GetOptions())
         elif text == options[0][0]:
             result = self.config.TITULO_APP + options[0][1] + "\n"
@@ -81,18 +80,17 @@ class RespText():
             result = self.config.TITULO_APP + options[3][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
-        elif text == '/Finalizar':
-            result = self.config.TITULO_APP + \
-                first_name+", gracias por usar nuestro servicio."
+        elif text == 'hola' or text == 'Hola' or text == 'HOLA':
+            result = self.config.TITULO_APP + "Hola " + first_name + \
+                ", ¿En qué puedo ayudarte? \n\nTambién puedes seleccionar una de mis opciones\n"
             self.api.SendMessage(chatId, result)
             self.api.SendMessage(chatId, '/OPTIONS')
-            self.chatbot.ClearContext()
+            self.api.SendKeyboard(chatId, self.options.GetOptions())
         else:
             self.api.SendMessage(
-                chatId, self.config.TITULO_APP + first_name +
-                ", dame un momento, estoy pensando...")
+                chatId, self.config.TITULO_APP + 
+                "Un momento, estoy pensando...")
             result = self.chatbot.ChatBotResponse(text)
             self.api.SendMessage(chatId, result)
-            self.api.SendMessage(chatId, '/Finalizar')
             keyboard = self.options.SendOptions()
             return self.api.SendKeyboard(chatId, keyboard)

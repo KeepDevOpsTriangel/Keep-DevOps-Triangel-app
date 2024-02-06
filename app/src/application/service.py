@@ -95,7 +95,7 @@ class Service():
                     self.user.SavedUser(chatId, first_name, username)
                     # send welcome message to user
                     self.resp.SendResponse(
-                        chatId, "nuevo", first_name)
+                        chatId, "newuser", first_name)
                     # send message to admin to inform new user
                     text = self.config.TITULO_APP +\
                         "New user in Bot: \n\n" + \
