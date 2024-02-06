@@ -66,3 +66,18 @@ class Context():
         for row in self.result:
             title_context = row[0]
             return title_context
+
+    def GetContextContext(self):
+        """
+        Method for get the context of the chatbot.
+
+        Returns:
+            str: context of the chatbot
+        """
+        self.cursor = self.db.cursor()
+        self.sql = 'SELECT context FROM context where id = 1'
+        self.cursor.execute(self.sql)
+        self.result = self.cursor.fetchall()
+        for row in self.result:
+            context = row[0]
+            return context
