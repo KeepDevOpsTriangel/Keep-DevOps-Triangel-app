@@ -37,7 +37,6 @@ class Service():
         self.token = self.config.TOKEN
         self.chat_id_support = self.config.CHAT_ID_SOPORTE
         self.email_support = self.config.EMAIL_SOPORTE
-        self.title_app = self.config.TITULO_APP
         self.meth = Api()
         self.user = User()
         self.state = StateApp()
@@ -45,7 +44,6 @@ class Service():
         self.options = Options()
         self.mongodb = MongoDB()
         self.context = Context()
-        self.config.TITULO_APP = self.context.GetTitleContext() + "\n\n"
         self.api = Api()
 
         json_file = 'data.json'  # File json for save data of message
@@ -99,7 +97,7 @@ class Service():
                     self.resp.SendResponse(
                         chatId, "hola", first_name)
                     # send message to admin to inform new user
-                    text = self.title_app +\
+                    text = self.config.TITULO_APP +\
                         "New user in Bot: \n\n" + \
                         first_name + " - " + username + " ("+chatId+")"
                     self.meth.SendMessage(self.chat_id_support, text)
@@ -110,7 +108,7 @@ class Service():
                     # the service is out of service
                     if (actual_state == 0 and chatId != self.chat_id_support):
                         note = self.state.GetNoteState()
-                        text = self.title_app+"Service out of service: \n\n" + \
+                        text = self.config.TITULO_APP+"Service out of service: \n\n" + \
                             note + "\n\nSorry for the inconvenience"
                         self.meth.SendMessage(chatId, text)
                     else:
@@ -127,7 +125,7 @@ class Service():
                             if text == '/REQUEST_ACCESS' \
                                     and chatId != self.chat_id_support:
                                 if self.user.CheckRequestUser(chatId) == 0:
-                                    text = self.title_app +\
+                                    text = self.config.TITULO_APP +\
                                         "Request access from user: \n\n" + \
                                         first_name + " - " + username +\
                                         " - ("+chatId+")"
@@ -135,21 +133,21 @@ class Service():
                                     self.user.RequestUser(chatId)
                                     self.meth.SendMessage(
                                         self.chat_id_support, text)
-                                    text = self.title_app + \
+                                    text = self.config.TITULO_APP + \
                                         "Your request has been sent to support, wait for a response.\n\n"
                                     self.meth.SendMessage(chatId, text)
                                 else:
-                                    text = self.title_app + \
+                                    text = self.config.TITULO_APP + \
                                         "Your request is pending, wait for a response.\n\n"
                                     self.meth.SendMessage(chatId, text)
-                                    text = self.title_app\
+                                    text = self.config.TITULO_APP\
                                         + "Remember that you have pending request.\n\n" +\
                                         first_name+" - " + username + \
                                         " - ("+chatId+")"
                                     self.meth.SendMessage(
                                         self.chat_id_support, text)
                             else:
-                                text = self.title_app +\
+                                text = self.config.TITULO_APP +\
                                     "Sorry user "+first_name + \
                                     ", but you are not user authorized.\nRequest your access if you think it is necessary\n\n/REQUEST_ACCESS"
                                 self.meth.SendMessage(chatId, text)
