@@ -14,7 +14,7 @@ spec:
   source:
     path: ./helm/triangle-app # Path to the application manifests in the Git repository
     repoURL: https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app # Git repository URL
-    targetRevision: dev # Git branch to deploy from the repository (main by default)
+    targetRevision: completed # Git branch to deploy from the repository (main by default)
   syncPolicy: # Sync policy for the application
     automated:
       prune: false
