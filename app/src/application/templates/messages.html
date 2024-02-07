@@ -1,6 +1,6 @@
 {% extends "home.html" %}
 {% block content %}
-<h2>Inbox Messages</h2>
+<h2>Messages Store</h2>
 <table border="1">
   <thead>
     <tr>
@@ -16,7 +16,11 @@
     <tr>
       <td>{{ message.message.date }}</td>
       <td>{{ message.message.chat.first_name }}</td>
+      {% if message.message.chat.username == 'ChatBot' %}
+      <td style="color:red;">{{ message.message.chat.username }}</td>
+      {% else %}
       <td>{{ message.message.chat.username }}</td>
+      {% endif %}
       <td>{{ message.message.text }}</td>
     </tr>
     {% endfor %}

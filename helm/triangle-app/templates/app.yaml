@@ -21,6 +21,7 @@ spec:
       containers:
       - name: triangle-app-container
         image: {{ .Values.image.repository.app }}:{{ .Values.image.tag.app }}
+        imagePullPolicy: Always
         ports:
           - name: {{ .Values.deployment.app.ports.name }}
             containerPort: {{ .Values.deployment.app.ports.containerPort }}
@@ -122,5 +123,10 @@ spec:
               configMapKeyRef:
                 name: {{ include "triangle-app.fullname" . }}-configmap
                 key: MONGO_COLLECTION
+          - name: OPENAI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: secret-token
+                key: OPENAI_API_KEY
           
             

@@ -5,6 +5,11 @@ from application.state_app import StateApp  # Import class StateApp
 from application.api import Api  # Import class Api
 from application.config_app import ConfigApp  # Import class configApp
 from application.options import Options  # Import class Options
+from application.context import Context  # Import class Context
+from application.chatbot import ChatBot  # Import class ChatBot
+from application.mongodb import MongoDB  # Import class MongoDB
+import time  # Import time for use time
+import datetime  # Import datetime for use datetime
 
 
 class RespText():
@@ -22,6 +27,37 @@ class RespText():
         self.options = Options()
         self.state = StateApp()
         self.user = User()
+        self.context = Context()
+        self.chatbot = ChatBot()
+        self.mongodb = MongoDB()
+
+    def SaveMessage(self, text):
+        """
+        save message of chatbot in MongoDB
+
+        args:
+        ----------
+        self : object
+            Object of class
+        chatId : str
+            Id of chat user
+        text : str
+            Text of message
+        """
+        time_unix = int(time.time())
+        time_text = datetime.datetime.fromtimestamp(time_unix)
+        time_text = time_text.strftime('%d-%m-%Y %H:%M:%S')
+        message = {
+            "message": {
+                "date": time_text,
+                "text": text,
+                "chat": {
+                    "first_name": self.config.TITULO_APP,
+                    "username": "ChatBot",
+                }
+            }
+        }
+        self.mongodb.InsertMessage(message)
 
     def SendResponse(self, chatId, text, first_name):
         """
@@ -51,64 +87,39 @@ class RespText():
         """
         options = self.options.GetOptions()
         if text == '/OPTIONS' or text == '/options':
-            result = self.config.TITULO_APP + \
-                "Your response is "+text
+            result = self.config.TITULO_APP + first_name + \
+                ", puedes seleccionar una de mis opciones\n"
             self.api.SendMessage(chatId, result)
-            return self.api.SendKeyboard(chatId, self.options.GetOptions())
-        elif text == 'ACTIVATE_SERVICE' or text == 'activate_service':
-            if chatId == self.config.CHAT_ID_SOPORTE:
-                self.state.ActivateState()
-                result = self.config.TITULO_APP + \
-                    "OK, SERVICE ACTIVATE"
-                self.api.SendMessage(chatId, result)
-        elif text == 'DEACTIVATE_SERVICE' or text == 'deactivate_service':
-            if chatId == self.config.CHAT_ID_SOPORTE:
-                self.state.DeactivateState()
-                result = self.config.TITULO_APP + \
-                    "OK, SERVICE DEACTIVATE"
-                self.api.SendMessage(chatId, result)
-        elif text == 'LIST_USERS':
-            if chatId == self.config.CHAT_ID_SOPORTE:
-                result = self.config.TITULO_APP + \
-                    "LIST USERS: \n\n" \
-                    + self.user.ListUsers()
-                self.api.SendMessage(
-                    self.config.CHAT_ID_SOPORTE, result)
-        elif text == 'LIST_USERS_PENDING':
-            if chatId == self.config.CHAT_ID_SOPORTE:
-                result = self.config.TITULO_APP + \
-                    "LIST USERS PENDING: \n\n" + \
-                    self.user.ListUsersPending()
-                self.api.SendMessage(
-                    self.config.CHAT_ID_SOPORTE, result)
-        elif text == 'LIST_USERS_AUTHORIZED':
-            if chatId == self.config.CHAT_ID_SOPORTE:
-                result = self.config.TITULO_APP + \
-                    "LIST USERS AUTHORIZED: \n\n" + \
-                    self.user.ListAuthorizedUsers()
-                self.api.SendMessage(
-                    self.config.CHAT_ID_SOPORTE, result)
+            self.api.SendKeyboard(chatId, self.options.SendOptions())
+        elif text == 'newuser':
+            result = self.config.TITULO_APP + "Hola " + first_name + \
+                ", Bienvenido al asistente virtual, ¿En qué puedo ayudarte? \n\nTambién puedes seleccionar una de mis opciones\n"
+            self.api.SendMessage(chatId, result)
+            self.api.SendMessage(chatId, '/OPTIONS')
+            self.api.SendKeyboard(chatId, self.options.SendOptions())
         elif text == options[0][0]:
             result = self.config.TITULO_APP + options[0][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
+            self.SaveMessage(result)
         elif text == options[1][0]:
             result = self.config.TITULO_APP + options[1][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
+            self.SaveMessage(result)
         elif text == options[2][0]:
             result = self.config.TITULO_APP + options[2][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
+            self.SaveMessage(result)
         elif text == options[3][0]:
             result = self.config.TITULO_APP + options[3][1] + "\n"
             self.api.SendMessage(
                 chatId, result)
+            self.SaveMessage(result)
         else:
-            result = self.config.TITULO_APP + \
-                "Sorry "+first_name + \
-                ", I don't understand your message: ("+text+") \
-                \n\nTry with /OPTIONS"
+            self.api.SendMessage(
+                chatId, self.config.TITULO_APP +
+                "Un momento, estoy pensando...")
+            result = self.chatbot.ChatBotResponse(text)
             self.api.SendMessage(chatId, result)
-            keyboard = self.options.SendOptions()
-            return self.api.SendKeyboard(chatId, keyboard)

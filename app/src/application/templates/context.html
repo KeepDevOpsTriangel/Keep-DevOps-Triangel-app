@@ -1,0 +1,27 @@
+{% extends "home.html" %}
+{% block content %}
+<h2>ChatBot Config</h2>
+{% if mycontext %}
+<table>
+  <tr>
+    <th>Description</th>
+  </tr>
+  {% for element in mycontext %}
+  <tr>
+    <td>{{ element[0] }}</td>
+  </tr>
+  {% endfor %}
+  {% if message %}
+  <div style="color: gold;">{{ message }}</div>
+  {% endif %}
+
+</table>
+{% endif %}
+<form action="{{ url_for('SetChatBot_') }}" method="post">
+  <div class="inputs">
+    <label for="context">ChatBot Description</label>
+    <textarea id="context" name="context" rows="4" required></textarea>
+  </div>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
