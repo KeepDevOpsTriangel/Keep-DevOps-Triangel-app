@@ -1,6 +1,7 @@
 """ Module for manage the service of the bot """
 
 # Imports class necessary for the module
+import datetime
 from application.resp import RespText
 from application.api import Api
 from application.config_app import ConfigApp
@@ -65,7 +66,7 @@ class Service():
         with open(json_file) as file:
             self.data = json.load(file)
         # insert data in database MongoDB
-        self.mongodb.InsertMessage(data)
+        self.mongodb.InsertMessageAll(data)
         # if data is not empty
         if self.data != []:
             # for each data in file json
@@ -80,6 +81,21 @@ class Service():
                     # save message in database MySQL
                     # self.user.SavedMessageUser(
                     #     chatId, first_name, text, username)
+                    time_unix = fact['message']['date']
+                    time_text = datetime.datetime.fromtimestamp(time_unix)
+                    time_text = time_text.strftime('%d-%m-%Y %H:%M:%S')
+                    message = {
+                        "message": {
+                            "date": time_text,
+                            "text": text,
+                            "chat": {
+                                "first_name": first_name,
+                                "username": username,
+                                "id": chatId,
+                            }
+                        }
+                    }
+                    self.mongodb.InsertMessage(message)
                 except Exception:
                     print("Error: "+Exception)
                 # send response to user

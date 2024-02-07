@@ -26,6 +26,20 @@ class MongoDB():
         message : dict
             Dictionary with the data of the message of the user
         """
+        collection = self.config.MONGO_COLLECTION
+        self.collection = self.database[collection]
+        self.collection.insert_one(message)
+
+    def InsertMessageAll(self, message):
+        """
+        Insert message in MongoDB
+
+        args:
+        message : dict
+            Dictionary with the data of the message of the user
+        """
+        newcollection = "inbox_messages"
+        self.collection = self.database[newcollection]
         self.collection.insert_one(message)
 
     def GetMessages(self):
