@@ -45,9 +45,10 @@ class Context():
             context (str): context of the chatbot
         """
         self.cursor = self.db.cursor()
-        self.sql = f'UPDATE context SET \
-            context = "{context}" WHERE id = 1'
-        self.cursor.execute(self.sql)
+        self.sql = "UPDATE context SET \
+            context = %s WHERE id = 1"
+        result = (context)
+        self.cursor.execute(self.sql, result)
         self.db.commit()
 
     def GetContextContext(self):
