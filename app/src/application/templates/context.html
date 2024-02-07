@@ -20,7 +20,7 @@
 <form action="{{ url_for('SetChatBot_') }}" method="post">
   <div class="inputs">
     <label for="context">ChatBot Description</label>
-    <input type="text" name="context" required />
+    <textarea id="context" name="context" rows="4" required></textarea>
   </div>
   <button type="submit">Save</button>
 </form>

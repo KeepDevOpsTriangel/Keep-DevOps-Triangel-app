@@ -60,6 +60,20 @@ select {
     margin: 5px;
 }
 
+textarea {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    width: 98%;
+    box-sizing: border-box;
+    border: 1px solid blue;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    font-family: Kanit-Regular;
+    margin: 5px;
+}
+
 input {
     padding: 10px;
     background-color: black;
