@@ -71,7 +71,7 @@ class Service():
             # for each data in file json
             for fact in self.data:
                 try:
-                    # Obtengo los parametros del mensaje
+                    # parameters of message
                     chatId = str(fact['message']['chat']['id'])
                     first_name = str(fact['message']['chat']['first_name'])
                     username = str(fact['message']['chat']['username'])
