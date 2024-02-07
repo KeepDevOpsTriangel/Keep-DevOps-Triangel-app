@@ -110,3 +110,16 @@ data:
       `message` text COLLATE utf8mb3_spanish_ci DEFAULT NULL,
       PRIMARY KEY (`id`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb3 COLLATE = utf8mb3_spanish_ci;
+    CREATE TABLE IF NOT EXISTS `context` (
+      `id` int NOT NULL AUTO_INCREMENT,
+      `updated` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+      `context` text COLLATE utf8mb3_spanish_ci,
+      PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb3 COLLATE = utf8mb3_spanish_ci;
+    INSERT INTO `context` (`id`, `updated`, `context`)
+    VALUES (
+      1,
+      '2024-01-18 12:23:23',
+      'Eres un asistente virtual sobre servicios IT de informática llamado TriangleApp que responderá a preguntas que estén solo y exlusivamente relacionadas con servicios IT de informática.Las respuestas que da son lo más cortas,
+      precisas y resumidas posible.'
+    );
