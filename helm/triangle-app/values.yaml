@@ -16,8 +16,8 @@ secret:
   WEB_PASSWORD: dHJpYW5nbGVhcHA=
 
 configmap:
-  URL_WEBHOOK: "https://bot.rafaeltorices.com"
-  TITULO_APP: TRIANGLE_APP
+  URL_WEBHOOK: "https://botdemo.rafaeltorices.com"
+  TITULO_APP: TRIANGLE_APP-DEMO
   TELEFONO_SOPORTE: 123456789
   EMAIL_SOPORTE: "soporte@triangle-app.example"
   MYSQL_PORT: 3306
@@ -73,12 +73,12 @@ deployment:
 
 image:
   repository:
-    app: kctriangle/triangle-bot
+    app: kctriangle/triangle-bot-demo
     mysql: mysql
     redis: redis
     mongo: bitnami/mongodb
   tag:
-    app: latest
+    app: dev
     mysql: latest
     redis: latest
     mongo: 4.4.13-debian-10-r30
@@ -125,7 +125,7 @@ ingress:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/issuer: "letsencrypt-prod"
   hosts:
-    host: bot.rafaeltorices.com
+    host: botdemo.rafaeltorices.com
     paths:
       path: /
   ports:

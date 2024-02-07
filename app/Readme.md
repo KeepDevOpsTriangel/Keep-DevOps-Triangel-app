@@ -1,8 +1,8 @@
-# Python Flask App with MySQL - Telegram Bot
+# Python Flask App with MySQL, REDIS and MongoDB - Telegram Bot with OpenAI
 
 ## Introduction
 
-App to create a Telegram Bot using official Telegram API ([python-telegram-bot](https://core.telegram.org/bots/api)). The app is developed using Python for the Bot service and communication with API Telegram, and Python Flask framework for the interface web. The database used for options and users is MySQL. The app use Redis database to login in the web interface and to save the messages use MongoDB.
+App to create a Telegram Bot using official Telegram API ([python-telegram-bot](https://core.telegram.org/bots/api)). The app is developed using Python for the Bot service and communication with API Telegram, and Python Flask framework for the interface web. The database used for options and users is MySQL. The app use Redis database to login in the web interface and to save the messages use MongoDB. The Bot is a ChatBot that simulates a conversation with the user about context defined by the admin user trough the web admin interface. Depending on the context, the Bot can respond to the user with messages about defined context.
 
 ## Description
 
@@ -23,6 +23,9 @@ The app create a Telegram Bot that can be used to exchange information and messa
 
 - SSL certificate for the **URL WEBHOOK** of the Bot Telegram where our app is deployed.
     > This requirement is demanded by Telegram API to use the webhook that receive the requests from the Bot Telegram. For more information, see [Telegram](https://core.telegram.org/bots/api#setwebhook).
+
+- OpenAI account and API key.
+    - (https://platform.openai.com/)
 
 ## Requirements technologies
 
@@ -54,7 +57,9 @@ The app create a Telegram Bot that can be used to exchange information and messa
     - **templates**: templates of the application web.
     - **api.py**: file with the methods for use the API Telegram.
     - **auth.py**: file with the methods for use the authentication of the web interface.
+    - **chatbot.py**: file with the methods for use the ChatBot of the OpenAI API.
     - **config_app.py**: variables of configuration of the Bot.
+    - **context.py**: file with the methods for use the context of the Bot.
     - **mongodb.py**: file with the methods and connection to the MongoDB database.
     - **options.py**: functions of the options of the Bot.
     - **resp.py**: functions of the responses of the Bot.
@@ -178,7 +183,11 @@ http://localhost:5000
 >   - **MONGO_PORT** - **(REQUIRED)**
 >   - **MONGO_DATABASE** - **(REQUIRED)**
 >   - **MONGO_COLLECTION** - **(REQUIRED)**
+> ------
 
+> ### - Variables environment of the OpenAI API:
+>   - **OPENAI_API_KEY** - **(REQUIRED)**
+> ------
 
 ### Once configured the environment variables, follow the next steps to deploy the app in local with Docker-compose:
 
@@ -290,3 +299,7 @@ The admin user (defined in the environment variable **CHAT_ID_SOPORTE** and defi
 - https://www.docker.com/get-started/
 - https://www.python.org/
 - https://www.mysql.com/
+- https://redis.io/
+- https://www.mongodb.com/
+- https://platform.openai.com/
+

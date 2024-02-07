@@ -10,6 +10,7 @@ from application.api import Api
 from application.service import Service
 from application.auth import Authenticator
 from application.mongodb import MongoDB
+from application.context import Context
 
 
 class AppWeb():
@@ -29,6 +30,7 @@ class AppWeb():
         self.authenticator = Authenticator()
         self.title_web = self.config.TITULO_APP  # Define title of web app
         self.mongodb = MongoDB()
+        self.context = Context()
 
     def Index(self):
         """
@@ -259,13 +261,13 @@ class AppWeb():
                     message = "User " + first_name + \
                         " deactivated correctly and informed by Telegram."
                     self.api.SendMessage(
-                        chatId, "Hello "+first_name+", your user has been deactivated.\nYou can't use the Bot.")
+                        chatId, self.config.TITULO_APP + "Hello "+first_name+", your user has been deactivated.\nYou can't use the Bot.")
                 else:
                     self.user.ActivateUserWeb(id)
                     message = "User " + first_name + \
                         " activated correctly and informed by Telegram."
                     self.api.SendMessage(
-                        chatId, "Hello "+first_name+", your user has been activated.\nYou can use the Bot.")
+                        chatId, self.config.TITULO_APP + "Hello "+first_name+", your user has been activated.\nYou can use the Bot.")
                 users = self.user.ListUsersWeb()
                 return render_template('users.html', users=users,
                                        message=message, title=self.title_web,
@@ -301,10 +303,10 @@ class AppWeb():
                 if result == 0:
                     self.state.ActivateState()
                     result = self.state.CheckStateWeb()
-                    for row in self.user.ChatIdUsers():
-                        chatId = row[0]
-                        self.api.SendMessage(
-                            chatId, "The service has been activated. \n\nYou can use the Bot.")
+                    # for row in self.user.ChatIdUsers():
+                    #     chatId = row[0]
+                    #     self.api.SendMessage(
+                    #         chatId, "The service has been activated. \n\nYou can use the Bot.")
                     return render_template('service.html', result=result)
                 else:
                     new_note = request.form['note']
@@ -312,11 +314,11 @@ class AppWeb():
                     note = self.state.GetNoteState()
                     self.state.DeactivateState()
                     result = self.state.CheckStateWeb()
-                    for row in self.user.ChatIdUsers():
-                        chatId = row[0]
-                        self.api.SendMessage(
-                            chatId, "Service temporarily unavailable: \n\n" + note +
-                                    "\n\nSorry for the inconvenience.")
+                    # for row in self.user.ChatIdUsers():
+                    #     chatId = row[0]
+                    #     self.api.SendMessage(
+                    #         chatId, "Service temporarily unavailable: \n\n" + note +
+                    #                 "\n\nSorry for the inconvenience.")
                     return render_template('service.html',
                                            result=result, note=note)
         else:
@@ -426,3 +428,54 @@ class AppWeb():
         """
         session.pop('username', None)
         return render_template('login.html', title=self.title_web)
+
+    def ChatBot(self):
+        """
+        config chatbot in web app
+
+        args:
+        ----------
+        self : object
+            Object of class
+
+        return:
+        ----------
+        render_template : object
+            Object of class render_template
+            render template context.html
+        """
+        if 'username' in session:
+            if request.method == 'GET':
+                mycontext = self.context.GetContext()
+                return render_template('context.html', mycontext=mycontext,
+                                       title=self.title_web,
+                                       myuser=session['username'])
+        else:
+            return render_template('login.html', title=self.title_web)
+
+    def SetChatBot(self):
+        """
+        set context of chatbot in web app
+
+        args:
+        ----------
+        self : object
+            Object of class
+
+        return:
+        ----------
+        render_template : object
+            Object of class render_template
+            render template context.html
+        """
+        if 'username' in session:
+            if request.method == 'POST':
+                context = request.form['context']
+                self.context.SetContext(context)
+                mycontext = self.context.GetContext()
+                return render_template('context.html', mycontext=mycontext,
+                                       message="Context set correctly.",
+                                       title=self.title_web,
+                                       myuser=session['username'])
+        else:
+            return render_template('login.html', title=self.title_web)

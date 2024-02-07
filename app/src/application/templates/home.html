@@ -25,6 +25,7 @@
         <li><a href="{{ url_for('Index_') }}">Home</a></li>
         <li><a href="{{ url_for('GetWebHookInfo_') }}">WebHook</a></li>
         <li><a href="{{ url_for('ListUsersWebApp_') }}">Users</a></li>
+        <li><a href="{{ url_for('ChatBot_')}}">ChatBot</li>
         <li><a href="{{ url_for('ListOptionsWebApp_') }}">Options</a></li>
         <li><a href="{{ url_for('ServiceStateWebApp_') }}">Service</a></li>
         <li><a href="{{ url_for('SendMessagesWebApp_') }}">Send Messages</a></li>
@@ -43,6 +44,9 @@
     {% if resp %}
     <div style="color: gold;">{{ resp }}</div>
     {% endif %}
+  </div>
+  <div>
+    DEMO TELEGRAM BOT
   </div>
 </body>
 

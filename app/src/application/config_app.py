@@ -69,3 +69,4 @@ class ConfigApp():
     MONGO_PORT = os.getenv('MONGO_PORT', 27017)
     MONGO_DATABASE = os.getenv('MONGO_DATABASE', 'databasemongo')
     MONGO_COLLECTION = os.getenv('MONGO_COLLECTION', 'collectionmongo')
+    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
