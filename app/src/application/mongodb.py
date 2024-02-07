@@ -51,6 +51,7 @@ class MongoDB():
             List with all messages in MongoDB
         """
         messages = []
-        for message in self.collection.find():
+        order_messages = self.collection.find().sort({"_id": -1}).limit(100)
+        for message in order_messages:
             messages.append(message)
         return messages
