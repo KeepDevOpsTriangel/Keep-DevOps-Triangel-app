@@ -15,7 +15,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 
     ![Alt text](/doc_images/triangle-app-app.png)
 
-- [Despliegue de la aplicación en un entorno de desarrollo](app/Readme.md)
+- [Despliegue de la aplicación en un entorno de desarrollo](/gke/Readme.md)
 - Despliegue automatizado de un cluster de Kubernetes en un entorno de producción
 - CI/CD, integración continua y despliegue continuo
 - Monitorización de la aplicación.
