@@ -1,0 +1,48 @@
+{% extends "home.html" %}
+{% block content %}
+<h2>WebHook Information</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>OK?</th>
+            <th>URL</th>
+            <th>IP_address</th>
+            <th>Messages Pending</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if data %}
+        <tr>
+            <td>
+                {{ data["ok"] }}
+            </td>
+            <td>
+                {{ data["result"]["url"] }}
+            </td>
+            <td>
+                {{ data["result"]["ip_address"] }}
+            </td>
+            <td>
+                {{ data["result"]["pending_update_count"] }}
+            </td>
+            <td>
+                <form action="{{ url_for('DeleteWebHook_') }}" method="get">
+                    <button type="submit">Delete WebHook</button>
+                </form>
+            </td>
+            <td>
+                <form action="{{ url_for('SetWebHook_') }}" method="post">
+                    <button type="submit">Set WebHook</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+    {% else %}
+    {% endif %}
+    {% if error %}
+    <div style="color: gold;">{{ error }}</div>
+    {% endif %}
+</table>
+{% endblock %}

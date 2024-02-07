@@ -1,0 +1,32 @@
+{% extends "home.html" %}
+{% block content %}
+<h2>Inbox Messages</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>DATE/TIME</th>
+      <th>FIRST_NAME</th>
+      <th>MESSAGE</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if messages %}
+    {% for message in messages %}
+    <tr>
+      <td>
+        <p>{{ message[0] }}</p>
+      </td>
+      <td>
+        <p>{{ message[1] }}</p>
+      </td>
+      <td>
+        <p>{{ message[3] }}</p>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% else %}
+  <div>Don't have messages!!</div>
+  {% endif %}
+</table>
+{% endblock %}

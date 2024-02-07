@@ -1,0 +1,24 @@
+version: "3"
+services:
+  app-mysql:
+    image: mysql:latest
+    container_name: app-bot-mysql
+    env_file:
+      - ./.env
+    volumes:
+      - ./config/mysql:/docker-entrypoint-initdb.d
+      - dbtelegram:/var/lib/mysql
+  app-telegram:
+    depends_on:
+      - app-mysql
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-bot-telegram
+    env_file:
+      - ./.env
+    ports:
+      - "5000:5000"
+
+volumes:
+  dbtelegram:
