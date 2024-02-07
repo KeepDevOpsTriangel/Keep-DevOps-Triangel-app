@@ -54,6 +54,7 @@ metadata:
 type: Opaque
 stringData:
     TOKEN: xxxxxxxxxxx
+    OPENAI_API_KEY: xxxxxxxxxxx
 
 kubeseal --controller-name=sealed-secrets-controller --controller-namespace=kube-system --format yaml < token.yaml > secret-token.yaml
 
