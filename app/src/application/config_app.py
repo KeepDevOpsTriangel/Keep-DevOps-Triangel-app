@@ -55,7 +55,7 @@ class ConfigApp():
     TELEFONO_SOPORTE = os.getenv(
         'TELEFONO_SOPORTE', '900000000') + '\n\n'
     CHAT_ID_SOPORTE = os.getenv(
-        'CHAT_ID_SOPORTE', '000000') + '\n\n'
+        'CHAT_ID_SOPORTE', '000000')
     EMAIL_SOPORTE = os.getenv('EMAIL_SOPORTE', 'MyEMAIL') + '\n\n'
     MYSQL_HOST = os.getenv('MYSQL_HOST', 'localhost')
     MYSQL_USER = os.getenv('MYSQL_USER', 'usermysql')

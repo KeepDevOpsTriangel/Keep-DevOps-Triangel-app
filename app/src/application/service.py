@@ -90,7 +90,7 @@ class Service():
                 if actual_user == 0:
                     self.user.SavedUser(chatId, first_name, username)
                     text = self.title_app+"Hello "+first_name + \
-                        " !!,\nWelcome to the system automated.\n\nHere you have our /OPTIONS"+self.email_support
+                        " !!,\nWelcome to the system automated.\n\nHere you have our /OPTIONS"
                     self.meth.SendMessage(chatId, text)
                 else:
                     # if the service is out of service and
@@ -100,7 +100,7 @@ class Service():
                     if (actual_state == 0 and chatId != self.chat_id_support):
                         note = self.state.GetNoteState()
                         text = self.title_app+"Service out of service: \n\n" + \
-                            note + "\n\nSorry for the inconvenience"+self.email_support
+                            note + "\n\nSorry for the inconvenience"
                         self.meth.SendMessage(chatId, text)
                     else:
                         # check if the user is authorized or is admin
@@ -119,28 +119,27 @@ class Service():
                                     text = self.title_app +\
                                         "Request access from user: \n\n" + \
                                         first_name + \
-                                        " - ("+chatId+")" + self.email_support
+                                        " - ("+chatId+")"
                                     # update user's status to pending
                                     self.user.RequestUser(chatId)
                                     self.meth.SendMessage(
                                         self.chat_id_support, text)
                                     text = self.title_app + \
-                                        "Your request has been sent to support, wait for a response.\n\n"+self.email_support
+                                        "Your request has been sent to support, wait for a response.\n\n"
                                     self.meth.SendMessage(chatId, text)
                                 else:
                                     text = self.title_app + \
-                                        "Your request is pending, wait for a response.\n\n"+self.email_support
+                                        "Your request is pending, wait for a response.\n\n"
                                     self.meth.SendMessage(chatId, text)
                                     text = self.title_app\
                                         + "Remember that you can only have one pending request.\n\n" +\
-                                        first_name+" - ("+chatId+")" + \
-                                        self.email_support
+                                        first_name+" - ("+chatId+")"
                                     self.meth.SendMessage(
                                         self.chat_id_support, text)
                             else:
                                 text = self.title_app +\
                                     "Sorry user "+first_name + \
-                                    ", but you are not user authorized.\nRequest your access if you think it is necessary\n\n/REQUEST_ACCESS" + self.email_support
+                                    ", but you are not user authorized.\nRequest your access if you think it is necessary\n\n/REQUEST_ACCESS"
                                 self.meth.SendMessage(chatId, text)
                 # empty file json for accept new data
                 with open(json_file, 'w') as file:
