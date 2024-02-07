@@ -7,23 +7,23 @@
 */
 
 module "eks" {
-  source  = "terraform-aws-modules/eks/aws"  # Specifies the source module for creating the EKS cluster
-  version = "~> 19.17.2"  # Specifies the version of the EKS module to use
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 19.17.2"
 
-  cluster_name    = "${var.env_name}-cluster"  # Specifies the name of the EKS cluster
-  cluster_version = var.cluster_version  # Specifies the version of the EKS cluster
+  cluster_name    = "${var.env_name}-cluster"
+  cluster_version = var.cluster_version
 
-  cluster_endpoint_public_access = true  # Enables public access to the EKS cluster endpoint
-  enable_irsa                    = true  # Enables IAM Roles for Service Accounts (IRSA)
+  cluster_endpoint_public_access = true
+  enable_irsa                    = true
 
-  cluster_addons = var.cluster_addons  # Specifies any additional cluster addons to deploy
+  cluster_addons = var.cluster_addons
 
-  vpc_id     = module.vpc.vpc_id  # Specifies the ID of the VPC where the EKS cluster will be created
-  subnet_ids = concat(sort(module.vpc.public_subnets), sort(module.vpc.private_subnets))  # Specifies the IDs of the subnets where the EKS cluster will be created
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = concat(sort(module.vpc.public_subnets), sort(module.vpc.private_subnets))
 
   eks_managed_node_group_defaults = {
-    instance_types = var.default_instance_types  # Specifies the default instance types for the managed node groups
+    instance_types = var.default_instance_types
   }
 
-  eks_managed_node_groups = var.eks_managed_node_groups  # Specifies the configuration for the managed node groups
+  eks_managed_node_groups = var.eks_managed_node_groups
 }

@@ -31,7 +31,7 @@ variable "provisioner" {
 }
 
 ######################################################################
-## Network
+## vpc
 variable "vpc_cidr" {
   type    = string
   default = "10.0.0.0/16"
@@ -132,7 +132,7 @@ variable "alb_controller_target_namespace" {
 }
 
 ######################################################################
-## ArgoCD
+## ARGO CD
 variable "argocd_deploy_name" {
   type    = string
   default = "argocd"
@@ -159,7 +159,7 @@ variable "argocd_server_insecure" {
 }
 
 ######################################################################
-## Bucket
+## BUCKET S3
 variable "s3_bucket_name" {
   type    = string
   default = "bucket-triangle-app"
@@ -173,7 +173,7 @@ variable "force_destroy" {
 }
 
 ######################################################################
-## cert manager
+## CERT MANAGER
 
 variable "email" {
   type    = string

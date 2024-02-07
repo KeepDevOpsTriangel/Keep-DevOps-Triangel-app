@@ -1,3 +1,4 @@
+# Module for creating an IAM role for the Load Balancer Controller
 module "lbc_role" {
   source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
 
@@ -15,6 +16,7 @@ module "lbc_role" {
   }
 }
 
+# Kubernetes service account for the Load Balancer Controller
 resource "kubernetes_service_account" "service-account" {
   metadata {
     name      = var.alb_controller_deploy_name
@@ -30,6 +32,7 @@ resource "kubernetes_service_account" "service-account" {
   }
 }
 
+# Helm release for the Load Balancer Controller
 resource "helm_release" "alb-controller" {
   name       = var.alb_controller_deploy_name
   repository = var.alb_controller_helm_repo_url

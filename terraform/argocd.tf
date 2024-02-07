@@ -1,3 +1,11 @@
+/*
+  This Terraform file defines the resources required for deploying ArgoCD.
+  It includes the following resources:
+  - kubernetes_namespace_v1.argocd_namespace: Creates the namespace for ArgoCD.
+  - helm_release.argocd: Deploys ArgoCD using Helm.
+  - kubernetes_ingress_v1.argocd_ingress: Configures the ingress for accessing ArgoCD.
+*/
+
 resource "kubernetes_namespace_v1" "argocd_namespace" {
   metadata {
     name = var.argocd_target_namespace
