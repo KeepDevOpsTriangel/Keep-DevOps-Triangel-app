@@ -2,57 +2,47 @@
 # It uses the terraform-aws-modules/vpc/aws module to provision the VPC resources.
 
 locals {
-  azs         = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
-  num_of_az   = length(local.azs)
-  subnet_cidr = cidrsubnets(var.vpc_cidr, var.public_subnets_cidr_root_newbits, var.private_subnets_cidr_root_newbits)
+  azs         = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]  # Defines the availability zones for the VPC subnets
+  num_of_az   = length(local.azs)  # Calculates the number of availability zones
+  subnet_cidr = cidrsubnets(var.vpc_cidr, var.public_subnets_cidr_root_newbits, var.private_subnets_cidr_root_newbits)  # Calculates the CIDR blocks for the subnets
 }
 
 locals {
-  public_subnets_list_cidr  = cidrsubnets(local.subnet_cidr[0], [for i in range(local.num_of_az) : var.public_subnets_cidr_sub_newbits]...)
-  private_subnets_list_cidr = cidrsubnets(local.subnet_cidr[1], [for i in range(local.num_of_az) : var.private_subnets_cidr_sub_newbits]...)
+  public_subnets_list_cidr  = cidrsubnets(local.subnet_cidr[0], [for i in range(local.num_of_az) : var.public_subnets_cidr_sub_newbits]...)  # Calculates the CIDR blocks for the public subnets
+  private_subnets_list_cidr = cidrsubnets(local.subnet_cidr[1], [for i in range(local.num_of_az) : var.private_subnets_cidr_sub_newbits]...)  # Calculates the CIDR blocks for the private subnets
 }
 
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source = "terraform-aws-modules/vpc/aws"  # Specifies the source module for creating the VPC
 
-  # Name of the VPC
-  name = "${var.name_prefix}-vpc"
+  name = "${var.name_prefix}-vpc"   # Name of the VPC
 
-  # CIDR block for the VPC
-  cidr = var.vpc_cidr
+  cidr = var.vpc_cidr 
 
-  # Availability Zones for the VPC subnets
-  azs             = local.azs
+  azs             = local.azs   # Availability Zones for the VPC subnets
 
-  # CIDR blocks for the public subnets
-  public_subnets  = local.public_subnets_list_cidr
 
-  # CIDR blocks for the private subnets
-  private_subnets = local.private_subnets_list_cidr
+  public_subnets  = local.public_subnets_list_cidr  # CIDR blocks for the public subnets
 
-  # Tags for the public subnets
+
+  private_subnets = local.private_subnets_list_cidr   # CIDR blocks for the private subnets
+
   public_subnet_tags = {
-    "kubernetes.io/role/elb" = 1
+    "kubernetes.io/role/elb" = 1   # Tags for the public subnets
   }
 
-  # Tags for the private subnets
   private_subnet_tags = {
-    "kubernetes.io/role/internal-elb" = 1
+    "kubernetes.io/role/internal-elb" = 1   # Tags for the private subnets
   }
 
-  # Enable NAT gateway for private subnets
-  enable_nat_gateway      = true
+  enable_nat_gateway      = true   # Enable NAT gateway for private subnets
 
-  # Use a single NAT gateway for all private subnets
-  single_nat_gateway      = true
+  single_nat_gateway      = true   # Use a single NAT gateway for all private subnets
 
-  # Enable VPN gateway
-  enable_vpn_gateway      = true
+  enable_vpn_gateway      = true   # Enable VPN gateway
 
-  # Create an Internet Gateway
-  create_igw              = true
+  create_igw              = true   # Create an Internet Gateway
 
-  # Automatically assign public IP addresses to instances launched in public subnets
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = true   # Automatically assign public IP addresses to instances launched in public subnets
 }
 
