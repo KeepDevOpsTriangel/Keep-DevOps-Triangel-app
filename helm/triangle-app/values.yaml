@@ -78,7 +78,7 @@ image:
     redis: redis
     mongo: bitnami/mongodb
   tag:
-    app: dev
+    app: latest
     mysql: latest
     redis: latest
     mongo: 4.4.13-debian-10-r30
