@@ -20,7 +20,7 @@ server:
       cert-manager.io/issuer: "letsencrypt-prod"
     enabled: true
     rules:
-      - host: argo.rafaeltorices.com
+      - host: argodemo.rafaeltorices.com
         http:
           paths:
             - path: /argocd
@@ -32,5 +32,5 @@ server:
                     number: 443
     tls:
       - hosts:
-          - argo.rafaeltorices.com
+          - argodemo.rafaeltorices.com
         secretName: argocd-secret-tls

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: triangle-app # Name of the application in ArgoCD
+  name: triangle-app-demo # Name of the application in ArgoCD
   namespace: argocd # Namespace where ArgoCD is installed
   finalizers:
     - resources-finalizer.argocd.argoproj.io # Finalizer for ArgoCD
@@ -14,8 +14,8 @@ spec:
   source:
     path: ./helm/triangle-app # Path to the application manifests in the Git repository
     repoURL: https://github.com/KeepDevOpsTriangel/Keep-DevOps-Triangel-app # Git repository URL
-    targetRevision: completed # Git branch to deploy from the repository (main by default)
+    targetRevision: dev # Git branch to deploy from the repository (main by default)
   syncPolicy: # Sync policy for the application
     automated:
-      prune: false
-      selfHeal: false
+      prune: true
+      selfHeal: true
