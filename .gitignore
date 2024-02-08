@@ -163,3 +163,5 @@ prueba*
 .vscode/
 token.yaml
 secret-token.yaml
+credentials*
+credentials*.json
