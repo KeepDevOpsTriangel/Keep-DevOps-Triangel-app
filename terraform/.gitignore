@@ -36,5 +36,6 @@ terraform.rc
 # Ignore lock hc files
 .terraform.lock.hcl
 
-# Ignore  secret token file
-secret-token.yml
+# Ignore  token
+token.yaml
+```
