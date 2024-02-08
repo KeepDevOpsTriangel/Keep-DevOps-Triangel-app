@@ -9,21 +9,20 @@ module "eks-cert-manager" {
 }
 
 # This resource defines the Issuer object for Let's Encrypt staging environment.
-resource "kubernetes_manifest" "issuer_letsencrypt_staging" {
+resource "kubernetes_manifest" "issuer_letsencrypt_prod" {
   manifest = {
     "apiVersion" = "cert-manager.io/v1"
     "kind" = "Issuer"
     "metadata" = {
-      "name" = "letsencrypt-staging"
-      "namespace" = "cert-manager"
+      "name" = "letsencrypt-prod"
     }
     "spec" = {
       "acme" = {
         "email" = "jeffnacato@gmail.com"
         "privateKeySecretRef" = {
-          "name" = "letsencrypt-staging"
+          "name" = "letsencrypt-prod"
         }
-        "server" = "https://acme-staging-v02.api.letsencrypt.org/directory"
+        "server" = "https://acme-v02.api.letsencrypt.org/directory"
         "solvers" = [
           {
             "http01" = {
@@ -36,5 +35,4 @@ resource "kubernetes_manifest" "issuer_letsencrypt_staging" {
       }
     }
   }
-  depends_on = [ module.eks-cert-manager ]
 }
