@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: secret-token
-  namespace: default
-type: Opaque
-stringData:
-  TOKEN: 6407826451:AAGet-VKdtt66jBjygyPuiOmv95oM4Kbjak
-  OPENAI_API_KEY: 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
