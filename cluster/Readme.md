@@ -1,12 +1,13 @@
 # Infrastructure as Code with Terraform
 
-Deploying a Kubernetes cluster on Google Cloud Platform (GCP) using Terraform, and deploying an application on the cluster using ArgoCD and Helm.
+Deploying a Kubernetes cluster on Google Cloud Platform (GCP) using Terraform and deploying ArgoCD with Helm release.
+
+> NOTE: The terraform state file is stored remotely in a Google Cloud Storage bucket.
 
 ## Resources created
 
 - Kubernetes cluster on GCP (GKE)
 - ArgoCD application on the cluster in the namespace argocd using Helm
-- Ingess controller on the cluster for ArgoCD
 
 ## Prerequisites
 
@@ -32,15 +33,15 @@ resource_name = "resource_name"
 project_id = "project_id"
 region = "region"
 zone = "zone"
-cluster_location     = "region"
-cluster_num_nodes    = 1
+cluster_location = "region"
+cluster_num_nodes = 1
 cluster_machine_type = "n1-standard-1"
-cluster_disk_type    = "pd-standard"
+cluster_disk_type = "pd-standard"
 cluster_disk_size_gb = 25
-chart                = ""
-repository           = ""
-chart_version        = ""
-file                = "" ("Values file for argocd")
+argocd_chart = ""
+argocd_repository = ""
+argocd_chart_version = ""
+argocd_file = "" ("Values file for argocd")
 ```
 
 ### Initialize Terraform
