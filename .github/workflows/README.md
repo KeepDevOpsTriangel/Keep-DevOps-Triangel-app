@@ -2,7 +2,7 @@
 
 Este README proporciona una visión general de los flujos de trabajo disponibles en este repositorio. Cada trabajo está diseñado para realizar una tarea específica en el proceso de desarrollo y entrega del software. Para obtener más detalles sobre cada trabajo y sus configuraciones, consulte los archivos de flujo de trabajo individuales en el directorio [.github/workflows/](.github/workflows/) del repositorio.
 
-### Pipeline test_and_docs
+## Pipeline test_and_docs
 
 Este [workflow](/.github\workflows\test_and_docs.yml) consta de 3 jobs principales, en los que su función será testear y documentar nuestra aplicación.
 
