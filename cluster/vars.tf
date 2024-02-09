@@ -33,15 +33,15 @@ variable "cluster_disk_type" {
 variable "cluster_disk_size_gb" {
   description = "disk size of the cluster"
 }
-variable "chart" {
+variable "argocd_chart" {
   type = string
 }
-variable "repository" {
+variable "argocd_repository" {
   type = string
 }
-variable "chart_version" {
+variable "argocd_chart_version" {
   type = string
 }
-variable "file" {
+variable "argocd_file" {
   type = string
 }
