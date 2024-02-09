@@ -1,6 +1,6 @@
-credentials_file     = "credentials_triangleapp_dev.json"
-resource_name        = "botdemo"
-project_id           = "botdemo-413810"
+credentials_file     = "credentials.json"
+resource_name        = "triangle-app"
+project_id           = "triangle-app-413819"
 region               = "europe-west1"
 zone                 = "europe-west1-d"
 cluster_location     = "europe-west1-d"
@@ -11,5 +11,5 @@ cluster_disk_size_gb = 25
 argocd_chart         = "argo-cd"
 argocd_repository    = "https://argoproj.github.io/argo-helm"
 argocd_chart_version = "5.27.3"
-argocd_file          = "values.yaml"
+argocd_file          = "../argocd/values.yaml"
 
