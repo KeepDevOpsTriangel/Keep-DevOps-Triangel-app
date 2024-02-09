@@ -1,7 +1,13 @@
 terraform {
   backend "gcs" {
-    bucket      = "botdemo-yndvq-tfstate"
+    bucket      = "triangle-app-j3sbk-tfstate"
     prefix      = "terraform/state"
-    credentials = "credentials_triangleapp_dev.json"
+    credentials = "credentials.json"
   }
 }
+
+# terraform {
+#   backend "local" {
+#     path = "terraform.tfstate"
+#   }
+# }

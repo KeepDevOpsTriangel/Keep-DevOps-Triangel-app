@@ -20,8 +20,7 @@ load_dotenv()  # Load variables of .env
 
 class MyApp():
     def __init__(self):
-        self.app = Flask(__name__, template_folder='application/templates',
-                         static_folder='application/static')
+        self.app = Flask(__name__, template_folder='application/templates')
         self.config = ConfigApp()
         self.user = User()
         self.options = Options()

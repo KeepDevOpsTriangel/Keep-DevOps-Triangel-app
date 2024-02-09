@@ -83,7 +83,7 @@ class AppWeb():
                                        title=self.title_web,
                                        myuser=session['username'])
             else:
-                return render_template('get_webhook.html', error=response)
+                return render_template('get_webhook.html', error=response, title=self.title_web, myuser=session['username'])
         else:
             return render_template('login.html', title=self.title_web)
 
@@ -111,7 +111,7 @@ class AppWeb():
                                        title=self.title_web,
                                        myuser=session['username'])
             else:
-                return render_template('get_webhook.html', error=response)
+                return render_template('get_webhook.html', error=response, title=self.title_web, myuser=session['username'])
         else:
             return render_template('login.html', title=self.title_web)
 
@@ -141,7 +141,7 @@ class AppWeb():
                                        myuser=session['username'])
             else:
                 return render_template('get_webhook.html',
-                                       error=response)
+                                       error=response, title=self.title_web, myuser=session['username'])
         else:
             return render_template('login.html', title=self.title_web)
 
@@ -307,7 +307,7 @@ class AppWeb():
                     #     chatId = row[0]
                     #     self.api.SendMessage(
                     #         chatId, "The service has been activated. \n\nYou can use the Bot.")
-                    return render_template('service.html', result=result)
+                    return render_template('service.html', result=result, title=self.title_web, myuser=session['username'])
                 else:
                     new_note = request.form['note']
                     self.state.UpdateNoteState(new_note)
@@ -320,7 +320,7 @@ class AppWeb():
                     #         chatId, "Service temporarily unavailable: \n\n" + note +
                     #                 "\n\nSorry for the inconvenience.")
                     return render_template('service.html',
-                                           result=result, note=note)
+                                           result=result, note=note, title=self.title_web, myuser=session['username'])
         else:
             return render_template('login.html', title=self.title_web)
 
@@ -353,7 +353,7 @@ class AppWeb():
                 users = self.user.ListUsersWeb()
                 return render_template('send_messages.html',
                                        message="Message sent correctly.",
-                                       users=users, title=self.title_web)
+                                       users=users, title=self.title_web, myuser=session['username'])
         else:
             return render_template('login.html', title=self.title_web)
 
@@ -407,7 +407,7 @@ class AppWeb():
                                        myuser=session['username'])
             else:
                 return render_template('login.html', title=self.title_web,
-                                       resp="Login failed.")
+                                       resp="Login failed")
         else:
             return render_template('home.html', title=self.title_web)
 

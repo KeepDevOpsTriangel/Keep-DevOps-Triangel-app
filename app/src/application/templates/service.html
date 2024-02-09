@@ -1,19 +1,30 @@
 {% extends "home.html" %}
 {% block content %}
-<h2>Service Status</h2>
-{% if result == 1 %}
-<div style="color:greenyellow; text-transform:uppercase;">Service active</div>
-<form action="{{ url_for('ServiceStateWebApp_') }}" method="post">
-  <div class="inputs">
-    <input type="text" name="note" placeholder="Write information message" required />
+<div class="card">
+  <div class="card-body">
+    <h2 style="color: blue;">Service Status</h2>
   </div>
-  <button type="submit">Deactivate Service</button>
-</form>
-{% else %}
-<div style="color: red; text-transform:uppercase;">Service inactive: {{ note }}</div>
-<form action="{{ url_for('ServiceStateWebApp_') }}" method="post">
-  <input type="hidden" name="note" />
-  <button type="submit">Activate Service</button>
-</form>
-{% endif %}
+</div>
+<div class="card">
+  <div class="card-body">
+    {% if result == 1 %}
+    <div class="alert alert-success" role="alert">Service active</div>
+    <form action="{{ url_for('ServiceStateWebApp_') }}" method="post">
+      <div class="mb-3">
+        <input type="text" class="form-control" name="note"
+          placeholder="Write information message to deactivate service" required />
+      </div>
+      <button type="submit" class="btn btn-danger">Deactivate Service</button>
+    </form>
+    {% else %}
+    <div class="alert alert-danger" role="alert">Service inactive: {{ note }}</div>
+    <form action="{{ url_for('ServiceStateWebApp_') }}" method="post">
+      <div class="mb-3">
+        <input type="hidden" name="note" />
+        <button type="submit" class="btn btn-success">Activate Service</button>
+      </div>
+    </form>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
