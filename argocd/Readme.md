@@ -51,3 +51,27 @@ Create a new application using the ArgoCD UI and use the manifest file located i
 ```bash
 triangle-app.yaml
 ```
+
+## Config Authentication with GitHub OAuth in ArgoCD
+
+Edit the file argocd-cm.yaml and add the following configuration:
+
+```bash
+kubectl edit configmap argocd-cm -n argocd
+
+data:
+    url: https://argocd.rafaeltorices.com/argocd
+    dex.config: |
+    connectors:
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          clientID: xxxxxxxx
+          clientSecret: xxxxxxxx
+          redirectURI: https://argocd.rafaeltorices.com/argocd/api/dex/callback
+          orgs:
+          - name: KeepDevOpsTriangel
+
+```
+
