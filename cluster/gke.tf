@@ -1,7 +1,9 @@
-resource "google_container_cluster" "this" {
-  name     = "${var.resource_name}-cluster"
-  project  = var.project_id
-  location = var.cluster_location
+data "google_client_config" "current" {}
+resource "google_container_cluster" "devcluster" {
+  name                = "${var.resource_name}-cluster"
+  project             = var.project_id
+  location            = var.cluster_location
+  deletion_protection = false
   node_pool {
     name       = "${var.resource_name}-cluster-nodes"
     node_count = var.cluster_num_nodes
