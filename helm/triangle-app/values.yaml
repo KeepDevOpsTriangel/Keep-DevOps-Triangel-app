@@ -30,7 +30,7 @@ configmap:
   MONGO_COLLECTION: triangleapp
 
 deployment:
-  replicaCount: 1
+  replicaCount: 4
   autoscaling:
     enabled: false
     minReplicas: 2
