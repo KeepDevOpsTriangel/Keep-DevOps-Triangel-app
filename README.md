@@ -40,7 +40,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
     - [ArgoCD](/argocd/Readme.md)
 
 - CI/CD
-    - GitHub Actions
+    - [GitHub Actions](.github/workflows/README.md)
 
 - Monitorización
     - Prometheus
