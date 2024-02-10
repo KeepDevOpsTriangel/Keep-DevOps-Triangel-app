@@ -19,8 +19,8 @@ Este [workflow](/.github/workflows/test_and_docs.yml) consta de 3 jobs principal
     - Para revisar los informes de seguridad del proyecto en Snyk se puede acceder en [Snyk TriangleApp](https://app.snyk.io/org/keepdevopstriangel?fromGitHubAuth=true)
 
 3. Generate-docs:
-    - Del mismo modo que su predecesor, sólo se ejecuta cuando los jobs anteriores terminen sin errores.
     - La principal función de ese trabajo es generar documentación para el proyecto y archivarla como artefacto, todo ello usando la herramienta pdoc.
+    -  Del mismo modo que su predecesor, sólo se ejecuta cuando los jobs anteriores terminen sin errores, ya que generar una documentación de un código erróneo o con vulnerabilidades destacables no tendría mucho sentido.
     - Dicha documentación es accesible a través de la interfaz de GHA, tal como se muestra en la siguiente imagen:
 
         ![Artifact_docs](/doc_images/docs-artifact.png)
@@ -28,10 +28,11 @@ Este [workflow](/.github/workflows/test_and_docs.yml) consta de 3 jobs principal
 
 ## Pipeline release
 
-Este [workflow](/.github\workflows\release.yml) consta de un único job que se encarga de construir y publicar nuestra aplicación, tanto en Github Container Registry como en Dockerhub.
+Este [workflow](/.github/workflows/release.yml) consta de un único job que se encarga de construir y publicar nuestra aplicación, tanto en Github Container Registry como en Dockerhub.
 
 - Utilizamos un sistema de versionado mediante etiquetado manual, con esto logramos tener un control más directo y mayor flexibilidad sobre los procesos del versionado para adaptar dichas versiones a las necesidades especificas del proyecto.
 - Con este sistema de etiquetado tambien nos ahorramos depender de herramientas de terceros como lo es Semantic-Release.
+- Se está valorando, en un futuro, implementar un sistema de versionado más automatizado.
 
 ### Funcionamiento versionado por etiquetas
 
@@ -53,7 +54,7 @@ Asimismo también se pueden eliminar etiquetas, por si hubiera algun error de tr
 
 Como hemos mencionado anteriormente, este pipeline sólo consta de un job:
 
-- build-publish-Docker-image:
+- Build-publish-Docker-image:
     - En el mismo job le damos permisos de lectura y escritura, esto sólo lo hará en ese job, sería semejante a crear token de Github con esos permisos.
     - Para los pasos posteriores son necesarios algunos secrets, almacenados en la interfaz de github, concretamente en el apartado secrets de Github Actions.
     [Settings >> Secrets and variables >> Actions >> Secrets]
