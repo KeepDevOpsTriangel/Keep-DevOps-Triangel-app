@@ -2,7 +2,7 @@
 ## Core
 variable "name_prefix" {
   type    = string
-  default = "eks-triangle-env"
+  default = "eks-triangle-env-1"
 }
 
 variable "aws_region" {
