@@ -30,18 +30,18 @@
         </td>
         <td>
           {% if (user[4] == 1) and (user[5] == 0) %}
-          <span class="badge text-bg-success">Active</span>
-          <input type="hidden" name="state" value="1">
-          {% else %}
-          <span class="badge text-bg-danger">Deactivate</span>
-          <input type="hidden" name="state" value="0">
-          {% endif %}
+          <p style="color: green;"><b>Active</b></span>
+            <input type="hidden" name="state" value="1">
+            {% else %}
+          <p style="color: red;"><b>Deactivate</b></span>
+            <input type="hidden" name="state" value="0">
+            {% endif %}
         </td>
         <td>
           {% if (user[4] == 1) and (user[5] == 0) %}
-          <button type="submit" class="btn btn-danger">Deactivate</button>
+          <button type="submit" class="btn btn-secondary">Deactivate</button>
           {% else %}
-          <button type="submit" class="btn btn-success">Activate</button>
+          <button type="submit" class="btn btn-primary">Activate</button>
           {% endif %}
         </td>
       </form>
@@ -49,7 +49,7 @@
     {% endfor %}
   </tbody>
   {% if message %}
-  <span class="badge text-bg-warning">{{ message }}</span>
+  <span class="badge text-bg-warning" style="padding:10px; margin:5px;">{{ message }}</span>
   {% endif %}
   {% else %}
   <span class="badge text-bg-warning">Not users !!</span>

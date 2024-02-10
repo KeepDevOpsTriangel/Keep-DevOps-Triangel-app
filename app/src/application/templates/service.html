@@ -14,14 +14,14 @@
         <input type="text" class="form-control" name="note"
           placeholder="Write information message to deactivate service" required />
       </div>
-      <button type="submit" class="btn btn-danger">Deactivate Service</button>
+      <button type="submit" class="btn btn-secondary">Deactivate Service</button>
     </form>
     {% else %}
     <div class="alert alert-danger" role="alert">Service inactive: {{ note }}</div>
     <form action="{{ url_for('ServiceStateWebApp_') }}" method="post">
       <div class="mb-3">
         <input type="hidden" name="note" />
-        <button type="submit" class="btn btn-success">Activate Service</button>
+        <button type="submit" class="btn btn-primary">Activate Service</button>
       </div>
     </form>
     {% endif %}

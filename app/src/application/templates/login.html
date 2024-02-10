@@ -16,9 +16,11 @@
         <button type="submit" class="btn btn-primary">Login</button>
       </div>
     </form>
-    {% if resp %}
-    <span class="badge text-bg-danger">{{ resp }}</span>
-    {% endif %}
   </div>
+  {% if resp %}
+  <p style="color: red;">
+    <b>{{ resp }}</b>
+  </p>
+  {% endif %}
 </div>
 {% endblock %}

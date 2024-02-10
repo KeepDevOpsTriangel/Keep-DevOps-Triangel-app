@@ -21,31 +21,31 @@
         <div class="card">
           <div class="card-body">
             <ul class="nav justify-content-center">
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-primary" href="{{ url_for('Index_') }}">Home</a>
               </li>
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-primary" href="{{ url_for('GetWebHookInfo_') }}">WebHook</a>
               </li>
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-primary" href="{{ url_for('ListUsersWebApp_') }}">Users</a>
               </li>
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-primary" href="{{ url_for('ChatBot_')}}">ChatBot</a>
               </li>
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-primary" href="{{ url_for('ListOptionsWebApp_') }}">Options</a>
               </li>
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-primary" href="{{ url_for('ServiceStateWebApp_') }}">Service</a>
               </li>
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-primary" href="{{ url_for('SendMessagesWebApp_') }}">Send Messages</a>
               </li>
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-primary" href="{{ url_for('GetMessagesWebApp_') }}">Messages</a>
               </li>
-              <li class="nav-item" style="margin:5px">
+              <li class="nav-item" style="margin:2px">
                 <a class="btn btn-secondary" href="{{ url_for('LogOut_') }}">LogOut</a>
               </li>
             </ul>
@@ -59,20 +59,20 @@
         </div>
         <div class="card">
           <div class="card-body">
-            <h3>Welcome to admin panel</h3>
+            {% if myuser %}
+            <h3>Welcome user <b>{{ myuser }}</b></h3>
+            {% endif %}
           </div>
           {% if resp %}
-          <span class="badge text-bg-success">{{ resp }}</span>
+          <span class="badge text-bg-warning" style="padding:10px; margin:5px;">{{ resp }}</span>
           {% endif %}
         </div>
         {% endblock %}
       </div>
-      <div class="card-footer text-body-secondary">
-        {% if myuser %}
-        <div style="color: gray"><b>You are user {{ myuser }}</b></div>
-        {% endif %}
-      </div>
+      <b class=" card-footer text-body-secondary">
+        <b>TriangleApp Panel Web Admin</b>{% if myuser %} <b style="color: blue"> - user {{ myuser }}</b>{% endif %}
     </div>
+  </div>
   </div>
 </body>
 
