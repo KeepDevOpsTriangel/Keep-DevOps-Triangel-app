@@ -4,11 +4,11 @@ Este README proporciona una visión general de los flujos de trabajo disponibles
 
 ## Pipeline test_and_docs
 
-Este [workflow](.github/workflows/test_and_docs.yml) consta de 3 jobs principales, en los que su función será testear y documentar nuestra aplicación.
+Este [workflow](/.github/workflows/test_and_docs.yml) consta de 3 jobs principales, en los que su función será testear y documentar nuestra aplicación.
 
 1. Testing-and-sonarcloud:
     - Primero configuramos unas variables para levantar una db mysql. Dicha db sería usada posteriormente para que el equipo de desarrollo pueda implementar más tests si fuera necesario.
-    - Se instalan todas las dependencias necesarias, ubicadas en [requirements.txt](app/requirements.txt) y se ejecuta el contenedor de MYSQL usando también un [script](/app/tools/check_mysql_ready.sh) que verifica cuando estará dispnible la base de datos.
+    - Se instalan todas las dependencias necesarias, ubicadas en [requirements.txt](/app/requirements.txt) y se ejecuta el contenedor de MYSQL usando también un [script](/app/tools/check_mysql_ready.sh) que verifica cuando estará dispnible la base de datos.
     - Se generan tests unitarios, ubicados en [test_app.py](/app/src/tests/test_app.py) y un informe de cobertura del código el cual será necesario para que SonarCloud pueda ejecutarse.
     - Se ejecuta un linting con Pylint, en este caso usamos un umbral bajo (under=1.0), por no disponer de equipo de desarrollo que pueda verificar el código completo y eliminamos el contenedor MYSQL creado anteriormente.
     - Finalizamos el primer job con una llamada a SonarCloud para que pueda analizar el código completo, su cobertura, calidad, errores, etc... Al terminar este paso se muestra un output con la URL del proyecto en Sonar --> [SonarCloud-TriangleApp](https://sonarcloud.io/project/overview?id=KeepDevOpsTriangel_Keep-DevOps-Triangel-app)
