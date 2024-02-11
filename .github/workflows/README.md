@@ -12,6 +12,7 @@ Este [workflow](/.github/workflows/test_and_docs.yml) consta de 3 jobs principal
     - Se generan tests unitarios, ubicados en [test_app.py](/app/src/tests/test_app.py) y un informe de cobertura del código el cual será necesario para que SonarCloud pueda ejecutarse.
     - Se ejecuta un linting con Pylint, en este caso usamos un umbral bajo (under=1.0), por no disponer de equipo de desarrollo que pueda verificar el código completo y eliminamos el contenedor MYSQL creado anteriormente.
     - Finalizamos el primer job con una llamada a SonarCloud para que pueda analizar el código completo, su cobertura, calidad, errores, etc... Al terminar este paso se muestra un output con la URL del proyecto en Sonar --> [SonarCloud-TriangleApp](https://sonarcloud.io/project/overview?id=KeepDevOpsTriangel_Keep-DevOps-Triangel-app)
+        - En estos momentos hemos añadido un Gate Quality personalizado en SonarCloud, debido a la gran cantidad de código y el poco coverage que nos dan los tests unitarios. El equipo de desarrollo estaría a cargo de crear o modificar los tests para así llegar a un buen índice de coverage.
 
 2. Snyk:
     - Este trabajo ejecuta un análisis de vulnerabilidades en el código utilizando Snyk. Únicamente se ejecutará si el job anterior es exitoso.
@@ -36,20 +37,34 @@ Este [workflow](/.github/workflows/release.yml) consta de un único job que se e
 
 ### Funcionamiento versionado por etiquetas
 
-Para poder versionar una nueva release es obligatorio que la etiqueta empiece por "v". De ese modo, si quisieramos lanzar una nueva versión, estando ahora en la v1.0, el tag debería ser similar a esto:
+En este repositorio usamos el criterio más estandarizado para versionar todas las releases que se van lanzando, "Semver". Para resumirlo brevemente, los dígitos de las etiquetas de cada versión se relacionan con el cambio que se ha hecho en la aplicación.
+En términos generales, un correcto versionado sería el siguiente:
+
+
+   ![versionado](/doc_images\semver.png)
+
+
+- Pequeña modificación, arreglos de bugs, etc... 
+    - Se cambiará el último dígito (PATCH o FIX).
+- Modificación moderada, se pueden incluir nuevas funcionalidades pero no incluye cambios drásticos de dependencias.
+    - Se cambiará el dígito del medio (MINOR o FEAT).
+- Modificación del código severa, cambia gran parte de dependencias y la versión de las mismas (nuevas apis, etc...).
+    - Se cambiará el primer dígito (MAJOR o BREAKING CHANGE).
+
+Para poder versionar una nueva release es obligatorio que la etiqueta empiece por "v". De ese modo, si quisieramos lanzar una nueva versión, en la que hemos arreglado algún bug, estando ahora en la v1.0.0, el tag debería ser similar a esto:
 
 ```
-git tag -a v1.1 -m "Versión 1.1, modificado script XXX" # Esto crear una nueva etiqueta.
-git push origin v1.1  # Ahora empuja la nueva etiqueta al remoto y se publica esa versión.
+git tag -a v1.0.1 -m "Versión 1.0.1, modificado script XXX" # Esto crear una nueva etiqueta.
+git push origin v1.0.1  # Ahora empuja la nueva etiqueta al remoto y se publica esa versión.
 ```
 
-Asimismo también se pueden eliminar etiquetas, por si hubiera algun error de transcripción. En el siguienete ejemplo se puede observar como eliminamos una etiqueta mal escrita, para corregirla y publicar la correcta.
+Asimismo también se pueden eliminar etiquetas, por si hubiera algun error de transcripción. En el siguiente ejemplo se puede observar como eliminamos una etiqueta mal escrita, para corregirla y publicar la correcta.
 
 ```
-    git tag -d v0.1.veta  # Eliminar etiqueta localmente
-    git push origin :refs/tags/v0.1.veta  # Eliminar etiqueta en el remoto
-    git tag -a v0.1.beta -m "Versión 0.1.beta"  # Crear nueva etiqueta localmente
-    git push origin v0.1.beta  # Empujar nueva etiqueta al remoto
+git tag -d v1.1.0.veta  # Eliminar etiqueta localmente
+git push origin :refs/tags/v1.1.0.veta  # Eliminar etiqueta en el remoto
+git tag -a v1.1.0.beta -m "Versión 1.1.0.beta"  # Crear nueva etiqueta localmente
+git push origin v1.1.0.beta  # Empujar nueva etiqueta al remoto
 ```
 
 Como hemos mencionado anteriormente, este pipeline sólo consta de un job:
