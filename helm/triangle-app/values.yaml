@@ -98,13 +98,13 @@ service:
       port: 3306
       targetPort: mysql-port
       protocol: TCP
-  mongo:
-    type: ClusterIP
-    ports:
-      name: mongo-port
-      port: 27017
-      targetPort: mongo-port
-      protocol: TCP
+  # mongo:
+  #   type: ClusterIP
+  #   ports:
+  #     name: mongo-port
+  #     port: 27017
+  #     targetPort: mongo-port
+  #     protocol: TCP
   redis:
     type: ClusterIP
     ports:
@@ -139,3 +139,21 @@ statefulset:
       memory: 256Mi
     limits:
       memory: 512Mi
+
+mongodb:
+  # -- Indicate whether MongoDB will be enabled or not
+  enabled: true
+  # -- Number of members of MongoDB replicaset
+  members: 3
+  # -- MongoDB version
+  version: "5.0.6"
+  # -- MongoDB Admin User
+  adminUser: "triangleapp"
+  # -- MongoDB user
+  user: "triangleapp"
+  # -- MongoDB password
+  password: "triangleapp"
+  # -- Metrics configuration
+  metrics:
+    # -- Indicate wheter the metrics will be configured or not
+    enabled: true
