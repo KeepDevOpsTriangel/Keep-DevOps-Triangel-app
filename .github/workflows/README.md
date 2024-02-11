@@ -41,7 +41,7 @@ En este repositorio usamos el criterio más estandarizado para versionar todas l
 En términos generales, un correcto versionado sería el siguiente:
 
 
-   ![versionado](/doc_images\semver.png)
+   ![versionado](/doc_images/semver.png)
 
 
 - Pequeña modificación, arreglos de bugs, etc... 
