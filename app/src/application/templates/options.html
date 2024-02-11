@@ -1,7 +1,11 @@
 {% extends "home.html" %}
 {% block content %}
-<h2>Options Bot Telegram</h2>
-<table border="1">
+<div class="card">
+  <div class="card-body">
+    <h2 style="color: blue;">Options Bot</h2>
+  </div>
+</div>
+<table class="border table table-bordered">
   <thead>
     <tr>
       <th>OPTION</th>
@@ -16,20 +20,21 @@
       <form action="{{ url_for('EditOptionsWebApp_') }}" method="post">
         <td>
           <input type="hidden" name="id" value="{{ option[0] }}">
-          <input type="text" name="option" value="{{ option[1] }}" required>
+          <input class="form-control" type="text" name="option" value="{{ option[1] }}" required>
         </td>
         <td>
-          <input type="text" name="text" value="{{ option[2] }}" placeholder="Write option text" required>
+          <input class="form-control" type="text" name="text" value="{{ option[2] }}" placeholder="Write option text"
+            required>
         </td>
         <td>
-          <button type="submit">Edit Option</button>
+          <button type="submit" class="btn btn-primary">Edit Option</button>
         </td>
       </form>
     </tr>
     {% endfor %}
   </tbody>
   {% if message %}
-  <div style="color: gold;">{{ message }}</div>
+  <span class="badge text-bg-warning" style="padding:10px; margin:5px;">{{ message }}</span>
   {% endif %}
   {% else %}
   <div></div>

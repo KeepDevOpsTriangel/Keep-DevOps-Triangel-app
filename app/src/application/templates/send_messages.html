@@ -1,19 +1,31 @@
 {% extends "home.html" %}
 {% block content %}
-<h2>Send Messages</h2>
-<form action="{{ url_for('SendMessagesWebApp_') }}" method="post">
-  <div class="inputs">
-    <input type="text" name="message" placeholder="Message" required>
-    <select name="chatId" required>
-      <option value="">Select User</option>
-      {% for user in users %}
-      <option value="{{ user[1] }}">{{ user[2] }}</option>
-      {% endfor %}
-    </select>
-    <button type="submit">Send</button>
+<div class="card">
+  <div class="card-body">
+    <h2 style="color: blue;">Send Messages</h2>
   </div>
-</form>
-{% if message %}
-<div style="color: gold;">{{ message }}</div>
-{% endif %}
+</div>
+<div class="card">
+  <div class="card-body">
+    <form action="{{ url_for('SendMessagesWebApp_') }}" method="post">
+      <div class="mb-3">
+        <textarea type="text" name="message" class="form-control" placeholder="Write a message" required></textarea>
+      </div>
+      <div class="mb-3">
+        <select name="chatId" required class="form-control">
+          <option value="">Select User</option>
+          {% for user in users %}
+          <option value="{{ user[1] }}">{{ user[2] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </form>
+    {% if message %}
+    <span class="badge text-bg-warning" style="padding:10px; margin:5px;">{{ message }}</span>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

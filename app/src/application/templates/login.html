@@ -1,27 +1,26 @@
 {% extends "home.html" %}
 {% block content %}
-<h2>Login</h2>
-<form action="{{ url_for('Login_') }}" method="post">
-  <table border="1">
-    <thead>
-      <tr>
-        <th>USERNAME</th>
-        <th>PASSWORD</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <input type="text" name="username" placeholder="Username">
-        </td>
-        <td>
-          <input type="password" name="password" placeholder="Password">
-        </td>
-        <td>
-          <button type="submit">Login</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  {% endblock %}
+<div class="card">
+  <div class="card-body">
+    <h2 style="color: blue;">Login</h2>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <form action="{{ url_for('Login_') }}" method="post">
+      <div class="input-group">
+        <span class="input-group-text">Username</span>
+        <input type="text" aria-label="username" name="username" class="form-control">
+        <span class="input-group-text">Password</span>
+        <input type="password" name="password" aria-label="password" class="form-control">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+  {% if resp %}
+  <p style="color: red;">
+    <b>{{ resp }}</b>
+  </p>
+  {% endif %}
+</div>
+{% endblock %}

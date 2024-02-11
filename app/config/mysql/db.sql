@@ -18,26 +18,26 @@ INSERT INTO `options` (`id`, `updated`, `opt`, `text`)
 VALUES (
     1,
     '2024-01-17 17:05:15',
-    'opcion1',
-    'Texto para opcion1'
+    '¿Qué soy?',
+    'Soy un asistente virtual basado en IA'
   ),
   (
     2,
     '2024-01-17 17:05:25',
-    'opcion2',
-    'Texto para opcion2'
+    '¿Dónde estoy?',
+    'Vivo en un cloud donde se despliegan todos mis recursos'
   ),
   (
     3,
     '2024-01-17 17:05:34',
-    'opcion3',
-    'Texto para opcion3'
+    '¿Qué hago?',
+    'Resuelvo las dudas que me preguntas basándome en mis conocimientos adquiridos'
   ),
   (
     4,
     '2024-01-17 17:05:41',
-    'opcion4',
-    'Texto para opcion4'
+    '¿Cómo funciono?',
+    'Muy simple, pregúntame y yo te respondo'
   );
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,

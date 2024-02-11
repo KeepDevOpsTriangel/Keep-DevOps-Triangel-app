@@ -1,7 +1,11 @@
 {% extends "home.html" %}
 {% block content %}
-<h2>Messages Store</h2>
-<table border="1">
+<div class="card">
+  <div class="card-body">
+    <h2 style="color: blue;">Messages Store</h2>
+  </div>
+</div>
+<table class="border table table-bordered">
   <thead>
     <tr>
       <th>DATE/TIME</th>
@@ -26,7 +30,7 @@
     {% endfor %}
   </tbody>
   {% else %}
-  <div>Don't have messages!!</div>
+  <span class="badge text-bg-warning" style="padding:10px; margin:5px;">Don't have messages!!</span>
   {% endif %}
 </table>
 {% endblock %}

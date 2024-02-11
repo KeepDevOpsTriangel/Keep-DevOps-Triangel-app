@@ -1,12 +1,13 @@
 # Infrastructure as Code with Terraform
 
-Deploying a Kubernetes cluster on Google Cloud Platform (GCP) using Terraform, and deploying an application on the cluster using ArgoCD and Helm.
+Deploying a Kubernetes cluster on Google Cloud Platform (GCP) using Terraform and deploying ArgoCD with Helm release.
+
+> NOTE: The terraform state file is stored remotely in a Google Cloud Storage bucket.
 
 ## Resources created
 
 - Kubernetes cluster on GCP (GKE)
 - ArgoCD application on the cluster in the namespace argocd using Helm
-- Ingess controller on the cluster for ArgoCD
 
 ## Prerequisites
 
@@ -18,8 +19,6 @@ Deploying a Kubernetes cluster on Google Cloud Platform (GCP) using Terraform, a
 
 ## Deployment of Kubernetes cluster on GCP using Terraform
 
-> NOTE: work directory **root**.
-
 ### Create a service account on GCP
 
 Create a service account on GCP and download the credentials file in JSON format.
@@ -29,11 +28,20 @@ Create a service account on GCP and download the credentials file in JSON format
 Create a file terraform.tfvars and add the following content:
 
 ```bash
-project_id = "project_id"
 credentials_file = "credentials_file.json"
 resource_name = "resource_name"
+project_id = "project_id"
 region = "region"
 zone = "zone"
+cluster_location = "region"
+cluster_num_nodes = 1
+cluster_machine_type = "n1-standard-1"
+cluster_disk_type = "pd-standard"
+cluster_disk_size_gb = 25
+argocd_chart = ""
+argocd_repository = ""
+argocd_chart_version = ""
+argocd_file = "" ("Values file for argocd")
 ```
 
 ### Initialize Terraform
@@ -53,8 +61,6 @@ terraform plan
 ```bash
 terraform apply
 ```
->NOTE: At the end of the deployment of resources, show the password for user **admin** of ArgoCD in screen.
-
 ### Destroy the infrastructure
 
 ```bash
@@ -72,4 +78,3 @@ terraform destroy
 - [Google Cloud SDK](https://cloud.google.com/sdk)
 - [Resource: helm_release](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release)
 - [kubectl](https://registry.terraform.io/providers/gavinbunney/kubectl/latest)
-- [terraform-iaac/nginx-controller/helm](https://registry.terraform.io/modules/terraform-iaac/nginx-controller/helm/2.3.0?utm_content=documentLink&utm_medium=Visual+Studio+Code&utm_source=terraform-ls)

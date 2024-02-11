@@ -26,13 +26,13 @@ helm install \
 ## Issuer Let's Encrypt - Staging
 
 ```bash
-kubectl apply -f issuer_letsencrypt_staging.yml
+kubectl apply -f issuer_letsencrypt_staging.yaml
 ```
 
 ## Issuer Let's Encrypt - Production
 
 ```bash
-kubectl apply -f issuer_letsencrypt_production.yml
+kubectl apply -f issuer_letsencrypt_production.yaml
 ```
 
 > **NOTE** The issuer must be installed in the same namespace as the app.

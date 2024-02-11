@@ -2,6 +2,8 @@
 .terraform*
 *.json
 credentials.json
+credentials*.json
+credentials*
 *.tfstate
 *.backup
 .tfvars
@@ -11,4 +13,3 @@ credentials.json
 .tfvars.*
 .tfvars.backup
 .tfvars.backup.*
-argocd_password.txt

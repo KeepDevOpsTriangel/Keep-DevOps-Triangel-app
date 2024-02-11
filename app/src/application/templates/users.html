@@ -1,7 +1,11 @@
 {% extends "home.html" %}
 {% block content %}
-<h2>Users List</h2>
-<table border="1">
+<div class="card">
+  <div class="card-body">
+    <h2 style="color: blue;">Users List</h2>
+  </div>
+</div>
+<table class="border table table-bordered">
   <thead>
     <tr>
       <th>FIRST_NAME</th>
@@ -26,18 +30,18 @@
         </td>
         <td>
           {% if (user[4] == 1) and (user[5] == 0) %}
-          <p style="color: greenyellow;">Active</p>
-          <input type="hidden" name="state" value="1">
-          {% else %}
-          <p style="color: red;">Deactivate</p>
-          <input type="hidden" name="state" value="0">
-          {% endif %}
+          <p style="color: green;"><b>Active</b></span>
+            <input type="hidden" name="state" value="1">
+            {% else %}
+          <p style="color: red;"><b>Deactivate</b></span>
+            <input type="hidden" name="state" value="0">
+            {% endif %}
         </td>
         <td>
           {% if (user[4] == 1) and (user[5] == 0) %}
-          <button type="submit">Deactivate</button>
+          <button type="submit" class="btn btn-secondary">Deactivate</button>
           {% else %}
-          <button type="submit">Activate</button>
+          <button type="submit" class="btn btn-primary">Activate</button>
           {% endif %}
         </td>
       </form>
@@ -45,10 +49,10 @@
     {% endfor %}
   </tbody>
   {% if message %}
-  <div style="color: gold;">{{ message }}</div>
+  <span class="badge text-bg-warning" style="padding:10px; margin:5px;">{{ message }}</span>
   {% endif %}
   {% else %}
-  <div>Not Users!!</div>
+  <span class="badge text-bg-warning">Not users !!</span>
   {% endif %}
 </table>
 {% endblock %}
