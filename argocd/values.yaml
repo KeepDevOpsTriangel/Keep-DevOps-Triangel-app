@@ -1,7 +1,7 @@
 # Values file for ArgoCD configuration in the cluster by Helm chart
 configs:
   params:
-    server.insecure: false
+    server.insecure: true
   cm:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
