@@ -64,8 +64,11 @@ Para el despliegue de la aplicación se dispone de un Helm Chart que incluye el 
 # Otros recursos utilizados
 
     - Ingress Controller Nginx (Ingress para Argocd y App)
+
     - Cert-Manager (Certificados SSL para Argocd y App)
+
     - Issuers de Let's Encrypt para los certificados https
+    
     - Sealed Secret (para encriptación de secrets tokens en el cluster)
 
 # Fuentes de información
