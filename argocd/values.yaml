@@ -18,8 +18,6 @@ server:
     annotations:
       # cert-manager.io/cluster-issuer: ca-issuer
       cert-manager.io/issuer: "letsencrypt-prod"
-      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     enabled: true
     rules:
       - host: argocdtriangleapp.rafaeltorices.com
@@ -29,7 +27,7 @@ server:
               pathType: Prefix
               backend:
                 service:
-                  name: triangle-app-argocd-server
+                  name: argocd-server
                   port:
                     number: 443
     tls:
