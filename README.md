@@ -46,8 +46,8 @@ Para el despliegue de la aplicación se dispone de un Helm Chart que incluye el 
 
 ## Entorno de desarrollo
 
-- [Docker](/)
-- [Docker Compose](/)
+- [Docker](#)
+- [Docker Compose](#)
 
 ## Entorno de producción
 
@@ -61,7 +61,7 @@ Para el despliegue de la aplicación se dispone de un Helm Chart que incluye el 
 
 [GitHub Actions](.github/workflows/README.md)
 
-## Otros recursos utilizados
+# Otros recursos utilizados
 
     - Ingress Controller Nginx (Ingress para Argocd y App)
     - Cert-Manager (Certificados SSL para Argocd y App)
