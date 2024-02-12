@@ -30,3 +30,18 @@ helm uninstall triangle-app
 > kubeseal --controller-name=sealed-secrets-controller --controller-namespace=kube-system --format yaml < token.yaml > sealed-secret.yaml
 > **token.yaml** is the file containing the secret to be sealed - not included in the repository.
 > ```
+
+## Resources
+
+The Helm Charts of Triangle-App deploy this:
+
+- app deployment
+- configmap enviroments
+- init-configmap to MySQL config database
+- mongo statefulset MongoDB
+- mysql statefulset MySQL
+- redis deployment
+- secret with passwords and tokens
+- services
+- ingress
+- hpa for app

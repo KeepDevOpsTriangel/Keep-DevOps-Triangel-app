@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket      = "triangle-app-j3sbk-tfstate"
+    bucket      = "triangle-app-73vpg-tfstate"
     prefix      = "terraform/state"
     credentials = "credentials.json"
   }

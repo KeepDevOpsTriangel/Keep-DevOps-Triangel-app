@@ -11,40 +11,62 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 
 # Descripción del proyecto
 
-- [Desarrollo de una aplicación](app/Readme.md)
+El proyecto consiste en el desarrollo de una aplicación de chatbot integrada con Telegram y ChatGPT que permite a los usuarios interactuar con un bot inteligente capaz de comprender y generar respuestas relevantes en función de la conversación y del contexto pre-definido del Bot.
+La aplicación se ha desarrollado con Python y se han usado distintas librerías como Flask para el panel web del admin de la app. Se hacen uso de las Api de Telegram para el Bot y de la Api de OpenAI para el uso de chatgpt en el Bot.
+La aplicación hace uso de bases de datos Redis (para el login web), MySQL para almacenar los usuarios y opciones del Bot y MongoDB para almacenar los messages intercambiados con el chatbot.
+Para el despliegue de la aplicación se dispone de un Helm Chart que incluye el despliegue de todos los componentes de la app. Además se ha utilizado ArgoCD para automatizar el despliegue continuo y asegurar la disponibilidad de la app. Se han definido dos pipelines con sus workflows correspondientes: uno para el testeo, análisis de código y generación de la documentación de la app y otro para la construcción y publicación de la imagen de la app en el repositorio de DockerHub. Para la puesta en producción de la app se han utilizado dos clúster distintos, uno en AWS y otro en GKE con el objetivo de poner en práctica lo aprendido en cuanto a infraestructura. Se ha utilizado Terraform en ambos casos para la disposición de esa infraestructura.
 
-    ![Alt text](/doc_images/triangle-app-app.png)
+# Proyecto en ejecución
 
-- [Despliegue de la aplicación en un entorno de desarrollo](/gke/Readme.md)
-- Despliegue automatizado de un cluster de Kubernetes en un entorno de producción
-- [CI/CD, integración continua y despliegue continuo](.github/workflows/README.md)
-- Monitorización de la aplicación.
+[Bot Telegram App](https://t.me/TriangleAppBot) (https://t.me/TriangleAppBot)
+
+[Panel web admin](https://triangleapp.rafaeltorices.com/) (https://triangleapp.rafaeltorices.com/)
+
+[ArgoCD](https://argocdtriangleapp.rafaeltorices.com/argocd/) (https://argocdtriangleapp.rafaeltorices.com/argocd/)
+
+
+# Ciclo de integración continua
+
+![alt text](/doc_images/devops.png)
+
+# Esquema Aplicación
+
+![Alt text](/doc_images/triangle-app-app.png)
+
 
 # Tecnologías utilizadas
 
-- Aplicación
-    - Python
-    - Flask
-    - MySQL
-    - Redis
-    - MongoDB
+![alt text](/doc_images/keep-project.png)
 
-- Entorno de desarrollo
-    - Docker
-    - Docker Compose
+# Documentación del proyecto
 
-- Entorno de producción
-    - EKS (Elastic Kubernetes Service) de AWS
-    - Terraform
-    - [Helm Charts](/helm/Readme.md)
-    - [ArgoCD](/argocd/Readme.md)
+## Aplicación
 
-- CI/CD
-    - [GitHub Actions](.github/workflows/README.md)
+- [Aplicación Python-Flask](app/Readme.md)
 
-- Monitorización
-    - Prometheus
-    - Grafana
+## Entorno de desarrollo
+
+- [Docker](#)
+- [Docker Compose](#)
+
+## Entorno de producción
+
+- [EKS](/)
+- [GKE](/cluster/Readme.md)
+- [Helm Charts](/helm/Readme.md)
+- [ArgoCD](/argocd/Readme.md)
+- [Kubernetes](/k8s/Readme.md)
+
+## CI-CD
+
+[GitHub Actions](.github/workflows/README.md)
+
+# Otros recursos utilizados
+
+    - Ingress Controller Nginx (Ingress para Argocd y App)
+    - Cert-Manager (Certificados SSL para Argocd y App)
+    - Issuers de Let's Encrypt para los certificados https
+    - Sealed Secret (para encriptación de secrets tokens en el cluster)
 
 # Fuentes de información
 

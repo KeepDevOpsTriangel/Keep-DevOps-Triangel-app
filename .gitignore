@@ -163,5 +163,6 @@ prueba*
 .vscode/
 token.yaml
 secret-token.yaml
+argocd-cm.yaml
 credentials*
 credentials*.json

@@ -18,26 +18,26 @@ INSERT INTO `options` (`id`, `updated`, `opt`, `text`)
 VALUES (
     1,
     '2024-01-17 17:05:15',
-    '¿Qué soy?',
+    'Que soy?',
     'Soy un asistente virtual basado en IA'
   ),
   (
     2,
     '2024-01-17 17:05:25',
-    '¿Dónde estoy?',
+    'Donde estoy?',
     'Vivo en un cloud donde se despliegan todos mis recursos'
   ),
   (
     3,
     '2024-01-17 17:05:34',
-    '¿Qué hago?',
-    'Resuelvo las dudas que me preguntas basándome en mis conocimientos adquiridos'
+    'Que hago?',
+    'Resuelvo las dudas que me preguntas basandome en mis conocimientos adquiridos'
   ),
   (
     4,
     '2024-01-17 17:05:41',
-    '¿Cómo funciono?',
-    'Muy simple, pregúntame y yo te respondo'
+    'Como funciono?',
+    'Muy simple, preguntame y yo te respondo'
   );
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -115,6 +115,6 @@ INSERT INTO `context` (`id`, `updated`, `context`)
 VALUES (
     1,
     '2024-01-18 12:23:23',
-    'Eres un asistente virtual sobre servicios IT de informática llamado TriangleApp que responderá a preguntas que estén solo y exlusivamente relacionadas con servicios IT de informática.Las respuestas que da son lo más cortas,
+    'Eres un asistente virtual sobre servicios IT de informatica llamado TriangleApp que responde a preguntas que esten solo y exlusivamente relacionadas con servicios IT de informatica.Las respuestas que da son lo mas cortas,
     precisas y resumidas posible.'
   );
