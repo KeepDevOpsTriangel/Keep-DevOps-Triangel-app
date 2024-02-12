@@ -1,12 +1,12 @@
 # Values file for ArgoCD configuration in the cluster by Helm chart
 configs:
   params:
-    server.insecure: true
+    server.insecure: false
   cm:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
       ignoreResourceStatusField: all
-    url: https://argocdtriangleapp/argocd
+    url: https://argocdtriangleapp.rafaeltorices.com/argocd
     application.instanceLabelKey: argocd.argoproj.io/instance
 server:
   insecure: true
@@ -18,6 +18,8 @@ server:
     annotations:
       # cert-manager.io/cluster-issuer: ca-issuer
       cert-manager.io/issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     enabled: true
     rules:
       - host: argocdtriangleapp.rafaeltorices.com
@@ -27,7 +29,7 @@ server:
               pathType: Prefix
               backend:
                 service:
-                  name: argocd-server
+                  name: triangle-app-argocd-server
                   port:
                     number: 443
     tls:
