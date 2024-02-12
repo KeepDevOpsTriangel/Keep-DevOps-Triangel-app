@@ -24,7 +24,7 @@ Este [workflow](/.github/workflows/test_and_docs.yml) consta de 3 jobs principal
 
         - Al crear la rama, se auto-commieta, detecta la action y la ejecuta, solucionando así el problema de la vulnerabilidad encontrada. (Sólo en la rama que ha creado el bot)
 
-            ![Auto commit Snyk](/doc_images\snyk-action.png)
+            ![Auto commit Snyk](/doc_images/snyk-action.png)
 
         - Además, el propio bot de Snyk crea una PR en GitHub para poder mergear el cambio que propone a la rama que sea necesario.
 
