@@ -27,7 +27,7 @@ server:
               pathType: Prefix
               backend:
                 service:
-                  name: argocd-server
+                  name: triangle-app-argocd-server
                   port:
                     number: 443
     tls:
