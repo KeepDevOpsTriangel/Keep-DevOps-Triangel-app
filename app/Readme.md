@@ -2,7 +2,7 @@
 
 ## Introduction
 
-App to create a Telegram Bot using official Telegram API ([python-telegram-bot](https://core.telegram.org/bots/api)). The app is developed using Python for the Bot service and communication with API Telegram, and Python Flask framework for the interface web. The database used for options and users is MySQL. The app use Redis database to login in the web interface and to save the messages use MongoDB. The Bot is a ChatBot that simulates a conversation with the user about context defined by the admin user trough the web admin interface. Depending on the context, the Bot can respond to the user with messages about defined context.
+App to create a Telegram Bot using official Telegram API ([python-telegram-bot](https://core.telegram.org/bots/api)). The app is developed using Python for the Bot service and communication with API Telegram, and Python Flask framework for the interface web. The Bot use OpenAI Api to reply questions about context that is defined into panel web admin. The database used for options and users is MySQL. The app use Redis database to login in the web interface and to save the messages use MongoDB. The Bot is a ChatBot that simulates a conversation with the user about context defined by the admin user trough the web admin interface. Depending on the context, the Bot can respond to the user with messages about defined context.
 
 ## Description
 
@@ -264,30 +264,6 @@ The admin user (defined in the environment variable **CHAT_ID_SOPORTE** and defi
 - **Service**: show the status of the Bot service. From this option you can activate/deactivate the Bot service. If you deactivate the service (indicate reason in the text area), the users that interact with the Bot will receive a message informing them that the service is deactivated and they will not be able to interact with the Bot. If you activate the service, the users that interact with the Bot will receive a message informing them that the service is activated and they will be able to interact with the Bot.
 - **Send Messages**: option to send direct messages to the users that can interact with the Bot.
 - **List Messages**: list of messages that the users send to the Bot.
-
-## Preview images of the app
-
-### Web interface
-
-  ![Alt text](images/image.png)
-
-  ![Alt text](images/image-1.png)
-
-  ![Alt text](images/image-2.png)
-
-  ![Alt text](images/image-3.png)
-
-  ![Alt text](images/image-4.png)
-
-  ![Alt text](images/image-5.png)
-
-  ### Bot in App Telegram
-
-  ![Alt text](images/image-6.png)
-
-  ![Alt text](images/image-7.png)
-
-  ![Alt text](images/image-8.png)
 
 ## Sources
 
