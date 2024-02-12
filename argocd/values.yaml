@@ -6,7 +6,7 @@ configs:
     resource.compareoptions: |
       ignoreAggregatedRoles: true
       ignoreResourceStatusField: all
-    url: http://localhost/argocd
+    url: https://argocdtriangleapp/argocd
     application.instanceLabelKey: argocd.argoproj.io/instance
 server:
   insecure: true
@@ -20,7 +20,7 @@ server:
       cert-manager.io/issuer: "letsencrypt-prod"
     enabled: true
     rules:
-      - host: argocd.rafaeltorices.com
+      - host: argocdtriangleapp.rafaeltorices.com
         http:
           paths:
             - path: /argocd
@@ -32,5 +32,5 @@ server:
                     number: 443
     tls:
       - hosts:
-          - argocd.rafaeltorices.com
+          - argocdtriangleapp.rafaeltorices.com
         secretName: argocd-secret-tls

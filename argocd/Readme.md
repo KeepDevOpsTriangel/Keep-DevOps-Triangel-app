@@ -60,7 +60,7 @@ Edit the file argocd-cm.yaml and add the following configuration:
 kubectl edit configmap argocd-cm -n argocd
 
 data:
-    url: https://argocd.rafaeltorices.com/argocd
+    url: https://argocdtriangleapp.rafaeltorices.com/argocd
     dex.config: |
     connectors:
       - type: github
@@ -69,7 +69,7 @@ data:
         config:
           clientID: xxxxxxxx
           clientSecret: xxxxxxxx
-          redirectURI: https://argocd.rafaeltorices.com/argocd/api/dex/callback
+          redirectURI: https://argocdtriangleapp.rafaeltorices.com/argocd/api/dex/callback
           orgs:
           - name: KeepDevOpsTriangel
 
