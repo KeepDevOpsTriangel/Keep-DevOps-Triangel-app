@@ -30,7 +30,7 @@ Este [workflow](/.github/workflows/test_and_docs.yml) consta de 3 jobs principal
 
             ![Pull request Snyk](/doc_images/snyk-pr.png)
 
-    - Para revisar los informes de seguridad del proyecto en Snyk se puede acceder en [Snyk TriangleApp](https://app.snyk.io/org/keepdevopstriangel?fromGitHubAuth=true)
+    - Para revisar los informes de seguridad del proyecto en Snyk se puede acceder en [Snyk TriangleApp](https://app.snyk.io/org/keepdevopstriangel)
 
 3. #### Generate-docs:
     - La principal función de ese trabajo es generar documentación para el proyecto y archivarla como artefacto, todo ello usando la herramienta pdoc.
