@@ -1,6 +1,6 @@
 # CI/CD - Workflows
 
-Este README proporciona una visión general de los flujos de trabajo disponibles en este repositorio. Cada trabajo está diseñado para realizar una tarea específica en el proceso de desarrollo y entrega del software. Para obtener más detalles sobre cada trabajo y sus configuraciones, consulte los archivos de flujo de trabajo individuales en el directorio [.github/workflows/](.github/workflows/) del repositorio. El proyecto consta de 2 workflows, uno para [testear y documentar la aplicación](#pipeline-test_and_docs) y otro para [lanzar las releases](#pipeline-release) con su versionado corresponiente.
+Este README proporciona una visión general de los flujos de trabajo disponibles en este repositorio. Cada trabajo está diseñado para realizar una tarea específica en el proceso de desarrollo y entrega del software. Para obtener más detalles sobre cada trabajo y sus configuraciones, consulte los archivos de flujo de trabajo individuales en el directorio [.github/workflows/](/.github/workflows/) del repositorio. El proyecto consta de 2 workflows, uno para [testear y documentar la aplicación](#pipeline-test_and_docs) y otro para [lanzar las releases](#pipeline-release) con su versionado corresponiente.
 
 ## Pipeline test_and_docs
 
