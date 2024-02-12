@@ -3,10 +3,10 @@ name: Testing, SonarCloud, Snyk, and Documentation
 on:
   pull_request:
     branches:
-      - 'completed'
+      - 'main'
   push:
     branches:
-      - 'completed'
+      - 'main'
 
 jobs:
   testing-and-sonarcloud:
