@@ -2,7 +2,7 @@
 ## Core
 variable "name_prefix" {
   type    = string
-  default = "eks-triangle-env-1"
+  default = "eks-triangle"
 }
 
 variable "aws_region" {
@@ -22,7 +22,7 @@ variable "aws_cred_profile" {
 
 variable "env_name" {
   type    = string
-  default = "eks-triangle-env"
+  default = "eks-app-triangle"
 }
 
 variable "provisioner" {

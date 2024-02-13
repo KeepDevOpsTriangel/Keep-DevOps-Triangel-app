@@ -27,6 +27,8 @@ terraform plan
 terraform apply
 ```
 
+despues de desplegar el cluster de eks, se tiene que descomentar el resource "kubernetes_manifest" "issuer_letsencrypt_prod" de  8-cert-manager.tf
+
 ## Outputs
 
 - `argocd_ingress_service_name`: This is the URL through which ArgoCD can be accessed.
