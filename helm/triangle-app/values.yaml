@@ -18,7 +18,7 @@ secret:
 configmap:
   URL_WEBHOOK: "https://triangleapp.rafaeltorices.com"
   TITULO_APP: TRIANGLE_APP
-  TELEFONO_SOPORTE: 123456789
+  TELEFONO_SOPORTE: 12345678
   EMAIL_SOPORTE: "soporte@triangle-app.example"
   MYSQL_PORT: 3306
   MYSQL_DATABASE: triangleapp
