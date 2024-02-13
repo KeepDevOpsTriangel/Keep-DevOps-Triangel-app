@@ -45,6 +45,14 @@ Open the browser and access to the following URL:
 http://localhost:8080/argocd
 ```
 
+## Ingrees configuration for ArgoCD
+
+Create a new ingress for the ArgoCD UI using the following manifest file:
+
+```bash
+kubectl apply -f ingress_argocd.yaml
+```
+
 ## Deploying an application using ArgoCD
 
 Create a new application using the ArgoCD UI and use the manifest file located in the folder:
