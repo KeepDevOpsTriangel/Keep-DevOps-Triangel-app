@@ -2,6 +2,8 @@
 
 Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII de KeepCoding.
 
+[Slides Proyecto](https://gamma.app/docs/TriangleApp-eljdi2m11v1j4uh)
+
 # Equipo de Trabajo
 
 - [Yuldor Librán](https://github.com/YuldiKeepCoding)
