@@ -2,8 +2,6 @@
 
 Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII de KeepCoding.
 
-[Slides Proyecto](https://gamma.app/docs/TriangleApp-eljdi2m11v1j4uh)
-
 # Equipo de Trabajo
 
 - [Yuldor Librán](https://github.com/YuldiKeepCoding)
@@ -17,6 +15,13 @@ El proyecto consiste en el desarrollo de una aplicación de chatbot integrada co
 La aplicación se ha desarrollado con Python y se han usado distintas librerías como Flask para el panel web del admin de la app. Se hacen uso de las Api de Telegram para el Bot y de la Api de OpenAI para el uso de chatgpt en el Bot.
 La aplicación hace uso de bases de datos Redis (para el login web), MySQL para almacenar los usuarios y opciones del Bot y MongoDB para almacenar los messages intercambiados con el chatbot.
 Para el despliegue de la aplicación se dispone de un Helm Chart que incluye el despliegue de todos los componentes de la app. Además se ha utilizado ArgoCD para automatizar el despliegue continuo y asegurar la disponibilidad de la app. Se han definido dos pipelines con sus workflows correspondientes: uno para el testeo, análisis de código y generación de la documentación de la app y otro para la construcción y publicación de la imagen de la app en el repositorio de DockerHub. Para la puesta en producción de la app se han utilizado dos clúster distintos, uno en AWS y otro en GKE con el objetivo de poner en práctica lo aprendido en cuanto a infraestructura. Se ha utilizado Terraform en ambos casos para la disposición de esa infraestructura.
+
+# Slides del proyecto
+
+[Slides Proyecto](https://gamma.app/public/TriangleApp-eljdi2m11v1j4uh)
+
+[PDF Slides Proyecto](#)
+
 
 # Proyecto en ejecución
 
