@@ -26,6 +26,8 @@ Para el despliegue de la aplicación se dispone de un Helm Chart que incluye el 
 
 [ArgoCD](https://argocdtriangleapp.rafaeltorices.com/argocd/) (https://argocdtriangleapp.rafaeltorices.com/argocd/)
 
+[Grafana/Prometheus](https://grafanatriangleapp.rafaeltorices.com) (https://grafanatriangleapp.rafaeltorices.com)
+
 
 # Ciclo de integración continua
 

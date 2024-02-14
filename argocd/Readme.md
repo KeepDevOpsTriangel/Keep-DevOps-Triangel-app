@@ -83,3 +83,7 @@ data:
 
 ```
 
+>-----
+> **Note**
+> Include ingress controller to access to ArgoCD from outside the cluster, with a domain and SSL certificate.
+>------

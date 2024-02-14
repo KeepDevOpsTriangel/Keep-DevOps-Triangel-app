@@ -50,4 +50,6 @@ kubectl -n monitoring port-forward svc/prometheus-kube-prometheus-prometheus 909
 
 Then, you can access to Prometheus in the following URL: [http://localhost:9090](http://localhost:9090)
 
-
+>-----
+> Include ingress controller to access to Grafana and Prometheus from outside the cluster, with a domain and SSL certificate.
+>------
