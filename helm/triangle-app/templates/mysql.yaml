@@ -54,12 +54,12 @@ spec:
                 configMapKeyRef:
                     name: {{ include "triangle-app.fullname" . }}-configmap
                     key: MYSQL_PORT
-          readinessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - mysqladmin ping -h localhost -u${MYSQL_USER} -p${MYSQL_PASSWORD}
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - sh
+          #       - -c
+          #       - mysqladmin ping -h localhost -u${MYSQL_USER} -p${MYSQL_PASSWORD}
           volumeMounts:
             {{- if .Values.deployment.mysql.persistence.enabled }}
             - name: {{ include "triangle-app.fullname" . }}-mysql-volume

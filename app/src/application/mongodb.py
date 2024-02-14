@@ -14,7 +14,7 @@ class MongoDB():
         self.port = self.config.MONGO_PORT
         self.database = self.config.MONGO_DATABASE
         self.collection = self.config.MONGO_COLLECTION
-        self.client = pymongo.MongoClient(f'mongodb://{self.host}:{self.port}')
+        self.client = pymongo.MongoClient(self.host)
         self.database = self.client[self.database]
         self.collection = self.database[self.collection]
 

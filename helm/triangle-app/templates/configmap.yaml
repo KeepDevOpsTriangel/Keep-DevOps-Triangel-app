@@ -14,7 +14,7 @@ data:
   EMAIL_SOPORTE: {{ .Values.configmap.EMAIL_SOPORTE | quote }}
   WEB_USERNAME: {{ .Values.configmap.WEB_USERNAME | quote }}
   REDIS_HOST: {{ include "triangle-app.fullname" . }}-redis-service
-  MONGO_HOST: {{ include "triangle-app.fullname" . }}-mongo-service
+  MONGO_HOST: mongodb+srv://triangleapp:triangleapp@mongodb-svc.mongodb.svc.cluster.local/triangleapp?replicaSet=mongodb&ssl=false
   MONGO_PORT: {{ .Values.configmap.MONGO_PORT | quote }}
   MONGO_DATABASE: {{ .Values.configmap.MONGO_DATABASE | quote }}
   MONGO_COLLECTION: {{ .Values.configmap.MONGO_COLLECTION | quote }}
