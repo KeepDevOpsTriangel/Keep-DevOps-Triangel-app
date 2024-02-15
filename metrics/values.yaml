@@ -105,7 +105,7 @@ alertmanager:
       - name: "null"
       - name: "slack"
         slack_configs:
-          - api_url: "https://hooks.slack.com/services/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" # <--- AÑADIR EN ESTA LÍNEA EL WEBHOOK CREADO
+          - api_url: "" # WEBHOOK SlackApp
             send_resolved: true
             channel: "#alarms-notifications-telegram-bot"
             title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
