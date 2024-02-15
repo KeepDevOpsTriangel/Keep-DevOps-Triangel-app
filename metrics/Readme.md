@@ -1,6 +1,7 @@
 # Metrics for the project
 
 This values.yaml file is used to configure the metrics for the project with stack Prometheus and Grafana.
+The metrics are collected from the cluster and resources Kubernetes deployed in the cluster. Also, are configured alerts to notify when the resources are in a critical state to slack channel.
 
 ## Prometheus / Grafana
 
@@ -24,6 +25,7 @@ The dashboards default in Grafana to visualize the metrics of the project.
 # Metrics
 
 The metrics are collected from cluster and resources Kubernetes deployed in the cluster.
+Alerts are configured to notify when the resources are in a critical state to slack channel.
 
 # Access to Grafana
 

@@ -20,8 +20,11 @@ Para el despliegue de la aplicación se dispone de un Helm Chart que incluye el 
 
 [Slides Proyecto](https://gamma.app/public/TriangleApp-eljdi2m11v1j4uh)
 
-[PDF Slides Proyecto](#)
+[PDF Slides Proyecto](/TriangleApp.pdf)
 
+[Vídeo del proyecto](/TriangleApp.mp4)
+
+![alt text](TriangleApp.gif)
 
 # Proyecto en ejecución
 
