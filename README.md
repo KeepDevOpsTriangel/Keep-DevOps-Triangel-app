@@ -6,7 +6,7 @@ Repositorio para el proyecto final del curso de DevOps and Cloud Computing VIII 
 
 - [Yuldor Librán](https://github.com/YuldiKeepCoding)
 - [Albert Fernández](https://github.com/albertferal)
-- [Jeff](https://github.com/jeffersonnc)
+- [Jeff Ñacato](https://github.com/jeffersonnc)
 - [Rafael Torices](https://github.com/RafaTorices)
 
 # Descripción del proyecto
