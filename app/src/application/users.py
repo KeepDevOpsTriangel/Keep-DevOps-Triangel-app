@@ -60,6 +60,8 @@ class User():
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
         rows = len(self.result)
+        self.conn.commit()
+        self.cursor.close()
         return rows
 
     def SavedUser(self, chatId, first_name, username):
@@ -83,6 +85,7 @@ class User():
         result = (chatId, first_name, username)
         self.cursor.execute(self.sql, result)
         self.conn.commit()
+        self.cursor.close()
 
     def ChekAuthorizedUser(self, chatId):
         """
@@ -106,6 +109,8 @@ class User():
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
         rows = len(self.result)
+        self.conn.commit()
+        self.cursor.close()
         return rows
 
     def RequestUser(self, chatId):
@@ -124,6 +129,7 @@ class User():
         self.sql = "UPDATE users SET pending = 1 WHERE chatid = "+chatId
         self.cursor.execute(self.sql)
         self.conn.commit()
+        self.cursor.close()
 
     def CheckRequestUser(self, chatId):
         """
@@ -147,6 +153,8 @@ class User():
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
         rows = len(self.result)
+        self.conn.commit()
+        self.cursor.close()
         return rows
 
     def ListUsers(self):
@@ -175,6 +183,8 @@ class User():
             user = row[0]
             list_users.append(user)
         users = '\n'.join(list_users)
+        self.conn.commit()
+        self.cursor.close()
         return users
 
     def ListUsersWeb(self):
@@ -183,6 +193,8 @@ class User():
             pending FROM users ORDER BY id DESC"
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
+        self.conn.commit()
+        self.cursor.close()
         return self.result
 
     def ChatIdUsers(self):
@@ -203,6 +215,8 @@ class User():
         self.sql = "SELECT chatid FROM users"
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
+        self.conn.commit()
+        self.cursor.close()
         return self.result
 
     def ActivateUserWeb(self, id):
@@ -221,6 +235,7 @@ class User():
         pending = 0 WHERE id = "+id
         self.cursor.execute(self.sql)
         self.conn.commit()
+        self.cursor.close()
 
     def DeactivateUserWeb(self, id):
         """
@@ -238,6 +253,7 @@ class User():
             pending = 1 WHERE id = "+id
         self.cursor.execute(self.sql)
         self.conn.commit()
+        self.cursor.close()
 
     def ListUsersPending(self):
         """
@@ -264,6 +280,8 @@ class User():
             user = row[0]
             list_users.append(user)
         users = '\n'.join(list_users)
+        self.conn.commit()
+        self.cursor.close()
         return users
 
     def ListAuthorizedUsers(self):
@@ -291,6 +309,8 @@ class User():
             user = row[0]
             list_users.append(user)
         users = '\n'.join(list_users)
+        self.conn.commit()
+        self.cursor.close()
         return users
 
     def SavedMessageUser(self, chatId, first_name, text, username):
@@ -315,6 +335,7 @@ class User():
         result = (chatId, first_name, text, username)
         self.cursor.execute(self.sql, result)
         self.conn.commit()
+        self.cursor.close()
 
     def ListMessagesWeb(self):
         """
@@ -336,4 +357,6 @@ class User():
             FROM messages ORDER BY updated DESC LIMIT 100"
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
+        self.conn.commit()
+        self.cursor.close()
         return self.result

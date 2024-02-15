@@ -48,6 +48,8 @@ class StateApp():
         for row in self.result:
             state = row[0]
             return state
+        self.conn.commit()
+        self.cursor.close()
 
     def CheckStateWeb(self):
         """
@@ -70,6 +72,8 @@ class StateApp():
         for row in self.result:
             state = row[0]
             return state
+        self.conn.commit()
+        self.cursor.close()
 
     def GetNoteState(self):
         """
@@ -93,6 +97,8 @@ class StateApp():
         for row in self.result:
             note = row[0]
             return note
+        self.conn.commit()
+        self.cursor.close()
 
     def UpdateNoteState(self, note):
         """
@@ -109,6 +115,7 @@ class StateApp():
         self.sql = 'UPDATE state SET note = "'+note+'" WHERE id = 1'
         self.cursor.execute(self.sql)
         self.conn.commit()
+        self.cursor.close()
 
     def ActivateState(self):
         """
@@ -123,6 +130,7 @@ class StateApp():
         self.sql = 'UPDATE state SET state = 1 WHERE id = 1'
         self.cursor.execute(self.sql)
         self.conn.commit()
+        self.cursor.close()
 
     def DeactivateState(self):
         """
@@ -137,3 +145,4 @@ class StateApp():
         self.sql = 'UPDATE state SET state = 0 WHERE id = 1'
         self.cursor.execute(self.sql)
         self.conn.commit()
+        self.cursor.close()

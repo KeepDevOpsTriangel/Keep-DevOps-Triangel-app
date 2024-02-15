@@ -19,10 +19,10 @@ class Context():
         and config data.
         """
         self.config = ConfigApp()  # Create an object of the class ConfigApp
-        self.db = pymysql.connect(host=self.config.MYSQL_HOST,
-                                  user=self.config.MYSQL_USER,
-                                  password=self.config.MYSQL_PASSWORD,
-                                  database=self.config.MYSQL_DATABASE)
+        self.conn = pymysql.connect(host=self.config.MYSQL_HOST,
+                                    user=self.config.MYSQL_USER,
+                                    password=self.config.MYSQL_PASSWORD,
+                                    database=self.config.MYSQL_DATABASE)
 
     def GetContext(self):
         """
@@ -31,10 +31,12 @@ class Context():
         Returns:
             str: context of the chatbot
         """
-        self.cursor = self.db.cursor()
+        self.cursor = self.conn.cursor()
         self.sql = 'SELECT context FROM context where id = 1'
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
+        self.conn.commit()
+        self.cursor.close()
         return self.result
 
     def SetContext(self, context):
@@ -44,12 +46,13 @@ class Context():
         Args:
             context (str): context of the chatbot
         """
-        self.cursor = self.db.cursor()
+        self.cursor = self.conn.cursor()
         self.sql = "UPDATE context SET \
             context = %s WHERE id = 1"
         result = (context)
         self.cursor.execute(self.sql, result)
-        self.db.commit()
+        self.conn.commit()
+        self.cursor.close()
 
     def GetContextContext(self):
         """
@@ -58,10 +61,12 @@ class Context():
         Returns:
             str: context of the chatbot
         """
-        self.cursor = self.db.cursor()
+        self.cursor = self.conn.cursor()
         self.sql = 'SELECT context FROM context where id = 1'
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
         for row in self.result:
             context = row[0]
             return context
+        self.conn.commit()
+        self.cursor.close()

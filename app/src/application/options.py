@@ -54,6 +54,8 @@ class Options():
             "remove_keyboard": True,
             "resize_keyboard": True,
         }
+        self.conn.commit()
+        self.cursor.close()
         return keyboard
 
     def EditOptions(self, id, option, text):
@@ -77,6 +79,7 @@ class Options():
         result = (option, text, id)
         self.cursor.execute(self.sql, result)
         self.conn.commit()
+        self.cursor.close()
 
     def ListOptions(self):
         """
@@ -97,6 +100,8 @@ class Options():
         self.sql = "SELECT id, opt, text FROM options"
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
+        self.conn.commit()
+        self.cursor.close()
         return self.result
 
     def GetOptions(self):
@@ -118,4 +123,6 @@ class Options():
         self.sql = "SELECT opt, text FROM options"
         self.cursor.execute(self.sql)
         self.result = self.cursor.fetchall()
+        self.conn.commit()
+        self.cursor.close()
         return self.result
