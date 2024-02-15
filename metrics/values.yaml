@@ -105,9 +105,9 @@ alertmanager:
       - name: "null"
       - name: "slack"
         slack_configs:
-          - api_url: "" # <--- AÑADIR EN ESTA LÍNEA EL WEBHOOK CREADO
+          - api_url: "https://hooks.slack.com/services/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" # <--- AÑADIR EN ESTA LÍNEA EL WEBHOOK CREADO
             send_resolved: true
-            channel: "#alarms-notifications-keepcoding-devops-8" # <--- AÑADIR EN ESTA LÍNEA EL CANAL
+            channel: "#alarms-notifications-telegram-bot"
             title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
             text: |-
               {{ range .Alerts }}
@@ -128,26 +128,86 @@ additionalPrometheusRulesMap:
     groups:
       - name: ruleset_1
         rules:
-          - alert: MongoDBDown
-            expr: mongodb_up == 0
+          - alert: HighRequestLatency
+            expr: job:request_latency_seconds:mean5m{job="triangle-app"} > 0.2
+            for: 0m
+            labels:
+              severity: page
+            annotations:
+              summary: High request latency
+              description: This service has a high request latency.
+          - alert: HighErrorRate
+            expr: job:errors:rate5m{job="triangleapp"} > 0.2
+            for: 0m
+            labels:
+              severity: page
+            annotations:
+              summary: High error rate
+              description: This service has a high error rate.
+          - alert: HighCPUUtilization
+            expr: avg(node_cpu{mode="system"}) > 20
             for: 0m
             labels:
               severity: critical
             annotations:
-              summary: MongoDB Down (instance {{ $labels.instance }})
-              description: "MongoDB instance is down"
-
-          - alert: fastApiConsumingMoreThanRequest
-            expr: avg(container_memory_usage_bytes{pod=~"my-app-fast-api-webapp-.*"}) by (pod) > avg(kube_pod_container_resource_requests{resource="memory",container="fast-api-webapp"}) by (pod)
+              summary: High CPU utilization on host {{ $labels.instance }}
+              description: The CPU utilization on host {{ $labels.instance }} has exceeded 20%.
+          - alert: HighMemoryUtilization
+            expr: node_memory_MemTotal - node_memory_MemFree < 0.2 * node_memory_MemTotal
+            for: 0m
+            labels:
+              severity: warning
+            annotations:
+              summary: High memory utilization on host {{ $labels.instance }}
+              description: The memory utilization on host {{ $labels.instance }} has exceeded 20%.
+          - alert: TriangleAppConsumingMemoryMoreThanRequest
+            expr: avg(container_memory_usage_bytes{pod=~"triangle-app-deployment-.*"}) by (pod) > avg(kube_pod_container_resource_requests{resource="memory",container="triangle-app-container"}) by (pod)
             for: 0m
             labels:
               severity: critical
-              alertname: "fast-api-webapp container is consuming more than requested"
+              alertname: "TriangleApp container is consuming more memory than requested"
             annotations:
-              summary: Pod {{ $labels.pod }} consuming more than requested
-              description: "Pod more less than request"
-              message: Pod {{ $labels.pod }} is consuming more than requested
-
+              summary: Pod {{ $labels.pod }} consuming more memory than requested
+              description: "Pod more memory less than request"
+              message: Pod {{ $labels.pod }} is consuming more memory than requested
+          - alert: TriangleAppConsumingCPUMoreThanRequest
+            expr: avg(container_memory_usage_bytes{pod=~"triangle-app-deployment-.*"}) by (pod) > avg(kube_pod_container_resource_requests{resource="memory",container="triangle-app-container"}) by (pod)
+            for: 0m
+            labels:
+              severity: critical
+              alertname: "TriangleApp container is consuming more cpu than requested"
+            annotations:
+              summary: Pod {{ $labels.pod }} consuming more cpu than requested
+              description: "Pod more memory less than request"
+              message: Pod {{ $labels.pod }} is consuming more cpu than requested
+          - alert: TriangleAppConsumingMemoryMoreThanRequestMySQL
+            expr: avg(container_memory_usage_bytes{pod=~"triangle-app-mysql-statefulset-0"}) by (pod) > avg(kube_pod_container_resource_requests{resource="memory",container="triangle-app-mysql"}) by (pod)
+            for: 0m
+            labels:
+              severity: critical
+              alertname: "TriangleApp-MySQL container is consuming more memory than requested"
+            annotations:
+              summary: Pod {{ $labels.pod }} consuming more memory than requested
+              description: "Pod more memory less than request"
+              message: Pod {{ $labels.pod }} is consuming more memory than requested
+          - alert: ArgoCDConsumingMemoryMoreThanRequest
+            expr: avg(container_memory_usage_bytes{pod=~"triangle-app-argocd-server-.*"}) by (pod) > avg(kube_pod_container_resource_requests{resource="memory",container="*triangle-app-argocd*"}) by (pod)
+            for: 0m
+            labels:
+              severity: critical
+              alertname: "TriangleApp-ArgoCD container is consuming more memory than requested"
+            annotations:
+              summary: Pod {{ $labels.pod }} consuming more memory than requested
+              description: "Pod more memory less than request"
+              message: Pod {{ $labels.pod }} is consuming more memory than requested
+          - alert: HighNetworkTraffic
+            expr: node_network_receive_bytes > 2e6
+            for: 0m
+            labels:
+              severity: warning
+            annotations:
+              summary: High network traffic on host {{ $labels.instance }}
+              description: The inbound network traffic on host {{ $labels.instance }} has exceeded 2 MB/s.
 grafana:
   plugins:
     - grafana-piechart-panel
