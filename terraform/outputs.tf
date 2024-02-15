@@ -16,7 +16,7 @@ output "cluster_id" {
 
 # Returns the command needed to update the kubeconfig configuration for the EKS cluster.
 output "kubeconfig_command" {
-  value = "rm $HOME/.kube/config ; aws eks update-kubeconfig --name eks-triangle-env-cluster"
+  value = "rm $HOME/.kube/config ; aws eks update-kubeconfig --name eks-app-triangle-cluster"
 }
 
 # Ouput the name of the ArgoCD Ingress service.
