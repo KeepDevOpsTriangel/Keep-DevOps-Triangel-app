@@ -12,6 +12,6 @@ pdoc==14.4.0 #añadido para la documentación
 pdoc3==0.10.0 #añadido para la documentación
 setuptools==69.0.3 #añadido para snyk
 redis==5.0.1
-pymongo==4.6.1
+pymongo==4.6.3
 openai==1.11.0
 dnspython>=2.6.0rc1 # not directly required, pinned by Snyk to avoid a vulnerability
